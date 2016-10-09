@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009201950) do
+ActiveRecord::Schema.define(version: 20161009223217) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -36,6 +36,18 @@ ActiveRecord::Schema.define(version: 20161009201950) do
 
   add_index "individual_reviews", ["review_id"], name: "index_individual_reviews_on_review_id"
   add_index "individual_reviews", ["user_id"], name: "index_individual_reviews_on_user_id"
+
+  create_table "profiles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "job_title"
+    t.string   "job_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
 
   create_table "questions", force: :cascade do |t|
     t.string   "subsection"
@@ -101,6 +113,15 @@ ActiveRecord::Schema.define(version: 20161009201950) do
   end
 
   add_index "signatures", ["individual_review_id"], name: "index_signatures_on_individual_review_id"
+
+  create_table "user_roles", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

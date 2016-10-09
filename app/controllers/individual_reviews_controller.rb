@@ -1,12 +1,12 @@
 class IndividualReviewsController < ApplicationController
   before_action :set_individual_review, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_has_profile
   # GET /individual_reviews
   # GET /individual_reviews.json
   def index
     @individual_reviews = IndividualReview.all
-    @individual_reviews_as_employee = IndividualReview.find_roles(:employee, current_user)
-    @individual_reviews_as_reviewer = IndividualReview.find_roles(:reviewer, current_user)
+    # @individual_reviews_as_employee = IndividualReview.find_roles(:employee, current_user)
+    # @individual_reviews_as_reviewer = IndividualReview.find_roles(:reviewer, current_user)
   end
 
   # GET /individual_reviews/1

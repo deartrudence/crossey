@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @profile.user %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @profile.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @profile.last_name %>
+</p>
+
+<p>
+  <strong>Job title:</strong>
+  <%= @profile.job_title %>
+</p>
+
+<p>
+  <strong>Job type:</strong>
+  <%= @profile.job_type %>
+</p>
+
+<p>Roles</p>
+<% @user_roles.each do |role| %>
+  <ul>
+    <li><%= role %></li>
+  </ul>
+<% end %>
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

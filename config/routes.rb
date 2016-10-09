@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :user_roles
+  resources :profiles
   resources :section_answers
   resources :answers
   resources :questions

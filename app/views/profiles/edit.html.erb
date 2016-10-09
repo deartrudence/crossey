@@ -1,0 +1,13 @@
+<h1>Editing Profile</h1>
+
+<%= render 'form' %>
+
+<p>Roles</p>
+<% @user_roles.each do |role| %>
+  <ul>
+    <li><%= role %></li>
+  </ul>
+<% end %>
+
+<%= link_to 'Show', @profile %> |
+<%= link_to 'Back', profiles_path %>
