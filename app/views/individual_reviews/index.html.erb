@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Individual Reviews</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @individual_reviews.each do |individual_review| %>
+      <tr>
+        <td><%= individual_review.user %></td>
+        <td><%= link_to 'Show', individual_review %></td>
+        <td><%= link_to 'Edit', edit_individual_review_path(individual_review) %></td>
+        <td><%= link_to 'Destroy', individual_review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>As Employee</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @individual_reviews_as_employee.each do |individual_review| %>
+      <tr>
+        <td><%= individual_review.resource.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>As Reviewer</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @individual_reviews_as_reviewer.each do |individual_review| %>
+      <tr>
+        <td><%= individual_review.resource.user.email %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Individual review', new_individual_review_path %>

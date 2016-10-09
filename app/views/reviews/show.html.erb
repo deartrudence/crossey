@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+<h1><%= @review.name %></h1>
+
+<% @review.sections.each do |section| %>
+	<ul>
+		<li><h2><%= section.title %></h2>
+		<% section.questions.group_by(&:subsection).each do |subsection,questions| %>
+				<h3><%= subsection %></h3> 
+				<% questions.each do |question|%>
+					<ul>
+						<li><%= question.question_text %> - <%= question.question_type%></li> 
+					</ul>
+				<% end %>
+		<% end%>
+		</li>
+		
+	</ul>
+<% end%>
+
+
+<%= link_to 'Back', reviews_path %>

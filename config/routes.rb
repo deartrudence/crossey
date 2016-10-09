@@ -1,5 +1,17 @@
 Rails.application.routes.draw do
+  resources :answers
+  resources :questions
+  get 'signature/create'
+
+  get 'signature/update'
+
+  get 'signature/destroy'
+
+  resources :individual_reviews
+  resources :reviews
   devise_for :users
+
+  root 'individual_reviews#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

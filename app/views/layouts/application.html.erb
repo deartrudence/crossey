@@ -9,6 +9,12 @@
 <body>
 	<p class="notice"><%= notice %></p>
 	<p class="alert"><%= alert %></p>
+	<ul>
+		<li> <%= link_to 'All Reviews',individual_reviews_path %> </li>
+		<li><%= link_to 'Start/Find Review', new_individual_review_path %></li>
+		<li><%= link_to 'All Reviews Types',reviews_path %> </li>
+		<li></li>
+	</ul>
 
 <%= yield %>
 

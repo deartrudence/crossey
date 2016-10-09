@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Reviews</h1>
+
+
+    <% @reviews.each do |review| %>
+      <ul>
+        <li><%= review.name %></li>
+        <li><%= link_to 'Show', review %></li>
+      </ul>
+      <hr>
+    <% end %>
+
+
+<%= link_to 'New Review', new_review_path %>

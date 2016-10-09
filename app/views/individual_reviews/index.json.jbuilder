@@ -1,0 +1,1 @@
+json.array! @individual_reviews, partial: 'individual_reviews/individual_review', as: :individual_review

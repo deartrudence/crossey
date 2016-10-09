@@ -11,7 +11,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009123833) do
+ActiveRecord::Schema.define(version: 20161009165243) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "individual_review_id"
+    t.text     "answer"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "answers", ["individual_review_id"], name: "index_answers_on_individual_review_id"
+  add_index "answers", ["question_id"], name: "index_answers_on_question_id"
+
+  create_table "individual_reviews", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "review_id"
+  end
+
+  add_index "individual_reviews", ["review_id"], name: "index_individual_reviews_on_review_id"
+  add_index "individual_reviews", ["user_id"], name: "index_individual_reviews_on_user_id"
+
+  create_table "questions", force: :cascade do |t|
+    t.string   "subsection"
+    t.string   "job_type"
+    t.string   "question_text"
+    t.string   "question_type"
+    t.integer  "section_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "questions", ["section_id"], name: "index_questions_on_section_id"
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -23,6 +62,30 @@ ActiveRecord::Schema.define(version: 20161009123833) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "sections", force: :cascade do |t|
+    t.integer  "review_id"
+    t.string   "title"
+    t.string   "portion"
+    t.text     "employee_comment"
+    t.text     "reviewer_comment"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "sections", ["review_id"], name: "index_sections_on_review_id"
+
+  create_table "signatures", force: :cascade do |t|
+    t.string   "name"
+    t.date     "date"
+    t.boolean  "signed"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "individual_review_id"
+    t.string   "signature_type"
+  end
+
+  add_index "signatures", ["individual_review_id"], name: "index_signatures_on_individual_review_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

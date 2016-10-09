@@ -1,0 +1,73 @@
+<h1>Editing Individual Review</h1>
+
+<p id="notice"><%= notice %></p>
+<h1><%= @individual_review.review.name %></h1>
+
+
+<% @individual_review.review.sections.each do |section| %>
+	<ul>
+		<li><h2><%= section.title %></h2>
+		<% section.questions.group_by(&:subsection).each do |subsection,questions| %>
+			<h3><%= subsection %></h3> 
+			<% questions.each do |question|%>
+				<ul>
+					<li><%= question.question_text %></li>
+					<li>
+						<% answer = question.answers.where(individual_review_id: @individual_review.id).first %>
+						<h3><%= answer.answer %></h3>	
+						<%= form_for(answer, remote: true, :authenticity_token => true, :html => {:id => "answer-#{question.id}", "data-id" => "#{answer.id}", :class => ''})  do |f| %>
+							<% if question.question_type == 'check_box' %>
+								<div class="form-group ">
+			          	<%= f.collection_radio_buttons :answer, Answer::ANSWERS, :to_s, :humanize, class: 'form-control' %>
+								</div>
+							<% else %>
+								<div class="form-group ">
+			          	<%= f.text_field :answer, class: 'form-control' %>
+								</div>
+							<% end %>
+			      <% end %>
+			      <hr>
+					</li>	
+				</ul>
+			<% end %>
+			<%= section.employee_comment %>
+		<% end%>
+		</li>
+		
+	</ul>
+<% end%>
+
+<%= link_to 'Show', @individual_review %> |
+<%= link_to 'Back', individual_reviews_path %>
+
+<script>
+	// AJAX to create or update each answer
+		$('input:radio').on('change', function(){
+			var answer_value = $(this).val()
+			var answer_id = $(this).parent().parent().data('id')
+			console.log(answer_id)
+			console.log(answer_value)
+			var question = $(this).parent().parent().attr('id').split('-').pop()
+			var individual_review = <%= @individual_review.id %>
+			$.ajax({
+				url:'/answers',
+				type: 'post',
+				data: {
+					answer : {
+						question_id : question,
+						answer_value : answer_value,
+						individual_review_id : individual_review,
+						answer_id : answer_id
+					}
+				},
+				dataType: 'script',
+				success: function(){
+					console.log('success')
+				},
+				error: function(error){
+					console.log('error')
+					console.log(error)
+				}
+			});
+		});
+</script>
