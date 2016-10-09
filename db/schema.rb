@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161009183023) do
+ActiveRecord::Schema.define(version: 20161009201950) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -26,10 +26,12 @@ ActiveRecord::Schema.define(version: 20161009183023) do
 
   create_table "individual_reviews", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "review_id"
     t.date     "date"
+    t.integer  "employee_id"
+    t.integer  "reviewer_id"
   end
 
   add_index "individual_reviews", ["review_id"], name: "index_individual_reviews_on_review_id"
@@ -63,6 +65,18 @@ ActiveRecord::Schema.define(version: 20161009183023) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "section_answers", force: :cascade do |t|
+    t.integer  "section_id"
+    t.integer  "individual_review_id"
+    t.text     "employee_comment"
+    t.text     "reviewer_comment"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+  end
+
+  add_index "section_answers", ["individual_review_id"], name: "index_section_answers_on_individual_review_id"
+  add_index "section_answers", ["section_id"], name: "index_section_answers_on_section_id"
 
   create_table "sections", force: :cascade do |t|
     t.integer  "review_id"

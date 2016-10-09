@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :section_answers
   resources :answers
   resources :questions
+  resources :sections
   get 'signature/create'
 
   get 'signature/update'

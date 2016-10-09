@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Section Answers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Section</th>
+      <th>Individual review</th>
+      <th>Employee comment</th>
+      <th>Reviewer comment</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @section_answers.each do |section_answer| %>
+      <tr>
+        <td><%= section_answer.section %></td>
+        <td><%= section_answer.individual_review %></td>
+        <td><%= section_answer.employee_comment %></td>
+        <td><%= section_answer.reviewer_comment %></td>
+        <td><%= link_to 'Show', section_answer %></td>
+        <td><%= link_to 'Edit', edit_section_answer_path(section_answer) %></td>
+        <td><%= link_to 'Destroy', section_answer, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Section answer', new_section_answer_path %>

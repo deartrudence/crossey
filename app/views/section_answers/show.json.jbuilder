@@ -1,0 +1,1 @@
+json.partial! "section_answers/section_answer", section_answer: @section_answer

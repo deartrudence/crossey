@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Section:</strong>
+  <%= @section_answer.section %>
+</p>
+
+<p>
+  <strong>Individual review:</strong>
+  <%= @section_answer.individual_review %>
+</p>
+
+<p>
+  <strong>Employee comment:</strong>
+  <%= @section_answer.employee_comment %>
+</p>
+
+<p>
+  <strong>Reviewer comment:</strong>
+  <%= @section_answer.reviewer_comment %>
+</p>
+
+<%= link_to 'Edit', edit_section_answer_path(@section_answer) %> |
+<%= link_to 'Back', section_answers_path %>
