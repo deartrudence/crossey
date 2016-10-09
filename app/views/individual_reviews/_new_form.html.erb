@@ -10,10 +10,19 @@
       </ul>
     </div>
   <% end %>
-
-  <%= f.fields_for :signatures do |builder| %>
-    <%= render 'signature_fields', f: builder %>
-  <% end %>
+	
+	<div class="field">
+	  <%= f.label :date %><br>
+	  <%= f.date_select :date %>
+	</div>
+	<div class="field">
+	  <%= f.label :review_id %><br>
+	  <%= f.collection_select :review_id, Review.all, :id, :name %>
+	</div>
+	<div class="field">
+		<%= f.label :employee %><br>
+		<%= f.collection_select :user_id, User.all, :id, :email %>
+	</div>
 
   <div class="actions">
     <%= f.submit %>

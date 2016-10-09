@@ -24,6 +24,12 @@ class AnswersController < ApplicationController
   # POST /answers
   # POST /answers.json
   def create
+    # answers created upon IndividualReview creation
+  end
+
+  # PATCH/PUT /answers/1
+  # PATCH/PUT /answers/1.json
+  def update
     question = params[:answer][:question_id]
     individual_review = params[:answer][:individual_review_id]
     answer_value = params[:answer][:answer_value]
@@ -31,32 +37,16 @@ class AnswersController < ApplicationController
     @answer = Answer.find(answer_id)
     @answer.update(answer: answer_value)
     @answer.save
-    # @answer = Answer.where(question_id: question, individual_review_id: individual_review, answer: answer_value).first_or_create()
-    # @answer = Answer.new(answer_params)
-
-    respond_to do |format|
-      if @answer.save
-        format.html { redirect_to @answer, notice: 'Answer was successfully created.' }
-        format.json { render :show, status: :created, location: @answer }
-      else
-        format.html { render :new }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /answers/1
-  # PATCH/PUT /answers/1.json
-  def update
-    respond_to do |format|
-      if @answer.update(answer_params)
-        format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @answer }
-      else
-        format.html { render :edit }
-        format.json { render json: @answer.errors, status: :unprocessable_entity }
-      end
-    end
+    head :ok, content_type: "text/html"
+    # respond_to do |format|
+    #   if @answer.update(answer_params)
+    #     format.html { redirect_to @answer, notice: 'Answer was successfully updated.' }
+    #     format.json { render :show, status: :ok, location: @answer }
+    #   else
+    #     format.html { render :edit }
+    #     format.json { render json: @answer.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # DELETE /answers/1

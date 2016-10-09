@@ -3,6 +3,9 @@
 <p id="notice"><%= notice %></p>
 <h1><%= @individual_review.review.name %></h1>
 
+<p>Date : <%= @individual_review.date %></p>
+<p>User : <%= @individual_review.user.email %></p>
+
 
 <% @individual_review.review.sections.each do |section| %>
 	<ul>
@@ -37,6 +40,8 @@
 	</ul>
 <% end%>
 
+<%= render 'form' %>
+
 <%= link_to 'Show', @individual_review %> |
 <%= link_to 'Back', individual_reviews_path %>
 
@@ -50,8 +55,8 @@
 			var question = $(this).parent().parent().attr('id').split('-').pop()
 			var individual_review = <%= @individual_review.id %>
 			$.ajax({
-				url:'/answers',
-				type: 'post',
+				url:'/answers/' + answer_id,
+				type: 'put',
 				data: {
 					answer : {
 						question_id : question,

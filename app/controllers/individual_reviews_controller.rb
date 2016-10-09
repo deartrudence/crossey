@@ -30,6 +30,11 @@ class IndividualReviewsController < ApplicationController
     @review = Review.last
     respond_to do |format|
       if @individual_review.save
+        #TODO - add all answers for review based on questions of review type
+        # ir.questions.each do |question|
+        #   Answer.create(question_id: question.id, individual_review_id: ir.id)
+        # end
+        #TODO - signatures for Employee, Reviewer, and Principle
         format.html { redirect_to @individual_review, notice: 'Individual review was successfully created.' }
         format.json { render :show, status: :created, location: @individual_review }
       else
