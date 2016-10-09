@@ -37,16 +37,17 @@
 					<% end %>	
 				<% end %>
 				<% section_answer = section.section_answers.where(individual_review_id: @individual_review.id).first %>
-				<%= section.id %>-<%= section_answer.id%>
 				<%= form_for(section_answer, remote: true, :authenticity_token => true, :html => {:id => "section-#{section.id}", "data-id" => "#{section_answer.id}", :class => ''})  do |f| %>
-					<div class="form-group ">
-						<%= f.label :employee_comment %><br>
-          	<%= f.text_field :employee_comment, class: 'form-control comment-js' %>
-					</div>
-					<div class="form-group ">
-						<%= f.label :reviewer_comment %><br>
-          	<%= f.text_field :reviewer_comment, class: 'form-control comment-js' %>
-					</div>
+					<fieldset>
+						<div class="form-group ">
+							<%= f.label :employee_comment %><br>
+	          	<%= f.text_field :employee_comment, class: 'form-control comment-js' %>
+						</div>
+						<div class="form-group ">
+							<%= f.label :reviewer_comment %><br>
+	          	<%= f.text_field :reviewer_comment, class: 'form-control comment-js' %>
+						</div>
+					</fieldset>
 	      <% end %>
 			</li>
 			<% end%>
@@ -94,10 +95,10 @@
 		// AJAX to create or update each section comment
 			$('.comment-js').on('change', function(){
 				var comment_value = $(this).val()
-				var section_answer_id = $(this).parent().parent().data('id')
+				var section_answer_id = $(this).parent().parent().parent().data('id')
 				console.log(section_answer_id)
 				console.log(comment_value)
-				var section_id = $(this).parent().parent().attr('id').split('-').pop()
+				var section_id = $(this).parent().parent().parent().attr('id').split('-').pop()
 				var comment_type = $(this)[0].name.split('[')[1].slice(0,-1)
 				console.log(comment_type)
 				console.log(section_id)

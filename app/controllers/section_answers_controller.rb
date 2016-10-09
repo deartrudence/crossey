@@ -42,19 +42,9 @@ class SectionAnswersController < ApplicationController
   def update
     comment_type = params[:section_answer][:comment_type]
     comment_value = params[:section_answer][:comment_value]
-    # @section_answer.update(answer: comment_value)
     @section_answer.update_column(comment_type, comment_value)
     @section_answer.save
     head :ok, content_type: "text/html"
-    # respond_to do |format|
-    #   if @section_answer.update(section_answer_params)
-    #     format.html { redirect_to @section_answer, notice: 'Section answer was successfully updated.' }
-    #     format.json { render :show, status: :ok, location: @section_answer }
-    #   else
-    #     format.html { render :edit }
-    #     format.json { render json: @section_answer.errors, status: :unprocessable_entity }
-    #   end
-    # end
   end
 
   # DELETE /section_answers/1
