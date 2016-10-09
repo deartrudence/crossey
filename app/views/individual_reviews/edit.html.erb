@@ -28,7 +28,7 @@
 									</div>
 								<% else %>
 									<div class="form-group ">
-				          	<%= f.text_field :answer, class: 'form-control' %>
+				          	<%= f.text_field :answer, class: 'form-control text-answer-js' %>
 									</div>
 								<% end %>
 				      <% end %>
@@ -62,7 +62,7 @@
 <%= link_to 'Back', individual_reviews_path %>
 
 <script>
-	// AJAX to create or update each answer
+	// AJAX to create or update each answer - radio button
 		$('input:radio').on('change', function(){
 			var answer_value = $(this).val()
 			var answer_id = $(this).parent().parent().data('id')
@@ -91,6 +91,37 @@
 				}
 			});
 		});
+
+		// AJAX to create or update each answer - text answer
+			$('.text-answer-js').on('change', function(){
+				var answer_value = $(this).val()
+				var answer_id = $(this).parent().parent().data('id')
+				var question = $(this).parent().parent().attr('id').split('-').pop()
+				console.log(answer_id)
+				console.log(answer_value)
+				console.log(question)
+				var individual_review = <%= @individual_review.id %>
+				$.ajax({
+					url:'/answers/' + answer_id,
+					type: 'put',
+					data: {
+						answer : {
+							question_id : question,
+							answer_value : answer_value,
+							individual_review_id : individual_review,
+							answer_id : answer_id
+						}
+					},
+					dataType: 'script',
+					success: function(){
+						console.log('success')
+					},
+					error: function(error){
+						console.log('error')
+						console.log(error)
+					}
+				});
+			});
 
 		// AJAX to create or update each section comment
 			$('.comment-js').on('change', function(){
