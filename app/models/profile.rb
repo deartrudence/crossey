@@ -9,4 +9,7 @@ class Profile < ActiveRecord::Base
 
   accepts_nested_attributes_for :user_roles, allow_destroy: :true
 
+  def name
+  	"#{self.first_name} #{self.last_name}"
+  end
 end

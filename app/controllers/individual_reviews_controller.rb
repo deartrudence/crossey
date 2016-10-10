@@ -5,6 +5,7 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews.json
   def index
     @individual_reviews = IndividualReview.all
+    @users = User.all
     # @individual_reviews_as_employee = IndividualReview.find_roles(:employee, current_user)
     # @individual_reviews_as_reviewer = IndividualReview.find_roles(:reviewer, current_user)
   end

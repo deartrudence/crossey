@@ -11,6 +11,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     @user_roles = @profile.user.user_roles.map(&:name)
+    @individual_reviews = IndividualReview.where(employee_id: @profile.user.id)
   end
 
   # GET /profiles/new

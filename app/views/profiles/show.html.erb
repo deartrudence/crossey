@@ -1,18 +1,9 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @profile.user %>
-</p>
 
 <p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
+  <strong>Name:</strong>
+  <%= @profile.name %>
 </p>
 
 <p>
@@ -25,11 +16,21 @@
   <%= @profile.job_type %>
 </p>
 
-<p>Roles</p>
+<h2>Roles</h2>
 <% @user_roles.each do |role| %>
   <ul>
     <li><%= role %></li>
   </ul>
 <% end %>
+
+<h2>Reviews</h2>
+<% @individual_reviews.each do |ir| %>
+  <fieldset>
+    <p><%= ir.review.name %></p>
+    <p><%= ir.date %></p>
+    <p><%= link_to 'Review', ir %></p>
+    <p><%= link_to "Update Review", edit_individual_review_path(ir) %></p>
+  </fieldset>
+<% end %> 
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

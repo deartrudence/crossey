@@ -11,12 +11,10 @@
   </thead>
 
   <tbody>
-    <% @individual_reviews.each do |individual_review| %>
+    <% @users.each do |user| %>
       <tr>
-        <td><%= individual_review.user %></td>
-        <td><%= link_to 'Show', individual_review %></td>
-        <td><%= link_to 'Edit', edit_individual_review_path(individual_review) %></td>
-        <td><%= link_to 'Destroy', individual_review, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= user.profile.first_name %></td>
+        <td><%= link_to 'Reviews', user.profile %></td>
       </tr>
     <% end %>
   </tbody>
