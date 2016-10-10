@@ -13,7 +13,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.profile.first_name %></td>
+        <td><%= user.profile.name %></td>
         <td><%= link_to 'Reviews', user.profile %></td>
       </tr>
     <% end %>

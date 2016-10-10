@@ -2,6 +2,23 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new
+    if user.is_super_admin?
+        can :manage, :all 
+    elsif user.is_principal?
+        can [:create], Profile
+        can [:update, :edit, :show, :index], Profile, :user_id => user.id
+        can [:manage], IndividualReview
+    elsif user.is_reviewer? 
+        can [:create], IndividualReview
+        can [:update, :edit, :show, :index], IndividualReview, :reviewer_id => user.id
+        can [:update, :edit, :show, :index], IndividualReview, :employee_id => user.id
+        can [:update, :edit, :show, :index], Profile
+    elsif user.is_employee?
+        can [:update, :edit, :show, :index], IndividualReview, :employee_id => user.id
+        can [:update, :edit, :show], Profile, :user_id => user.id
+
+    end
     # Define abilities for the passed in user here. For example:
     #
     #   user ||= User.new # guest user (not logged in)

@@ -29,7 +29,10 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @profile.user = current_user
-    raise 'hell'
+    if params[:profile][:user_role].present?
+      user_role = @profile.user.user_roles.where(name: params[:profile][:user_role]).first_or_initialize
+      user_role.save
+    end
     respond_to do |format|
       if @profile.save
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }

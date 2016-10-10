@@ -1,6 +1,7 @@
 class IndividualReviewsController < ApplicationController
   before_action :set_individual_review, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_has_profile
+  load_and_authorize_resource
   # GET /individual_reviews
   # GET /individual_reviews.json
   def index
