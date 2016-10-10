@@ -13,5 +13,5 @@ class IndividualReview < ActiveRecord::Base
 
   accepts_nested_attributes_for :signatures, allow_destroy: :true
 
-  resourcify
+  # resourcify
 end

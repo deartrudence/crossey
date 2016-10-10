@@ -35,7 +35,9 @@ class IndividualReviewsController < ApplicationController
           Answer.create(question_id: question.id, individual_review_id: @individual_review.id)
         end
         #TODO - add section comments
-        
+        @individual_review.sections.each do |section|
+          SectionAnswer.create(section_id: section.id, individual_review_id: @individual_review.id)
+        end
         #TODO - signatures for Employee, Reviewer, and Principle
         @individual_review.signatures.create(signature_type: "Employee")
         @individual_review.signatures.create(signature_type: "Reviewer")

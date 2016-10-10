@@ -12,7 +12,8 @@ sections = [
 	['Section II', 'Reviewer'], 
 	['Section III', 'Reviewer'],
 	['Section IV', 'Reviewer'],
-	['Section V', 'Reviewer']
+	['Section V', 'Reviewer'],
+	['Employee Section', 'Employee']
 ]
 
 questions = [
@@ -135,6 +136,55 @@ questions = [
 	['Section IV', 'Project Management', 'Actively participates in team meetings and prepares meeting mintues for projects chaired by CEL', 'check_box'],
 	['Section IV', 'Project Management', 'Able to perform staff reviews and provides constructive criticism on performance', 'check_box'],
 	['Section IV', 'Project Management', 'Managing Principal Comments', 'text'],
+	['Section IV', 'Promotion of Business', 'Ensures client is aware of extra services that CEL provides', 'check_box'],
+	['Section IV', 'Promotion of Business', 'Builds and maintains client relationships', 'check_box'],
+	['Section IV', 'Promotion of Business', 'Seeks and develops new clients', 'check_box'],
+	['Section IV', 'Promotion of Business', 'Keeps clients satisfied', 'check_box'],
+	['Section IV', 'Promotion of Business', 'Attends client functions', 'check_box'],
+	['Section IV', 'Promotion of Business', 'Participates in social events with clients (i.e. golf, lunch, theatre, etc.)', 'check_box'],
+	['Section IV', 'Promotion of Business', 'Managing Principal Comments', 'text'],
+	['Section IV', 'Supervisory', "Informs Supervisor of team members' performance", 'check_box'],
+	['Section IV', 'Supervisory', 'Communicates project objectives, schedule and design details to team members', 'check_box'],
+	['Section IV', 'Supervisory', 'Assigns appropriate work to team members and provides direction as needed', 'check_box'],
+	['Section IV', 'Supervisory', "Monitors team members' progress and performance", 'check_box'],
+	['Section IV', 'Supervisory', "Reviews team members' work for accuracy and completeness", 'check_box'],
+	['Section IV', 'Supervisory', 'Monitors and manages punctuality, attendance and absence of team members', 'check_box'],
+	['Section IV', 'Supervisory', 'Ensures team members comply with CEL policies and procedures', 'check_box'],
+	['Section IV', 'Supervisory', 'Provides coaching and feedback to team members', 'check_box'],
+	['Section IV', 'Supervisory', 'Identifies, addresses and manages performance problems', 'check_box'],
+	['Section IV', 'Supervisory', 'Reviews and approves team members time sheets on a weekly basis', 'check_box'],
+	['Section IV', 'Supervisory', 'Communicates team, departmental and organizational information to team members', 'check_box'],
+	['Section IV', 'Supervisory', 'Provides training and development of team members', 'check_box'],
+	['Section IV', 'Supervisory', 'Provides input for performance reviews', 'check_box'],
+	['Section IV', 'Supervisory', 'Managing Principal Comments', 'text'],
+	['Section IV', 'Organizational', 'Arrives at meetings on time', 'check_box'],
+	['Section IV', 'Organizational', 'Arrives and leaves in accordance with their working schedule', 'check_box'],
+	['Section IV', 'Organizational', 'Attends internal meetings', 'check_box'],
+	['Section IV', 'Organizational', 'Participates in training', 'check_box'],
+	['Section IV', 'Organizational', 'Maintains an organized desk', 'check_box'],
+	['Section IV', 'Organizational', 'Files emails and design files on network', 'check_box'],
+	['Section IV', 'Organizational', 'Follows company project closeout procedures', 'check_box'],
+	['Section IV', 'Organizational', 'Timesheets are completed on time', 'check_box'],
+	['Section IV', 'Organizational', 'Expenses are submitted on time', 'check_box'],
+	['Section IV', 'Organizational', 'Complies with CEL policies and procedures', 'check_box'],
+	['Section IV', 'Organizational', 'Ability to work independently with minimal input from supervisor', 'check_box'],
+	['Section IV', 'Organizational', 'Participates in learning sessions', 'check_box'],
+	['Section IV', 'Organizational', 'Managing Principal Comments', 'text'],
+	['Section IV', 'Health and Safety', "Complies with CEL's H&S program", 'check_box'],
+	['Section IV', 'Health and Safety', 'Managing Principal Comments', 'text'],
+	['Section V', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Strengths', 'text'],
+	['Section V', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Improvement Areas', 'text'],
+	['Section V', 'Performance Goals for the Upcoming Year', 'Goals', 'text'],
+	['Section V', 'Performance Goals for the Upcoming Year', 'Timeframe for completion', 'text'],
+	['Section V', 'Choose 1-2 development goals to focus on this year to enhance ', 'Goals', 'text'],
+	['Section V', 'Choose 1-2 development goals to focus on this year to enhance ', 'Timeframe for completion', 'text'],
+	['Section V', 'Identify 1-2 career development goals to help make progress for longer-tem ', 'Goals', 'text'],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What makes you happy while working at CEL?', 'text'],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What frustrates you while working at CEL?', 'text'],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What are your career goals for the next 2 years and 5 years.', 'text'],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What can your manager do to help you achieve your goals?', 'text'],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What are the key items which enable you to do your best work (Work space free of distraction, training, timely input from my Manager, Revit/It Support…)?', 'text'],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What items at CEL are preventing you from doing your best work?', 'text'],
 ]
 
 sections.each do |section|
@@ -146,6 +196,14 @@ questions.each do |question|
 		sec = Section.find_by_title('Section I')
 	elsif question[0] == 'Section II'
 		sec = Section.find_by_title('Section II')
+	elsif question[0] == 'Section III'
+		sec = Section.find_by_title('Section II')
+	elsif question[0] == 'Section IV'
+		sec = Section.find_by_title('Section IV')
+	elsif question[0] == 'Section V'
+		sec = Section.find_by_title('Section V')
+	elsif question[0] == 'Employee Section'
+		sec = Section.find_by_title('Employee Section')
 	end
 	Question.create(section_id: sec.id, subsection: question[1], question_text: question[2], question_type: question[3])
 end
