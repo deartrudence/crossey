@@ -32,6 +32,5 @@ class Profile < ActiveRecord::Base
   def set_job_level
   	job_level = Profile::JOB_LEVELS[self.job_title.to_sym]
   	self.job_level = job_level
-  	# self.save
   end
 end
