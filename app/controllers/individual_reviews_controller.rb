@@ -5,18 +5,17 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews
   # GET /individual_reviews.json
   def index
-    @individual_reviews = IndividualReview.all
+    # @individual_reviews = IndividualReview.all
     if current_user.is_super_admin?
       @users = User.all
     elsif current_user.is_principal?
-      @users = User.all 
+      user_array = Profile.by_job_type('Designer').less_than_level(2).map(&:user_id)
+      @users = User.where(id: user_array)
     elsif current_user.is_reviewer?
       user_array = current_user.authored_reviews.map(&:employee_id)
       @users = User.where(id: user_array) 
-      @me = current_user
-    else
-      @users = User.where(id: current_user.id)
     end
+    @me = current_user
       
     # @individual_reviews_as_employee = IndividualReview.find_roles(:employee, current_user)
     # @individual_reviews_as_reviewer = IndividualReview.find_roles(:reviewer, current_user)

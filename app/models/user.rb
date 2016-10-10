@@ -11,18 +11,34 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   def is_employee?
-  	self.profile.user_roles.map(&:name).include?('Employee')
+    if self.profile.present?
+  	 self.profile.user_roles.map(&:name).include?('Employee')
+    else
+      return false
+    end
   end
 
   def is_reviewer?
-  	self.profile.user_roles.map(&:name).include?('Reviewer')
+    if self.profile.present?
+  	 self.profile.user_roles.map(&:name).include?('Reviewer')
+    else
+      return false
+    end
   end
 
   def is_principal?
-  	self.profile.user_roles.map(&:name).include?('Principal')
+    if self.profile.present?
+  	 self.profile.user_roles.map(&:name).include?('Principal')
+    else
+      return false
+    end
   end
 
   def is_super_admin?
-  	self.profile.user_roles.map(&:name).include?('SuperAdmin')
+    if self.profile.present?
+  	 self.profile.user_roles.map(&:name).include?('SuperAdmin')
+    else
+      return false
+    end
   end
 end

@@ -7,20 +7,18 @@
 <%= @me.profile.name %>
 <%= link_to 'Reviews', @me.profile %>
 
-<h4>People I have Reviewed</h4>
-<table>
-  <tbody>
-   
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.profile.name %></td>
-        <td><%= link_to 'Reviews', user.profile %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @users.present? %>
+  <h4>People I have Reviewed</h4>
+  <table>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.profile.name %></td>
+          <td><%= link_to 'Reviews', user.profile %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
 
 
-<br>
-
-<%= link_to 'New Individual review', new_individual_review_path %>
