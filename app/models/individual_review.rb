@@ -13,5 +13,22 @@ class IndividualReview < ActiveRecord::Base
 
   accepts_nested_attributes_for :signatures, allow_destroy: :true
 
-  # resourcify
+  def check_results
+    hash = {
+      'Exceeds Expectations' => 0, 
+      'Meets Expectations' => 0,
+      'Needs Improvement' => 0,
+      'N/A' => 0
+    }
+    Answer::ANSWERS.each do |answer|
+      count = self.answers.where(answer: answer).count
+      hash[answer] = count
+    end
+    return hash
+  end
+
+  def text_results
+    self.answers.joins(:question).where(questions: {question_type: 'text'})
+  end
+  
 end

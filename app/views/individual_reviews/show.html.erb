@@ -5,5 +5,30 @@
   <%= @individual_review.user %>
 </p>
 
+<h2>Results</h2>
+<% @check_results.each do |key, value|%>
+	<p><strong><%= key %> :</strong> <%= value %></p>
+<% end %>
+
+<h2>--> Just Text</h2>
+<% @text_results.select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
+		<h3><%= subsection %></h3>
+		<% texts.each do |text| %>
+			<p><strong><%= text.question.question_text %></strong></p>
+			<p><%= text.answer %></p>
+		<% end %>
+	<hr>
+<% end %>
+
+<h2>--> All Answers</h2>
+<% @results.select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
+		<h3><%= subsection %></h3>
+		<% texts.each do |text| %>
+			<p><strong><%= text.question.question_text %></strong></p>
+			<p><%= text.answer %></p>
+		<% end %>
+	<hr>
+<% end %>
+
 <%= link_to 'Edit', edit_individual_review_path(@individual_review) %> |
 <%= link_to 'Back', individual_reviews_path %>

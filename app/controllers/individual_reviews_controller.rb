@@ -12,6 +12,9 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews/1
   # GET /individual_reviews/1.json
   def show
+    @check_results = @individual_review.check_results
+    @text_results = @individual_review.text_results
+    @results = @individual_review.answers.joins(:question)
   end
 
   # GET /individual_reviews/new
