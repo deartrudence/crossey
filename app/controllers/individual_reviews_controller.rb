@@ -9,7 +9,7 @@ class IndividualReviewsController < ApplicationController
     if current_user.is_super_admin?
       @users = User.all
     elsif current_user.is_principal?
-      user_array = Profile.by_job_type('Designer').less_than_level(2).map(&:user_id)
+      user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
       @users = User.where(id: user_array)
     elsif current_user.is_reviewer?
       user_array = current_user.authored_reviews.map(&:employee_id)

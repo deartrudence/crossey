@@ -7,8 +7,8 @@ class Ability
         if user.is_super_admin?
             can :manage, :all 
         elsif user.is_principal?
-            can [:create], Profile
-            can [:update, :edit, :show, :index], Profile.by_job_type('Designer').less_than_level(2)
+            can [:create, :edit, :update, :show, :new], Profile, :user_id => user.id
+            can [:update, :edit, :show, :index], Profile.by_job_type(user.profile.job_type).less_than_level(user.profile.job_level)
             can [:manage], IndividualReview
         elsif user.is_reviewer? 
             can [:create], IndividualReview
