@@ -26,27 +26,44 @@
     </div> 
     <div class="box-body">
       <%= @me.profile.name %>
-      <%= link_to 'Reviews', @me.profile, class:"btn btn-primary pull-right" %>
+      <%= link_to 'Reviews', @me.profile, class:"btn btn-flat btn-primary pull-right" %>
     </div> 
   </div>
 
   <div class="box">
-    <% if @users.present? %>
-      <div class="box-header with-border">
-        <h4 class="box-title">People I have Reviewed / I am Principal of</h4>
-        <div class="box-tools pull-right">
-          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-            <i class="fa fa-minus"></i></button>
-        </div>
+    <div class="box-header with-border">
+      <h4 class="box-title">People I have Reviewed</h4>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
       </div>
+      </div>
+    <% if @users.present? %>
         <% @users.each do |user| %>
           <div class="box-body">
             <%= user.profile.name %>
-            <%= link_to 'Reviews', user.profile, class: 'btn btn-primary pull-right' %>
+            <%= link_to 'Reviews', user.profile, class: 'btn btn-flat btn-primary pull-right' %>
           </div>
         <% end %>
-    <% end %>
-    
+    <% end %>    
+  </div>
+
+  <div class="box">
+    <div class="box-header with-border">
+      <h4 class="box-title">People I am Principal of</h4>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+      </div>
+    </div>
+    <% if @underlings.present? %>
+        <% @underlings.each do |user| %>
+          <div class="box-body">
+            <%= user.profile.name %>
+            <%= link_to 'Reviews', user.profile, class: 'btn btn-flat btn-primary pull-right' %>
+          </div>
+        <% end %>
+    <% end %>    
   </div>
   
 </section>

@@ -9,8 +9,10 @@ class IndividualReviewsController < ApplicationController
     if current_user.is_super_admin?
       @users = User.all
     elsif current_user.is_principal?
-      user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
+      user_array = current_user.authored_reviews.map(&:employee_id)
       @users = User.where(id: user_array)
+      user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
+      @underlings = User.where(id: user_array)
     elsif current_user.is_reviewer?
       user_array = current_user.authored_reviews.map(&:employee_id)
       @users = User.where(id: user_array) 
@@ -24,6 +26,7 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews/1
   # GET /individual_reviews/1.json
   def show
+    @total_check_questions = @individual_review.questions.where(question_type: "check_box").count
     @check_results = @individual_review.check_results
     @text_results = @individual_review.text_results
     @results = @individual_review.answers.joins(:question)

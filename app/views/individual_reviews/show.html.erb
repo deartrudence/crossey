@@ -1,54 +1,91 @@
-<p id="notice"><%= notice %></p>
+<div class="content">
+	
+	<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Date:</strong>
-  <%= @individual_review.date %><br>
-  <strong>Employee:</strong>
-  <%= @individual_review.employee.profile.name %><br>
-  <strong>Reviewer:</strong>
-  <%= @individual_review.reviewer.profile.name %><br>
-  <strong>Employee Title:</strong>
-  <%= @individual_review.employee.profile.job_title %><br>
-</p>
+	<p>
+	  <strong>Date:</strong>
+	  <%= @individual_review.date %><br>
+	  <strong>Employee:</strong>
+	  <%= @individual_review.employee.profile.name %><br>
+	  <strong>Reviewer:</strong>
+	  <%= @individual_review.reviewer.profile.name %><br>
+	  <strong>Employee Title:</strong>
+	  <%= @individual_review.employee.profile.job_title %><br>
+	</p>
 
-<%= link_to "Update this review", edit_individual_review_path(@individual_review) %>
+	<%= link_to "Update this review", edit_individual_review_path(@individual_review), class:"btn btn-flat btn-primary" %>
 
-<h2 class="page-header">Results</h2>
-<% @check_results.each do |key, value|%>
-	<p><strong><%= key %> :</strong> <%= value %></p>
-<% end %>
+	<div class="row">
+		
+		<div class="col-md-8">
+			
+			<div class="box">
+				<div class="box-header">
+					<h3>Results</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-bordered">
 
-<h2>--> Just Text</h2>
-<% @text_results.select('answers.*, questions.section_id').group_by(&:section_id).each do |section, answers| %>
-		<h3><%= Section.find(section).title %></h3>
-		<!-- this is to get Active Record relation of Answers instead of array -->
-		<% array = answers.map(&:id) %>
-		<% these_answers = Answer.where(id: array) %>
-		<!-- end -->
-		<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts|%>
-			<h4><%= subsection %></h4>
+						<tbody>
+							<th>key</th>
+							<th>value</th>
+							<th>percentage</th>
+							<th></th>	
+							<% @check_results.each do |key, value|%>
+								<tr>
+									<td><%= key %></td> 
+									<td><%= value %></td> 
+									<td>
+										<% percentage = ((value.to_f / @total_check_questions.to_f) * 100).round(0) %>
+										<div class="progress progress-xs">
+											<div class="progress-bar progress-bar" style='width: <%= percentage %>%'></div>
+											
+										</div>
+									</td>
+									<td>
+										<span class="badge bg-light-blue">% <%= percentage.round(0)%></span>	
+									</td>
+								</tr>
+							<% end %>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<h2>--> Just Text</h2>
+	<% @text_results.select('answers.*, questions.section_id').group_by(&:section_id).each do |section, answers| %>
+			<h3><%= Section.find(section).title %></h3>
+			<!-- this is to get Active Record relation of Answers instead of array -->
+			<% array = answers.map(&:id) %>
+			<% these_answers = Answer.where(id: array) %>
+			<!-- end -->
+			<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts|%>
+				<h4><%= subsection %></h4>
+				<% texts.each do |text| %>
+					<p><em><%= text.question.question_text %></em></p>
+					<p><%= text.answer %></p>
+				<% end %>
+			<% end %>
+			<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @individual_review.id) %>
+			<h4>Employee Comment</h4>
+			<p><%= section_answer.employee_comment %></p>
+			<h4>Reviewer Comment</h4>
+			<p><%= section_answer.reviewer_comment %></p>
+		<hr>
+	<% end %>
+
+	<h2>--> All Answers</h2>
+	<% @results.select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
+			<h3><%= subsection %></h3>
 			<% texts.each do |text| %>
 				<p><em><%= text.question.question_text %></em></p>
 				<p><%= text.answer %></p>
 			<% end %>
-		<% end %>
-		<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @individual_review.id) %>
-		<h4>Employee Comment</h4>
-		<p><%= section_answer.employee_comment %></p>
-		<h4>Reviewer Comment</h4>
-		<p><%= section_answer.reviewer_comment %></p>
-	<hr>
-<% end %>
+		<hr>
+	<% end %>
 
-<h2>--> All Answers</h2>
-<% @results.select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
-		<h3><%= subsection %></h3>
-		<% texts.each do |text| %>
-			<p><em><%= text.question.question_text %></em></p>
-			<p><%= text.answer %></p>
-		<% end %>
-	<hr>
-<% end %>
-
-<%= link_to 'Edit', edit_individual_review_path(@individual_review) %> |
-<%= link_to 'Back', individual_reviews_path %>
+	<%= link_to 'Edit', edit_individual_review_path(@individual_review) %> |
+	<%= link_to 'Back', individual_reviews_path %>
+</div>

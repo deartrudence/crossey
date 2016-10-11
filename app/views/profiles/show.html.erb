@@ -1,36 +1,46 @@
-<p id="notice"><%= notice %></p>
+<div class="content">
+  
+  <p id="notice"><%= notice %></p>
 
 
-<p>
-  <strong>Name:</strong>
-  <%= @profile.name %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @profile.name %>
+  </p>
 
-<p>
-  <strong>Job title:</strong>
-  <%= @profile.job_title %>
-</p>
+  <p>
+    <strong>Job title:</strong>
+    <%= @profile.job_title %>
+  </p>
 
-<p>
-  <strong>Job type:</strong>
-  <%= @profile.job_type %>
-</p>
+  <p>
+    <strong>Job type:</strong>
+    <%= @profile.job_type %>
+  </p>
 
-<h2>Roles</h2>
-<% @user_roles.each do |role| %>
-  <ul>
-    <li><%= role %></li>
-  </ul>
-<% end %>
+  <h2>Roles</h2>
+  <% @user_roles.each do |role| %>
+    <ul>
+      <li><%= role %></li>
+    </ul>
+  <% end %>
 
-<h2>Reviews</h2>
-<% @individual_reviews.each do |ir| %>
-  <fieldset>
-    <p><%= ir.review.name %></p>
-    <p><%= ir.date %></p>
-    <p><%= link_to 'Review', ir %></p>
-    <p><%= link_to "Update Review", edit_individual_review_path(ir) %></p>
-  </fieldset>
-<% end %> 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+  <h2>Reviews</h2>
+  <% @individual_reviews.each do |ir| %>
+    <div class="box">
+      <div class="box-header with-border">
+        <%= ir.review.name %> - <%= ir.date %>
+      </div>
+      <div class="box-body">
+        <p></p>
+        <p></p>
+        <p><%= link_to 'Review', ir, class: "btn btn-flat btn-primary" %></p>
+        <p><%= link_to "Update Review", edit_individual_review_path(ir), class: "btn btn-flat btn-primary" %></p>
+        
+      </div>
+    </div>
+
+  <% end %> 
+  <%= link_to 'Edit', edit_profile_path(@profile) %> |
+  <%= link_to 'Back', profiles_path %>
+</div>

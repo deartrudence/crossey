@@ -1,38 +1,61 @@
-<%= form_for(@profile) do |f| %>
-  <% if @profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+<section class="content">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+      
+      <%= form_for(@profile) do |f| %>
+        <% if @profile.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
 
-      <ul>
-      <% @profile.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+            <ul>
+            <% @profile.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        
+        <div class="box box-primary">
+          <div class="box-header">
+            Update your Profile
+          </div>
+          <div class="box-body">
+            <div class="row">
+              <div class="field form-group col-md-6">
+                <%= f.label :first_name %><br>
+                <%= f.text_field :first_name, class:"form-control" %>
+              </div>
+              <div class="field form-group col-md-6">
+                <%= f.label :last_name %><br>
+                <%= f.text_field :last_name, class:"form-control" %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="field form-group col-md-6">
+                <%= f.label :job_title %><br>
+                <%= f.text_field :job_title, class:"form-control" %>
+              </div>
+              <div class="field form-group col-md-6">
+                <%= f.label :job_type %><br>
+                <%= f.text_field :job_type, class:"form-control" %>
+              </div>
+            </div>
+            <div class="field form-group">
+              <%= f.label :role %><br>
+              <%= f.collection_select :user_role, Profile::USER_ROLES, :to_s, :to_s %>
+            </div>
+
+            <div class="actions">
+              <%= f.submit class: 'btn btn-flat btn-primary' %>
+            </div>
+            
+          </div>
+        </div>
       <% end %>
-      </ul>
     </div>
-  <% end %>
+  </div>
+</section>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :job_title %><br>
-    <%= f.text_field :job_title %>
-  </div>
-  <div class="field">
-    <%= f.label :job_type %><br>
-    <%= f.text_field :job_type %>
-  </div>
-  <div class="field">
-    <%= f.label :role %><br>
-    <%= f.collection_select :user_role, Profile::USER_ROLES, :to_s, :to_s %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<script>
+  $('select').addClass('form-control select2 select2-hidden-accessible')
+</script>
