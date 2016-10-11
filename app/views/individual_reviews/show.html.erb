@@ -13,7 +13,7 @@
 
 <%= link_to "Update this review", edit_individual_review_path(@individual_review) %>
 
-<h2>Results</h2>
+<h2 class="page-header">Results</h2>
 <% @check_results.each do |key, value|%>
 	<p><strong><%= key %> :</strong> <%= value %></p>
 <% end %>
@@ -21,7 +21,7 @@
 <h2>--> Just Text</h2>
 <% @text_results.select('answers.*, questions.section_id').group_by(&:section_id).each do |section, answers| %>
 		<h3><%= Section.find(section).title %></h3>
-		<!-- this is to get active record relation of Answers instead of array -->
+		<!-- this is to get Active Record relation of Answers instead of array -->
 		<% array = answers.map(&:id) %>
 		<% these_answers = Answer.where(id: array) %>
 		<!-- end -->

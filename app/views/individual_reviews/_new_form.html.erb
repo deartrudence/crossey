@@ -1,30 +1,58 @@
-<%= form_for(@individual_review) do |f| %>
-  <% if @individual_review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@individual_review.errors.count, "error") %> prohibited this individual_review from being saved:</h2>
+<section class="content">
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			
+			<%= form_for(@individual_review) do |f| %>
+			  <% if @individual_review.errors.any? %>
+			    <div id="error_explanation">
+			      <h2><%= pluralize(@individual_review.errors.count, "error") %> prohibited this individual_review from being saved:</h2>
 
-      <ul>
-      <% @individual_review.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-	
-	<div class="field">
-	  <%= f.label :date %><br>
-	  <%= f.date_select :date %>
+			      <ul>
+			      <% @individual_review.errors.full_messages.each do |message| %>
+			        <li><%= message %></li>
+			      <% end %>
+			      </ul>
+			    </div>
+			  <% end %>
+				
+				<div class="box box-primary">
+					<div class="box-header">
+						Create a New Review
+					</div>
+					<div class="box-body">
+						<div class="field">
+						  <%= f.label :date %><br>
+						  <%= f.date_select :date, class: 'form-control' %>
+						</div>
+						<div class="field form-group">
+						  <%= f.label :date %>
+						  <div class="input-group date">
+						  	<div class="input-group-addon">
+						  		<i class="fa fa-calendar">
+						  		</i>
+						  	</div>
+						  		<%= f.text_field :date, class: 'form-control pull-right', id:'datepicker' %>
+						  </div>
+						</div>
+						<div class="field">
+						  <%= f.label :review_id %><br>
+						  <%= f.collection_select :review_id, Review.all, :id, :name, class: 'form-control select2 select2-hidden-accessible' %>
+						</div>
+						<div class="field">
+							<%= f.label :employee %><br>
+							<%= f.collection_select :employee_id, User.all, :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
+						</div>
+						<br>
+					  <div class="actions">
+					    <%= f.submit class: 'btn btn-primary' %>
+					  </div>
+					</div>
+				</div>
+			<% end %>
+		</div>
 	</div>
-	<div class="field">
-	  <%= f.label :review_id %><br>
-	  <%= f.collection_select :review_id, Review.all, :id, :name %>
-	</div>
-	<div class="field">
-		<%= f.label :employee %><br>
-		<%= f.collection_select :employee_id, User.all, :id, :email %>
-	</div>
+</section>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<script>
+	$('select').addClass('form-control select2 select2-hidden-accessible')
+</script>

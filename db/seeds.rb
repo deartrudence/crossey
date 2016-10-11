@@ -261,7 +261,7 @@ questions.each do |question|
 	elsif question[0] == 'Section II'
 		sec = Section.find_by_title('Section II')
 	elsif question[0] == 'Section III'
-		sec = Section.find_by_title('Section II')
+		sec = Section.find_by_title('Section III')
 	elsif question[0] == 'Section IV'
 		sec = Section.find_by_title('Section IV')
 	elsif question[0] == 'Section V'

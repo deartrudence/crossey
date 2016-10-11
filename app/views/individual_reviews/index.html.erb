@@ -1,24 +1,54 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Individual Reviews</h1>
+<ol class="breadcrumb">
+  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="#">Layout</a></li>
+  <li class="active">Fixed</li>
+</ol>
+<section class="content-header">
+  <div class="callout callout-info">
+    <h1>
+      Listing Employee Reviews
+      <small>Blank example to the fixed layout</small>
+    </h1>
+    
+  </div>
+</section>
 
-<h4>My Reviews</h4>
+<section class="content">
+  <div class="box">
+    <div class="box-header with-border">
+      <h4 class="box-title">My Reviews</h4>
+      <div class="box-tools pull-right">
+        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+          <i class="fa fa-minus"></i></button>
+      </div> 
+    </div> 
+    <div class="box-body">
+      <%= @me.profile.name %>
+      <%= link_to 'Reviews', @me.profile, class:"btn btn-primary pull-right" %>
+    </div> 
+  </div>
 
-<%= @me.profile.name %>
-<%= link_to 'Reviews', @me.profile %>
-
-<% if @users.present? %>
-  <h4>People I have Reviewed</h4>
-  <table>
-    <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td><%= user.profile.name %></td>
-          <td><%= link_to 'Reviews', user.profile %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
+  <div class="box">
+    <% if @users.present? %>
+      <div class="box-header with-border">
+        <h4 class="box-title">People I have Reviewed / I am Principal of</h4>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+            <i class="fa fa-minus"></i></button>
+        </div>
+      </div>
+        <% @users.each do |user| %>
+          <div class="box-body">
+            <%= user.profile.name %>
+            <%= link_to 'Reviews', user.profile, class: 'btn btn-primary pull-right' %>
+          </div>
+        <% end %>
+    <% end %>
+    
+  </div>
+  
+</section>
 
 
