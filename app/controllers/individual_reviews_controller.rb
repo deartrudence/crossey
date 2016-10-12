@@ -40,7 +40,7 @@ class IndividualReviewsController < ApplicationController
 
   # GET /individual_reviews/1/edit
   def edit
-    @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info' ]
+    @color_array = ['primary', 'navy', 'purple', 'teal', 'maroon' ]
   end
   # Allow the review to be downlaoded 
   def download
@@ -48,7 +48,10 @@ class IndividualReviewsController < ApplicationController
     @employee = @review.employee.profile
     @reviewer = @review.reviewer.profile
     @answers = @review.answers
-    # raise 'hell'
+    @check_results = @review.check_results
+    @total_check_questions = @review.questions.where(question_type: "check_box").count
+    @results = @review.answers.joins(:question)
+    @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info']
     html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
     pdf = WickedPdf.new.pdf_from_string(html)
     send_data(pdf,

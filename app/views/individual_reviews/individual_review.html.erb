@@ -5,8 +5,102 @@
 	<title>Individual Review</title>
 </head>
 <body>
-	<h1>Review for: <%= @employee.name %></h1>
-	<p></p>
-	<%= @review %>
+	<style>
+		html {
+			font-size: 8px;
+		}
+		body {
+			font-family: sans-serif;
+		}
+		h1 {
+			font-size: 4rem;
+		}
+		h2{
+			font-size: 3.2rem;
+		}
+		h3 {
+			font-size: 2.8rem;
+		}
+		h4 {
+			font-size: 2.4rem;
+		}
+		h5 {
+			font-size: 2rem;
+		}
+		p {
+			font-size: 1.6rem;
+		}
+		
+		hr {
+			margin: 20px auto;
+		}
+		.hl-box {
+			background: #ECF0F5;
+			padding: 12px;
+		}
+		.hl-box p {
+			margin-top: 0;
+		}
+		h3.section-title {
+			padding: 20px;
+			color: white;
+			margin: 0;
+		}
+		.bg-primary {
+			background: #3c8dbc;
+		}
+		.bg-navy {
+			background:#001f3f;
+		}
+		.bg-purple {
+			background:#605ca8;
+		}
+
+		.bg-teal {
+			background: #39cccc;
+		}
+		.bg-maroon {
+			background: #d81b60;
+		}
+
+	</style>
+	<div class="review-pdf">
+		<h1>Review for: <%= @employee.name %></h1>
+		<p><strong>Date:</strong> <%= @review.date %></p>
+		<p><strong>Reviewer:</strong> <%= @reviewer.name %></p>
+		<p><strong>Job Title:</strong> <%= @review.employee_job_title %></p>
+
+		<div class="hl-box">
+			<h2>Total Aggregate Score</h2>	
+			<% @check_results.each do |key, val| %>
+				<% percentage = ((val.to_f / @total_check_questions.to_f) * 100).round(0) %>
+				<p><%= key %> - <%= val%> (%<%= percentage %>)</p>
+			<% end %>
+		</div>
+		<div>
+			<h2>Results</h2>
+			<% @results.select('answers.*, questions.section_id').group_by(&:section_id).each_with_index do |(section, answers), i| %>
+				<h3 class="bg-<%=@color_array[i]%> section-title"><%= Section.find(section).title %></h3>
+				<% array = answers.map(&:id) %>
+				<% these_answers = Answer.where(id: array) %>
+				<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
+						<h5><%= subsection %></h5>
+						<% texts.each do |text| %>
+							<p><strong><em><%= text.question.question_text %></em></strong></p>
+							<p class="answer"><%= text.answer %></p>
+						<% end %>
+				<% end %>
+				<div class="hl-box">
+					<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @review.id) %>
+					<p><strong><em>Employee Comment</em></strong></p>
+					<p><%= section_answer.employee_comment %></p>
+					<p><strong><em>Reviewer Comment</em></strong></p>
+					<p><%= section_answer.reviewer_comment %></p>
+				</div>
+				<hr>
+			<% end %>
+		</div>
+
+	</div>
 </body>
 </html>
