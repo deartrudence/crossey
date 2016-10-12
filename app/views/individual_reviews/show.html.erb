@@ -1,17 +1,38 @@
+<p id="notice"><%= notice %></p>
+<ol class="breadcrumb">
+  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+  <li><a href="#">Layout</a></li>
+  <li class="active">Fixed</li>
+</ol>
+<section class="content-header">
+  <div class="callout callout-info">
+    <h1>
+      Review for <%= @individual_review.employee.profile.name %> on <%= @individual_review.date %>
+    </h1>
+    
+  </div>
+</section>	
+
 <div class="content">
 	
-	<p id="notice"><%= notice %></p>
-
-	<p>
-	  <strong>Date:</strong>
-	  <%= @individual_review.date %><br>
-	  <strong>Employee:</strong>
-	  <%= @individual_review.employee.profile.name %><br>
-	  <strong>Reviewer:</strong>
-	  <%= @individual_review.reviewer.profile.name %><br>
-	  <strong>Employee Title:</strong>
-	  <%= @individual_review.employee.profile.job_title %><br>
-	</p>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<div class="box-body">
+					<p>
+					  <strong>Date:</strong>
+					  <%= @individual_review.date %><br>
+					  <strong>Employee:</strong>
+					  <%= @individual_review.employee.profile.name %><br>
+					  <strong>Reviewer:</strong>
+					  <%= @individual_review.reviewer.profile.name %><br>
+					  <strong>Employee Title:</strong>
+					  <%= @individual_review.employee.profile.job_title %><br>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<%= link_to "Update this review", edit_individual_review_path(@individual_review), class:"btn btn-flat btn-primary" %>
 	<br><br>
@@ -55,38 +76,75 @@
 		</div>
 	</div>
 
-	<h2>--> Just Text</h2>
-	<% @text_results.select('answers.*, questions.section_id').group_by(&:section_id).each do |section, answers| %>
-			<h3><%= Section.find(section).title %></h3>
+
+	<h2>Results</h2>
+	<% @results.select('answers.*, questions.section_id').group_by(&:section_id).each_with_index do |(section, answers), i| %>
+		<div class="box box-solid collapsed-box box-primary">
+			<div class="box-header bg-<%= @color_array[i] %> with-border">
+				<h4 class='box-title'><%= Section.find(section).title %></h4>
+				<div class="box-tools pull-right">
+				  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+				    <i class="fa fa-plus"></i></button>
+				</div>
+			</div>
 			<!-- this is to get Active Record relation of Answers instead of array -->
 			<% array = answers.map(&:id) %>
 			<% these_answers = Answer.where(id: array) %>
 			<!-- end -->
-			<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts|%>
-				<h4><%= subsection %></h4>
-				<% texts.each do |text| %>
-					<p><em><%= text.question.question_text %></em></p>
-					<p><%= text.answer %></p>
+			<div class="box-body">
+				
+				<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
+						<h3><%= subsection %></h3>
+						<% texts.each do |text| %>
+							<p><strong><em><%= text.question.question_text %></em></strong></p>
+							<p class="answer"><%= text.answer %></p>
+						<% end %>
 				<% end %>
-			<% end %>
-			<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @individual_review.id) %>
-			<h4>Employee Comment</h4>
-			<p><%= section_answer.employee_comment %></p>
-			<h4>Reviewer Comment</h4>
-			<p><%= section_answer.reviewer_comment %></p>
-		<hr>
-	<% end %>
-
-	<h2>--> All Answers</h2>
-	<% @results.select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
-			<h3><%= subsection %></h3>
-			<% texts.each do |text| %>
-				<p><em><%= text.question.question_text %></em></p>
-				<p><%= text.answer %></p>
-			<% end %>
-		<hr>
+				<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @individual_review.id) %>
+				<h4>Employee Comment</h4>
+				<p><%= section_answer.employee_comment %></p>
+				<h4>Reviewer Comment</h4>
+				<p><%= section_answer.reviewer_comment %></p>
+				<hr>
+			</div>
+		</div>
 	<% end %>
 
 	<%= link_to 'Edit', edit_individual_review_path(@individual_review) %> |
 	<%= link_to 'Back', individual_reviews_path %>
 </div>
+
+<script>
+
+  var AdminLTEOptions = {
+    //Enable sidebar expand on hover effect for sidebar mini
+    //This option is forced to true if both the fixed layout and sidebar mini
+    //are used together
+    sidebarExpandOnHover: true,
+    //BoxRefresh Plugin
+    enableBoxRefresh: true,
+    //Bootstrap.js tooltip
+    enableBSToppltip: true,
+    //Box Widget Plugin. Enable this plugin
+    //to allow boxes to be collapsed and/or removed
+    enableBoxWidget: true,
+    //Box Widget plugin options
+    boxWidgetOptions: {
+      boxWidgetIcons: {
+        //Collapse icon
+        collapse: 'fa-minus',
+        //Open icon
+        open: 'fa-plus',
+        //Remove icon
+        remove: 'fa-times'
+      },
+      boxWidgetSelectors: {
+        //Remove button selector
+        remove: '[data-widget="remove"]',
+        //Collapse button selector
+        collapse: '[data-widget="collapse"]'
+      }
+    },
+  };
+
+</script>
