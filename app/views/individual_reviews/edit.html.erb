@@ -19,9 +19,11 @@
 	<div class="row">
 		<div class="col-md-6">
 			<div class="box box-primary">
-				<p>Date : <%= @individual_review.date %></p>
-				<p>Employee : <%= @individual_review.employee.profile.name %></p>
-				<p>Reviewer : <%= @individual_review.reviewer.profile.name %></p>
+				<div class="box-body">
+					<p><strong>Date :</strong> <%= @individual_review.date %></p>
+					<p><strong>Employee :</strong> <%= @individual_review.employee.profile.name %></p>
+					<p><strong>Reviewer :</strong> <%= @individual_review.reviewer.profile.name %></p>
+				</div>
 			</div>
 		</div>
 	</div>
