@@ -1,13 +1,21 @@
-<h1 class="text-center">Editing Profile</h1>
+<section class="content">
+	<%= render 'form' %>
 
-<%= render 'form' %>
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="box box-primary">
+				<div class="box-header">
+					<h3>Employee's Roles</h3>
+				</div>
+				<div class="box-body">
+					<% @user_roles.each do |role| %>
+					  <ul>
+					    <li><%= role %></li>
+					  </ul>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
 
-<p>Roles</p>
-<% @user_roles.each do |role| %>
-  <ul>
-    <li><%= role %></li>
-  </ul>
-<% end %>
-
-<%= link_to 'Show', @profile %> |
-<%= link_to 'Back', profiles_path %>

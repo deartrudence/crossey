@@ -7,20 +7,24 @@
 </ol>
 
 <section class="content-header">
-  <div class="callout callout-warning">
+  <div class="callout callout-info">
     <h1>
-      Complete Employee Reviews
+      Complete Employee Reviews - <%= @individual_review.review.name %> Review
     </h1>
   </div>
 </section>
 
-<h1><%= @individual_review.review.name %></h1>
-
 <section class="content">
 	
-	<p>Date : <%= @individual_review.date %></p>
-	<p>Employee : <%= @individual_review.employee.email %></p>
-	<p>Reviewer : <%= @individual_review.reviewer.email %></p>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="box box-primary">
+				<p>Date : <%= @individual_review.date %></p>
+				<p>Employee : <%= @individual_review.employee.profile.name %></p>
+				<p>Reviewer : <%= @individual_review.reviewer.profile.name %></p>
+			</div>
+		</div>
+	</div>
 
 	<%= link_to "View Results", individual_review_path(@individual_review), class: "btn btn-flat btn-primary" %>
 
@@ -31,9 +35,9 @@
 			<li><h2><%= portion.capitalize %></h2></li>
 				
 				<% sections.group_by(&:portion).each do |section, questions|%>
-					<% sections.each do |section| %>
+					<% sections.each_with_index do |section, i| %>
 			<div class="box box-primary box-solid collapsed-box">
-				<div class="box-header">
+				<div class="box-header bg-<%= @color_array[i] %>">
 					<li><h3 class="box-title"><%= section.title %></h3>
 					<div class="box-tools pull-right">
 					  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -51,7 +55,7 @@
 									<h3><%= answer.answer %></h3>	
 									<%= form_for(answer, remote: true, :authenticity_token => true, :html => {:id => "answer-#{question.id}", "data-id" => "#{answer.id}", :class => ''})  do |f| %>
 										<% if question.question_type == 'check_box' %>
-											<div class="form-group ">
+											<div class="form-group checkbox ">
 						          	<%= f.collection_radio_buttons :answer, Answer::ANSWERS, :to_s, :humanize, class: 'form-control' %>
 											</div>
 										<% else %>
@@ -87,8 +91,6 @@
 	<% end%>
 
 	<%= render 'form' %>
-
-	<%= link_to 'Show', @individual_review %> |
 </section>
 
 <script>

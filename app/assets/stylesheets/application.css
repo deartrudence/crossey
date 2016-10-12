@@ -14,3 +14,10 @@
  *= require_self
  *= require bootstrap-datepicker
  */
+
+ul {
+	padding: 0;
+}
+li {
+	list-style-type: none;
+}

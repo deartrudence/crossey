@@ -39,7 +39,7 @@ class IndividualReviewsController < ApplicationController
 
   # GET /individual_reviews/1/edit
   def edit
-    @color_array = ['primary', 'info', 'success', 'warning', 'navy', 'teal', 'purple', 'maroon']
+    @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info' ]
   end
 
   # POST /individual_reviews
