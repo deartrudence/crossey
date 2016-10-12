@@ -52,7 +52,7 @@
 								<li><%= question.question_text %></li>
 								<li>
 									<% answer = question.answers.where(individual_review_id: @individual_review.id).first %>
-									<h3><%= answer.answer %></h3>	
+										
 									<%= form_for(answer, remote: true, :authenticity_token => true, :html => {:id => "answer-#{question.id}", "data-id" => "#{answer.id}", :class => ''})  do |f| %>
 										<% if question.question_type == 'check_box' %>
 											<div class="form-group checkbox ">
@@ -94,6 +94,12 @@
 </section>
 
 <script>
+
+	// $('.checkbox > input').map(function(index){ 
+	// 	console.log('check')
+	// 	console.log($(this).next('label'))
+	// 	$(this).next('label').andSelf().wrapAll('<div class="test/>')
+	// });
 	// AJAX to create or update each answer - radio button
 		$('input:radio').on('change', function(){
 			var answer_value = $(this).val()
