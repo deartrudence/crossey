@@ -41,6 +41,20 @@ class IndividualReviewsController < ApplicationController
   def edit
     @color_array = ['primary', 'info', 'success', 'warning', 'navy', 'teal', 'purple', 'maroon']
   end
+  # Allow the review to be downlaoded 
+  def download
+    @review = IndividualReview.find(params[:review])
+    @employee = @review.employee.profile
+    @reviewer = @review.reviewer.profile
+    @answers = @review.answers
+    # raise 'hell'
+    html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
+    pdf = WickedPdf.new.pdf_from_string(html)
+    send_data(pdf,
+      :filename => "individual_review.pdf",
+      :type => "application/pdf",
+      :diposition => 'attachment')
+  end
 
   # POST /individual_reviews
   # POST /individual_reviews.json

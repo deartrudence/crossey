@@ -46,6 +46,7 @@
       <div class="box-body">
         <p></p>
         <p></p>
+        <%= link_to 'Download', individual_reviews_download_path(review: ir), target: '_blank' %>
         <p><%= link_to 'Review', ir, class: "btn btn-flat btn-primary" %></p>
         <p><%= link_to "Update Review", edit_individual_review_path(ir), class: "btn btn-flat btn-primary" %></p>
         

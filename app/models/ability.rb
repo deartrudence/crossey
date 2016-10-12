@@ -17,7 +17,7 @@ class Ability
         end
     elsif user.is_reviewer? 
         can [:create], IndividualReview
-        can [:update, :edit, :show, :index], IndividualReview, :reviewer_id => user.id
+        can [:update, :edit, :show, :index, :download], IndividualReview, :reviewer_id => user.id
         can [:update, :edit, :show, :index], IndividualReview, :employee_id => user.id
         can [:update, :edit, :show, :index], Profile, :user_id => user.id
         user_array = user.authored_reviews.map(&:employee_id)
