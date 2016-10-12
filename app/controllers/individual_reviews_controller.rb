@@ -42,12 +42,29 @@ class IndividualReviewsController < ApplicationController
   def edit
     @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info' ]
   end
+  # Allow the review to be downlaoded 
+  def download
+    @review = IndividualReview.find(params[:review])
+    @employee = @review.employee.profile
+    @reviewer = @review.reviewer.profile
+    @answers = @review.answers
+    # raise 'hell'
+    html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
+    pdf = WickedPdf.new.pdf_from_string(html)
+    send_data(pdf,
+      :filename => "individual_review.pdf",
+      :type => "application/pdf",
+      :diposition => 'attachment')
+  end
 
   # POST /individual_reviews
   # POST /individual_reviews.json
   def create
+    employee = Profile.where(id: individual_review_params[:employee_id]).first
     @individual_review = IndividualReview.new(individual_review_params)
     @individual_review.reviewer_id = current_user.id
+    @individual_review.employee_job_type = employee.job_type
+    @individual_review.employee_job_title = employee.job_title
     respond_to do |format|
       if @individual_review.save
         #TODO - add all answers for review based on questions of review type
