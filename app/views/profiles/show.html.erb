@@ -15,27 +15,28 @@
 </section>
 
 <div class="content">
-  <p>
-    <strong>Name:</strong>
-    <%= @profile.name %>
-  </p>
+  <div class="row"> 
+    <div class="col-md-6">
+      <div class="box box-primary">
+        <div class="box-body">
+          <p>
+            <strong>Name:</strong>
+            <%= @profile.name %>
+          </p>
 
-  <p>
-    <strong>Job title:</strong>
-    <%= @profile.job_title %>
-  </p>
+          <p>
+            <strong>Job title:</strong>
+            <%= @profile.job_title %>
+          </p>
 
-  <p>
-    <strong>Job type:</strong>
-    <%= @profile.job_type %>
-  </p>
-
-  <h2>Roles</h2>
-  <% @user_roles.each do |role| %>
-    <ul>
-      <li><%= role %></li>
-    </ul>
-  <% end %>
+          <p>
+            <strong>Job type:</strong>
+            <%= @profile.job_type %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <h2>Reviews</h2>
   <% @individual_reviews.each do |ir| %>
