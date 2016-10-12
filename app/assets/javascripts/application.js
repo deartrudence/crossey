@@ -15,4 +15,9 @@
 //= require jquery-ui
 //= require turbolinks
 //= require bootstrap-datepicker
+//= require paloma
 //= require_tree .
+$(document).ready(function(){
+  	Paloma.start();
+ 
+});
