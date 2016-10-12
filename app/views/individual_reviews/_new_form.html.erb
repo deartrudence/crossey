@@ -20,24 +20,21 @@
 						Create a New Review
 					</div>
 					<div class="box-body">
-						<div class="field">
+						<div class="form-group">
 						  <%= f.label :date %><br>
-						  <%= f.date_select :date, class: 'form-control' %>
+							<div class="input-group date" data-provide="datepicker">
+							    <div class="input-group-addon">
+							        <i class="fa fa-calendar"></i>
+							    </div>
+							    <%= f.text_field :date, class: 'form-control datapicker' %>
+							</div>		
 						</div>
-						<div class="field form-group">
-						  <%= f.label :date %>
-						  <div class="input-group date">
-						  	<div class="input-group-addon">
-						  		<i class="fa fa-calendar">
-						  		</i>
-						  	</div>
-						  		<%= f.text_field :date, class: 'form-control pull-right', id:'datepicker' %>
-						  </div>
-						</div>
+
 						<div class="field">
 						  <%= f.label :review_id %><br>
 						  <%= f.collection_select :review_id, Review.all, :id, :name, class: 'form-control select2 select2-hidden-accessible' %>
 						</div>
+
 						<div class="field">
 							<%= f.label :employee %><br>
 							<%= f.collection_select :employee_id, User.all, :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
@@ -56,5 +53,7 @@
 <script>
 	$('select').addClass('form-control select2 select2-hidden-accessible')
 
-	$('.datepicker').datepicker();
+	$('.datepicker').datepicker({
+		format: 'dd/mm/yyyy'
+	});
 </script>
