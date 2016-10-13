@@ -30,7 +30,7 @@
 				
 				<% sections.group_by(&:portion).each do |section, questions|%>
 					<% sections.each_with_index do |section, i| %>
-			<div class="box box-primary box-solid collapsed-box">
+			<div class="box box-solid collapsed-box">
 				<div class="box-header bg-<%= @color_array[i] %>">
 					<li><h3 class="box-title"><%= section.title %></h3>
 					<div class="box-tools pull-right">

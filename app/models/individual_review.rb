@@ -28,7 +28,7 @@ class IndividualReview < ActiveRecord::Base
   end
 
   def text_results
-    self.answers.joins(:question).where(questions: {question_type: 'text'})
+    self.answers.includes(:question).joins(:question).where(questions: {question_type: 'text'})
   end
   
 end

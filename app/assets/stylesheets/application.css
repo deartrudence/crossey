@@ -43,3 +43,7 @@ li {
 .navbar a {
 	color: white;
 }
+
+.page-title {
+	margin-bottom: 45px;
+}
