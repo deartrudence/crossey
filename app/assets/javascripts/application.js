@@ -21,3 +21,7 @@ $(document).ready(function(){
   	Paloma.start();
  
 });
+$(document).on('turbolinks:load', function(){
+  // Manually evaluates the appended script tag.
+  Paloma.start();
+});

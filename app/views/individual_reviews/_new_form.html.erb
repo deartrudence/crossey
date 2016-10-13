@@ -39,6 +39,7 @@
 							<%= f.label :employee %><br>
 							<%= f.collection_select :employee_id, User.all, :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
 						</div>
+						<br>
 						<div class="actions">
 							
 							<a href="/profiles/1" class="btn btn-flat btn-primary" id="show-previous">Show previous reviews</a>
@@ -60,4 +61,5 @@
 	$('.datepicker').datepicker({
 		dateFormat: 'mm/dd/yyyy'
 	});
+
 </script>
