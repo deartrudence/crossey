@@ -1,16 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<ol class="breadcrumb">
-  <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-  <li><a href="#">Layout</a></li>
-  <li class="active">Fixed</li>
-</ol>
-
 <section class="content-header">
-  <div class="callout callout-info">
-    <h1>
-      Complete Employee Reviews - <%= @individual_review.review.name %> Review
-    </h1>
+  <div class="text-center">
+    <h1 class="page-title">Complete Employee Reviews - <%= @individual_review.review.name %> Review</h1>
   </div>
 </section>
 
@@ -38,7 +30,7 @@
 				
 				<% sections.group_by(&:portion).each do |section, questions|%>
 					<% sections.each_with_index do |section, i| %>
-			<div class="box box-primary box-solid collapsed-box">
+			<div class="box box-solid collapsed-box">
 				<div class="box-header bg-<%= @color_array[i] %>">
 					<li><h3 class="box-title"><%= section.title %></h3>
 					<div class="box-tools pull-right">

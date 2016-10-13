@@ -7,15 +7,15 @@ class IndividualReviewsController < ApplicationController
   def index
     # @individual_reviews = IndividualReview.all
     if current_user.is_super_admin?
-      @users = User.all
+      @users = User.includes(:profile).all
     elsif current_user.is_principal?
       user_array = current_user.authored_reviews.map(&:employee_id)
-      @users = User.where(id: user_array)
+      @users = User.includes(:profile).where(id: user_array)
       user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
-      @underlings = User.where(id: user_array)
+      @underlings = User.includes(:profile).where(id: user_array)
     elsif current_user.is_reviewer?
       user_array = current_user.authored_reviews.map(&:employee_id)
-      @users = User.where(id: user_array) 
+      @users = User.includes(:profile).where(id: user_array) 
     end
     @me = current_user
       

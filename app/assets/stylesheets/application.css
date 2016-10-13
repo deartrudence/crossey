@@ -31,3 +31,19 @@ li {
 .answer {
 	margin-left: 20px;
 }
+
+.content-wrapper {
+	min-height: 100vh;
+}
+
+.navbar {
+	background-color: #555;
+}
+
+.navbar a {
+	color: white;
+}
+
+.page-title {
+	margin-bottom: 45px;
+}
