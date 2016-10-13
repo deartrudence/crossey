@@ -16,37 +16,43 @@
 			  <% end %>
 				
 				<div class="box box-primary">
-					<div class="box-header">
-						Create a New Review
-					</div>
-					<div class="box-body">
-						<div class="form-group">
-						  <%= f.label :date %><br>
-							<div class="input-group date" data-provide="datepicker">
-							    <div class="input-group-addon">
-							        <i class="fa fa-calendar"></i>
-							    </div>
-							    <%= f.text_field :date, class: 'form-control datapicker' %>
-							</div>		
+				<div class="row">
+					<div class="col-md-10 col-md-offset-1">
+						<br><br>
+						<div class="box-header">
+							Create a New Review
 						</div>
+						<div class="box-body">
+								<div class="form-group">
+								  <%= f.label :date %><br>
+									<div class="input-group date" >
+									    <div class="input-group-addon">
+									        <i class="fa fa-calendar"></i>
+									    </div>
+									    <%= f.text_field :date, class: 'form-control datepicker' %>
+									</div>		
+								</div>
 
-						<div class="field">
-						  <%= f.label :review_id %><br>
-						  <%= f.collection_select :review_id, Review.all, :id, :name, class: 'form-control select2 select2-hidden-accessible' %>
-						</div>
+								<div class="field form-group">
+								  <%= f.label :review_id %><br>
+								  <%= f.collection_select :review_id, Review.all, :id, :name, class: 'form-control select2 select2-hidden-accessible' %>
+								</div>
 
-						<div class="field">
-							<%= f.label :employee %><br>
-							<%= f.collection_select :employee_id, User.all, :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
+								<div class="field form-group">
+									<%= f.label :employee %><br>
+									<%= f.collection_select :employee_id, User.all, :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
+								</div>
+								<div class="actions">
+									
+									<a href="/profiles/1" class="btn btn-flat btn-primary" id="show-previous">Show previous reviews</a>
+								</div>
+								<br>
+							  <div class="actions">
+							    <%= f.submit class: 'btn btn-flat btn-primary' %>
+							  </div>
+							  <br><br>
+							</div>
 						</div>
-						<div class="actions">
-							
-							<a href="/profiles/1" class="btn btn-flat btn-primary" id="show-previous">Show previous reviews</a>
-						</div>
-						<br>
-					  <div class="actions">
-					    <%= f.submit class: 'btn btn-flat btn-primary' %>
-					  </div>
 					</div>
 				</div>
 			<% end %>
@@ -58,6 +64,7 @@
 	$('select').addClass('form-control select2 select2-hidden-accessible')
 
 	$('.datepicker').datepicker({
-		dateFormat: 'mm/dd/yyyy'
+		format: 'dd-mm-yyyy',
+		autoclose: true
 	});
 </script>
