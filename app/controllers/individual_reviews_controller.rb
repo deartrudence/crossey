@@ -95,6 +95,18 @@ class IndividualReviewsController < ApplicationController
   # PATCH/PUT /individual_reviews/1
   # PATCH/PUT /individual_reviews/1.json
   def update
+    raise 'hell'
+    # @review = IndividualReview.find(params[:review])
+    # @employee = @review.employee.profile
+    # @reviewer = @review.reviewer.profile
+    # @answers = @review.answers
+    # @check_results = @review.check_results
+    # @total_check_questions = @review.questions.where(question_type: "check_box").count
+    # @results = @review.answers.joins(:question)
+    # @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info']
+    # html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
+    # pdf = WickedPdf.new.pdf_from_string(html)
+    PdfMailer.pdf_email().deliver
     respond_to do |format|
       if @individual_review.update(individual_review_params)
         format.html { redirect_to @individual_review, notice: 'Individual review was successfully updated.' }

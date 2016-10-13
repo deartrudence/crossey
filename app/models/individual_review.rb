@@ -13,6 +13,7 @@ class IndividualReview < ActiveRecord::Base
 
   accepts_nested_attributes_for :signatures, allow_destroy: :true
 
+
   def check_results
     hash = {
       'Exceeds Expectations' => 0, 
@@ -29,6 +30,10 @@ class IndividualReview < ActiveRecord::Base
 
   def text_results
     self.answers.joins(:question).where(questions: {question_type: 'text'})
+  end
+
+  def is_current_reviewer(user)
+    self.reviewer_id == user.id
   end
   
 end
