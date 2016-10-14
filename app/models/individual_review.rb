@@ -35,5 +35,9 @@ class IndividualReview < ActiveRecord::Base
   def is_current_reviewer(user)
     self.reviewer_id == user.id
   end
+
+  def job_level_to_title
+    
+  end
   
 end
