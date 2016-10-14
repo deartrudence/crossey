@@ -31,8 +31,16 @@
                 Download
                 <% end %>
               </p> 
-              <p class="col-md-2"><%= link_to 'Review', ir, class: "btn btn-flat btn-primary form-control" %></p>
-              <p class="col-md-2"><%= link_to "Update Review", edit_individual_review_path(ir), class: "btn btn-flat btn-info form-control" %></p>     
+              <p class="col-md-2"><%= link_to ir, class: "btn btn-flat btn-primary form-control" do %>
+                <i class="fa fa-file-text" aria-hidden="true"></i>
+                Review
+                <% end %>
+              </p>
+              <p class="col-md-2"><%= link_to edit_individual_review_path(ir), class: "btn btn-flat btn-info form-control" do %>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                Edit Review
+                <% end %>
+              </p>     
             </div>
           </div>
         <% end %>

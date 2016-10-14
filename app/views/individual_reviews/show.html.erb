@@ -26,7 +26,10 @@
 	</div>
 
 	<p class="col-md-2">
-		<%= link_to "Update this review", edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" %>
+		<%= link_to edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" do %>
+			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+			Edit Review
+		<% end%>
 	</p>
 	<p class="col-md-2">
 	<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
@@ -40,7 +43,7 @@
 		<div class="col-md-8">		
 			<div class="box box-primary">
 				<div class="box-header">
-					<h3>Results</h3>
+					<h3>Results Overview</h3>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">
