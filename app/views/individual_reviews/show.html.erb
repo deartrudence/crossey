@@ -75,7 +75,7 @@
 	<h2>Results</h2>
 	<% @results.select('answers.*, questions.section_id').group_by(&:section_id).each_with_index do |(section, answers), i| %>
 		<div class="box box-solid collapsed-box">
-			<div class="box-header bg-<%= @color_array[i] %> with-border">
+			<div class="box-header bg-<%= IndividualReview::REVIEW_COLORS[i] %> with-border">
 				<h4 class='box-title'><%= Section.find(section).title %></h4>
 				<div class="box-tools pull-right">
 				  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Expand">

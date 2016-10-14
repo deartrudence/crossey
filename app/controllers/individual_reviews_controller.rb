@@ -30,7 +30,6 @@ class IndividualReviewsController < ApplicationController
     @check_results = @individual_review.check_results
     @text_results = @individual_review.text_results
     @results = @individual_review.answers.joins(:question)
-    @color_array = [ 'navy', 'teal', 'purple', 'orange', 'maroon' ]
   end
 
   # GET /individual_reviews/new
@@ -40,9 +39,9 @@ class IndividualReviewsController < ApplicationController
 
   # GET /individual_reviews/1/edit
   def edit
-    @color_array = [ 'navy', 'teal', 'purple', 'orange', 'maroon' ]
   end
-  # Allow the review to be downlaoded 
+
+  # Allow the review to be downloaded 
   def download
     @review = IndividualReview.find(params[:review])
     @employee = @review.employee.profile
@@ -51,7 +50,6 @@ class IndividualReviewsController < ApplicationController
     @check_results = @review.check_results
     @total_check_questions = @review.questions.where(question_type: "check_box").count
     @results = @review.answers.joins(:question)
-    @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info']
     html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
     pdf = WickedPdf.new.pdf_from_string(html)
     send_data(pdf,
@@ -102,7 +100,6 @@ class IndividualReviewsController < ApplicationController
     @check_results = @review.check_results
     @total_check_questions = @review.questions.where(question_type: "check_box").count
     @results = @review.answers.joins(:question)
-    @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info']
     html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
     @pdf = WickedPdf.new.pdf_from_string(html)
     PdfMailer.pdf_email(@pdf, @employee).deliver

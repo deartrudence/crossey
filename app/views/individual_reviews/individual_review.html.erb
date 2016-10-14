@@ -82,7 +82,7 @@
 		<div>
 			<h2>Results</h2>
 			<% @results.select('answers.*, questions.section_id').group_by(&:section_id).each_with_index do |(section, answers), i| %>
-				<h3 class="bg-<%=@color_array[i]%> section-title"><%= Section.find(section).title %></h3>
+				<h3 class="bg-<%= IndividualReview::REVIEW_COLORS[i]%> section-title"><%= Section.find(section).title %></h3>
 				<% array = answers.map(&:id) %>
 				<% these_answers = Answer.where(id: array) %>
 				<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
