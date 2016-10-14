@@ -30,7 +30,7 @@ class IndividualReviewsController < ApplicationController
     @check_results = @individual_review.check_results
     @text_results = @individual_review.text_results
     @results = @individual_review.answers.joins(:question)
-    @color_array = ['primary', 'navy', 'purple', 'warning', 'teal', 'maroon', 'success',  'info' ]
+    @color_array = [ 'navy', 'teal', 'purple', 'orange', 'maroon' ]
   end
 
   # GET /individual_reviews/new
@@ -40,7 +40,7 @@ class IndividualReviewsController < ApplicationController
 
   # GET /individual_reviews/1/edit
   def edit
-    @color_array = ['primary', 'navy', 'purple', 'teal', 'maroon' ]
+    @color_array = [ 'navy', 'teal', 'purple', 'orange', 'maroon' ]
   end
   # Allow the review to be downlaoded 
   def download

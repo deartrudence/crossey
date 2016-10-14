@@ -18,19 +18,29 @@
         <%= @profile.job_type %></h4>
     </div>
     <div class="box-body">
-      <% @individual_reviews.each do |ir| %>
-        <hr>
-        <div class="row">
-          <div class="col-md-12">
-            <p class="col-md-2">Employee Title : <%= ir.employee_job_title %></p>
-            <p class="col-md-2"><%= ir.date %></p>
-            <p class="col-md-2">
-            <%= link_to 'Download', individual_reviews_download_path(review: ir), target: '_blank', class: 'btn btn-flat btn-success form-control' %></p> 
-            <p class="col-md-2"><%= link_to 'Review', ir, class: "btn btn-flat btn-primary form-control" %></p>
-            <p class="col-md-2"><%= link_to "Update Review", edit_individual_review_path(ir), class: "btn btn-flat btn-info form-control" %></p>     
+      <% if @individual_reviews.present? %>
+        <% @individual_reviews.each do |ir| %>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <p class="col-md-2">Employee Title : <%= ir.employee_job_title %></p>
+              <p class="col-md-2"><%= ir.date %></p>
+              <p class="col-md-2">
+              <%= link_to  individual_reviews_download_path(review: ir), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
+                <i class="fa fa-file-pdf-o"></i>
+                Download
+                <% end %>
+              </p> 
+              <p class="col-md-2"><%= link_to 'Review', ir, class: "btn btn-flat btn-primary form-control" %></p>
+              <p class="col-md-2"><%= link_to "Update Review", edit_individual_review_path(ir), class: "btn btn-flat btn-info form-control" %></p>     
+            </div>
           </div>
-        </div>
-      <% end %> 
+        <% end %>
+      <% else %>
+        <div class="text-center">
+          <h3>There are no reviews for this employee</h3>
+        </div> 
+      <% end %>
     </div>
   </div>
 </section>

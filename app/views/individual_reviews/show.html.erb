@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <section class="content-header">
   <div class="text-center">
     <h1 class="page-title">Review for <%= @individual_review.employee.profile.name %> on <%= @individual_review.date %></h1>
@@ -26,7 +25,15 @@
 		</div>
 	</div>
 
-	<%= link_to "Update this review", edit_individual_review_path(@individual_review), class:"btn btn-flat btn-primary" %>
+	<p class="col-md-2">
+		<%= link_to "Update this review", edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" %>
+	</p>
+	<p class="col-md-2">
+	<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
+	  <i class="fa fa-file-pdf-o"></i>
+	  Download
+	  <% end %>
+	</p> 
 	<br><br>
 
 	<div class="row">
@@ -71,7 +78,7 @@
 			<div class="box-header bg-<%= @color_array[i] %> with-border">
 				<h4 class='box-title'><%= Section.find(section).title %></h4>
 				<div class="box-tools pull-right">
-				  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+				  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Expand">
 				    <i class="fa fa-plus"></i></button>
 				</div>
 			</div>
@@ -98,10 +105,6 @@
 			</div>
 		</div>
 	<% end %>
-
-	<%= link_to 'Edit', edit_individual_review_path(@individual_review) %> |
-	<%= link_to 'Back', individual_reviews_path %>
-</div>
 
 <script>
 
