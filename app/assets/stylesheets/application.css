@@ -48,6 +48,12 @@ li {
 	margin-bottom: 45px;
 }
 
+@media (max-width: 767px){
+	.main-header {
+		background-color: #222d32;
+	}
+}
+
 /*.btn-box-tool {
 	color: #333;
 }*/
