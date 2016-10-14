@@ -36,6 +36,10 @@
             <%= link_to 'Reviews', user.profile, class: 'btn btn-flat btn-primary pull-right' %>
           </div>
         <% end %>
+    <% else %>
+      <div class="box-body">
+        No reviews in this category
+      </div>
     <% end %>    
   </div>
 
@@ -48,12 +52,16 @@
       </div>
     </div>
     <% if @underlings.present? %>
-        <% @underlings.each do |user| %>
-          <div class="box-body">
-            <%= user.profile.name %>
-            <%= link_to 'Reviews', user.profile, class: 'btn btn-flat btn-primary pull-right' %>
-          </div>
-        <% end %>
+      <% @underlings.each do |user| %>
+        <div class="box-body">
+          <%= user.profile.name %>
+          <%= link_to 'Reviews', user.profile, class: 'btn btn-flat btn-primary pull-right' %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="box-body">
+        No reviews in this category
+      </div>
     <% end %>    
   </div>
   

@@ -7,7 +7,9 @@ class IndividualReviewsController < ApplicationController
   def index
     # @individual_reviews = IndividualReview.all
     if current_user.is_super_admin?
-      @users = User.includes(:profile).all
+      user_array = current_user.authored_reviews.map(&:employee_id)
+      @users = User.includes(:profile).where(id: user_array)
+      @underlings = User.includes(:profile).all
     elsif current_user.is_principal?
       user_array = current_user.authored_reviews.map(&:employee_id)
       @users = User.includes(:profile).where(id: user_array)
