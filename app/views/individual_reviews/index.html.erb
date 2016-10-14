@@ -17,7 +17,10 @@
     </div> 
     <div class="box-body">
       <%= @me.profile.name %>
-      <%= link_to 'Reviews', @me.profile, class:"btn btn-flat btn-primary pull-right" %>
+      <%= link_to @me.profile, class:"btn btn-flat btn-primary pull-right" do %>
+        <i class="fa fa-files-o" aria-hidden="true"></i>
+        Reviews
+      <% end %>
     </div> 
   </div>
 
@@ -33,7 +36,10 @@
         <% @users.each do |user| %>
           <div class="box-body">
             <%= user.profile.name %>
-            <%= link_to 'Reviews', user.profile, class: 'btn btn-flat btn-primary pull-right' %>
+            <%= link_to user.profile, class: 'btn btn-flat btn-primary pull-right' do %>
+              <i class="fa fa-files-o" aria-hidden="true"></i>
+              Reviews
+            <% end %>
           </div>
         <% end %>
     <% else %>
@@ -55,7 +61,10 @@
       <% @underlings.each do |user| %>
         <div class="box-body">
           <%= user.profile.name %>
-          <%= link_to 'Reviews', user.profile, class: 'btn btn-flat btn-primary pull-right' %>
+          <%= link_to user.profile, class: 'btn btn-flat btn-primary pull-right' do %>
+            <i class="fa fa-files-o" aria-hidden="true"></i>
+            Reviews
+          <% end %>
         </div>
       <% end %>
     <% else %>
