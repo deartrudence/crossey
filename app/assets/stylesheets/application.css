@@ -52,6 +52,26 @@ li {
 	.main-header {
 		background-color: #222d32;
 	}
+	.navbar a {
+		color: white !important;
+	}
+	.navbar a:hover {
+		color: #333 !important;
+	}
+
+}
+
+@media (max-width: 991px){
+	.main-header {
+		background-color: #222d32;
+	}
+	.navbar a {
+		color: white !important;
+	}
+	.navbar a:hover {
+		color: #333 !important;
+	}
+
 }
 
 /*.btn-box-tool {
