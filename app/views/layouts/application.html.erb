@@ -69,6 +69,9 @@
 					<%= link_to 'All Reviews',individual_reviews_path %> 
 				</li>
 				<li><%= link_to 'Start/Find Review', new_individual_review_path %></li>
+				<% if current_user.present? && current_user.is_super_admin? %>
+					<li><%= link_to 'Users', profiles_path %></li>
+				<% end %>
 			</ul>
 		</section>
 		<div class="slimScrollBar"></div>

@@ -5,6 +5,10 @@ class Profile < ActiveRecord::Base
 
   USER_ROLES = ["Employee", "Reviewer"]
 
+  ADVANCED_USER_ROLES = ["Principal", "SuperAdmin"]
+
+  JOB_TYPES = ["Engineer", "Designer"]
+
   JOB_LEVELS = {
   	EIT1: 1,
   	EIT2: 2,
