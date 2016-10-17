@@ -18,17 +18,25 @@ RSpec.describe Profile, type: :model do
 	end
 
 	it 'returns all profiles below a certain job level' do
-		profile1 = build(:profile_job_level_1)
-		profile2 = build(:profile, job_level: 2)
-		profile2.update(job_level: 2)
-		profile3 = build(:profile, job_level: 3)
-		profile3.update(job_level: 3)
-		profile4 = build(:profile, job_level: 4)
-		profile4.update(job_level: 4)
+		profile1 = create(:profile, job_title: 'EIT1')
+		profile2 = create(:profile, job_title: 'EIT2')
+		profile3 = create(:profile, job_title: 'EIT3')
+		profile4 = create(:profile, job_title: 'EIT4')
 
 		profiles = Profile.less_than_level(3)
 
-		expect(profiles.all).to eq(5)
+		expect(profiles).to eq([profile1, profile2])
+	end
+
+	it 'returns all profiles with same job type' do
+		profile1 = create(:profile, job_type: 'Engineer')
+		profile2 = create(:profile, job_type: 'Engineer')
+		profile3 = create(:profile, job_type: 'Designer')
+		profile4 = create(:profile, job_type: 'Designer')
+
+		profiles = Profile.by_job_type('Engineer')
+
+		expect(profiles).to eq([profile1, profile2])
 	end
 
 end
