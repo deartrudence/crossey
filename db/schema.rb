@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161017130332) do
+ActiveRecord::Schema.define(version: 20161017193827) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20161017130332) do
     t.integer  "reviewer_id"
     t.string   "employee_job_type"
     t.string   "employee_job_title"
+    t.integer  "employee_job_level"
   end
 
   add_index "individual_reviews", ["review_id"], name: "index_individual_reviews_on_review_id"
