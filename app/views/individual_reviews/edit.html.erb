@@ -20,10 +20,12 @@
 		</div>
 	</div>
 
+
 	<%= link_to profile_path(@individual_review.employee.profile), class: "btn btn-flat btn-primary" do %>
 		<i class="fa fa-user"></i>
 		Employee
 	<% end %>
+
 	
 	<% @individual_review.review.sections.group_by(&:portion).each do |portion, sections| %>
 		<ul>
@@ -45,8 +47,8 @@
 							<h3><%= subsection %></h3> 
 							
 								<% array_questions = questions.map(&:id) %>
-								<% these_questions = Question.where(id: array_questions).question_belongs_to_job_level(@individual_review.employee_job_type)%>
-								<% next_questions = Question.where(id: array_questions).question_belongs_to_next_job_level(@individual_review.employee_job_type)%>
+								<% these_questions = Question.where(id: array_questions).belongs_to_job_level?(@individual_review.employee_job_type).uniq%>
+								<% next_questions = Question.where(id: array_questions).belongs_to_next_job_level?(@individual_review.employee_job_type).uniq%>
 								<% these_questions.each do |question|%>	
 									<li><%= question.question_text %></li>
 									<li>
