@@ -1,8 +1,8 @@
 FactoryGirl.define do
   factory :section_answer do
-    section nil
-    individual_review nil
-    employee_comment "MyText"
-    reviewer_comment "MyText"
+    association :section, factory: :section
+    association :individual_review, factory: :individual_review
+    employee_comment "This is the employee comment"
+    reviewer_comment "This is the reviewer comment"
   end
 end

@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :section do
-    review nil
-    title "MyString"
-    portion "MyString"
-    employee_comment "MyText"
-    reviewer_comment "MyText"
+    association :review, factory: :review
+    title "Section II"
+    portion "Reviewer"
+    employee_comment "not used"
+    reviewer_comment "not used"
   end
 end
