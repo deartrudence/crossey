@@ -61,6 +61,38 @@ RSpec.describe IndividualReviewsController, type: :controller do
       @users = User.includes(:profile).where(id: user_array)
       expect(@users).to match_array([user2, user3])
     end  
+    it "assigns underlings to all users if the current user is a superadmin" do
+      user = create(:user)
+      profile = create(:profile, user: user)
+      create(:user_role, user: user, name: "SuperAdmin")
+      user2 = create(:user)
+      user3 = create(:user)
+      current_user = user
+      if current_user.is_super_admin?
+        @underlings = User.includes(:profile).all
+      elsif current_user.is_principal?
+        other_user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
+        @underlings = User.includes(:profile).where(id: other_user_array)
+      end
+      expect(@underlings).to match_array([user, user2, user3])
+    end 
+    it "assigns underlings to all users who have the same job type and a lower level if current user is principal" do
+      user = create(:user)
+      profile = create(:profile, user: user, job_title: 'EIT3', job_level: '3', job_type: 'Engineer')
+      create(:user_role, user: user, name: "Principal")
+      user2 = create(:user)
+      profile2 = create(:profile, user: user2, job_title: 'EIT2', job_level: '2', job_type: 'Engineer')
+      user3 = create(:user)
+      profile3 = create(:profile, user: user3, job_title: 'EIT4', job_level: '4', job_type: 'Engineer')
+      current_user = user
+      if current_user.is_super_admin?
+        @underlings = User.includes(:profile).all
+      elsif current_user.is_principal?
+        other_user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
+        @underlings = User.includes(:profile).where(id: other_user_array) 
+      end
+      expect(@underlings).to match_array([user2])
+    end  
   end
 
   describe "GET #show" do
@@ -69,6 +101,18 @@ RSpec.describe IndividualReviewsController, type: :controller do
       get :show, params: {id: individual_review.to_param}, session: valid_session
       expect(assigns(:individual_review)).to eq(individual_review)
     end
+
+    it "assigns @total_check_questions to the totla number of questions with question_type: check_box" do
+      user1 = create(:user)
+      user2 = create(:user)
+      current_user = user1
+      section = create(:section)
+      q1 = create(:question)
+      q2 = create(:question, question_type: 'text')
+      ir = create(:individual_review_with_questions, reviewer_id: user1.id, employee_id: user2.id)
+      @total_check_questions = Question.belongs_to_job_level(ir.employee_id).where(question_type: "check_box").uniq.count
+      expect(ir.questions).to eq(1)
+    end 
   end
 
   describe "GET #new" do

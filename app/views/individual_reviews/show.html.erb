@@ -56,12 +56,14 @@
 							<th>value</th>
 							<th>percentage</th>
 							<th></th>	
+							<% total_answered = 0 %>
 							<% @check_results.each do |key, value|%>
 								<tr>
 									<td><%= key %></td> 
 									<td><%= value %></td> 
 									<td>
 										<% percentage = ((value.to_f / @total_check_questions.to_f) * 100).round(0) %>
+										<% total_answered += value.to_f %>
 										<div class="progress progress-xs">
 											<div class="progress-bar progress-bar" style='width: <%= percentage %>%'></div>
 										</div>
@@ -71,6 +73,10 @@
 									</td>
 								</tr>
 							<% end %>
+							<tr>
+								<td>Unanswered</td>
+								<td><%=  @total_check_questions.to_f - total_answered %></td>
+							</tr>
 						</tbody>
 					</table>
 				</div>

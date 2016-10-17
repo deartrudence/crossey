@@ -11,13 +11,8 @@ class IndividualReviewsController < ApplicationController
     if current_user.is_super_admin?
       @underlings = User.includes(:profile).all
     elsif current_user.is_principal?
-      # user_array = current_user.authored_reviews.map(&:employee_id)
-      # @users = User.includes(:profile).where(id: user_array)
-      user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
-      @underlings = User.includes(:profile).where(id: user_array)
-    elsif current_user.is_reviewer?
-      # user_array = current_user.authored_reviews.map(&:employee_id)
-      # @users = User.includes(:profile).where(id: user_array) 
+      other_user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
+      @underlings = User.includes(:profile).where(id: other_user_array) 
     end
     @me = current_user
       
@@ -28,7 +23,8 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews/1
   # GET /individual_reviews/1.json
   def show
-    @total_check_questions = @individual_review.questions.where(question_type: "check_box").count
+    # @total_check_questions = @individual_review.questions.where(question_type: "check_box").count
+    @total_check_questions = Question.belongs_to_job_level(@individual_review.employee_id).where(question_type: "check_box").uniq.count
     @check_results = @individual_review.check_results
     @text_results = @individual_review.text_results
     @results = @individual_review.answers.joins(:question)
@@ -66,7 +62,7 @@ class IndividualReviewsController < ApplicationController
     employee = Profile.where(id: individual_review_params[:employee_id]).first
     @individual_review = IndividualReview.new(individual_review_params)
     @individual_review.reviewer_id = current_user.id
-    @individual_review.employee_job_type = employee.job_level
+    @individual_review.employee_job_level = employee.job_level
     @individual_review.employee_job_title = employee.job_title
     respond_to do |format|
       if @individual_review.save
