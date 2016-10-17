@@ -98,7 +98,7 @@
 				<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
 						<h3><%= subsection %></h3>
 						<% texts.each do |text| %>
-							<p><strong><em><%= text.question.question_text %></em></strong></p>
+							<p <% if text.answer.nil? %> class="off"<% end %>><strong><em><%= text.question.question_text %></em></strong></p>
 							<p class="answer"><%= text.answer %></p>
 						<% end %>
 						<hr>

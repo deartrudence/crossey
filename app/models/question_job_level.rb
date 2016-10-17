@@ -1,3 +1,4 @@
 class QuestionJobLevel < ActiveRecord::Base
-  belongs_to :queston
+  belongs_to :question
+
 end
