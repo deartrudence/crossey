@@ -64,6 +64,7 @@
 									<td>
 										<% percentage = ((value.to_f / @total_check_questions.to_f) * 100).round(0) %>
 										<% total_answered += value.to_f %>
+										<% #raise 'hell'%>
 										<div class="progress progress-xs">
 											<div class="progress-bar progress-bar" style='width: <%= percentage %>%'></div>
 										</div>
@@ -75,7 +76,17 @@
 							<% end %>
 							<tr>
 								<td>Unanswered</td>
-								<td><%=  @total_check_questions.to_f - total_answered %></td>
+									<% unanswered = @total_check_questions - total_answered %>
+								<td><%=  unanswered.to_i %></td>
+									<% percentage = ((unanswered.to_f / @total_check_questions.to_f) * 100).round(0) %>
+								<td>
+									<div class="progress progress-xs">
+										<div class="progress-bar progress-bar-yellow" style='width: <%= percentage %>%'></div>
+									</div>
+								</td>
+								<td>
+									<span class="badge bg-yellow">% <%= percentage.round(0)%></span>
+								</td>
 							</tr>
 						</tbody>
 					</table>
