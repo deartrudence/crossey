@@ -10,33 +10,37 @@
 		<div class="col-md-6">
 			<div class="box box-primary">
 				<div class="box-body">
-					<p>
-					  <strong>Date:</strong>
-					  <%= @individual_review.date %><br>
-					  <strong>Employee:</strong>
-					  <%= @individual_review.employee.profile.name %><br>
-					  <strong>Reviewer:</strong>
-					  <%= @individual_review.reviewer.profile.name %><br>
-					  <strong>Employee Title:</strong>
-					  <%= @individual_review.employee.profile.job_title %><br>
-					</p>
+					<p><strong>Date :</strong>
+					  <%= @individual_review.date %></p>
+					  <p><strong>Employee :</strong>
+					  <%= @individual_review.employee.profile.name %></p>
+					  <p><strong>Employee Job Title at Time of Review :</strong>
+					  <%= @individual_review.employee_job_title %></p>
+					  <p><strong>Reviewer :</strong>
+					  <%= @individual_review.reviewer.profile.name %></p>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<p class="col-md-2">
+	<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
+	  <i class="fa fa-file-pdf-o"></i>
+	  Download
+	  <% end %>
+	</p>
+	<p class="col-md-2">
+	<%= link_to profile_path(@individual_review.employee.profile), class: 'btn btn-flat btn-primary form-control' do %>
+	  <i class="fa fa-user"></i>
+	  Employee
+	  <% end %>
+	</p> 
+	<p class="col-md-2">
 		<%= link_to edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" do %>
 			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
 			Edit Review
 		<% end%>
 	</p>
-	<p class="col-md-2">
-	<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
-	  <i class="fa fa-file-pdf-o"></i>
-	  Download
-	  <% end %>
-	</p> 
 	<br><br>
 
 	<div class="row">

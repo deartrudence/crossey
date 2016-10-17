@@ -33,24 +33,33 @@
             <div class="row">
               <div class="field form-group col-md-6">
                 <%= f.label :job_title %><br>
-                <%= f.text_field :job_title, class:"form-control" %>
+                <%= f.collection_select :job_title, Profile::JOB_LEVELS, :first, :first %>
               </div>
               <div class="field form-group col-md-6">
                 <%= f.label :job_type %><br>
-                <%= f.text_field :job_type, class:"form-control" %>
+                <%= f.select :job_type, Profile::JOB_TYPES %>
               </div>
             </div>
             <div class="field form-group">
               <%= f.label :role %><br>
-              <%= f.collection_select :user_role, Profile::USER_ROLES, :to_s, :to_s %>
+              <%= f.select :user_role, Profile::USER_ROLES %>
             </div>
+            
+            <% if current_user.is_super_admin? %>
+              <div class="field form-group">
+                <%= f.label :advanced_role %><br>
+                <%= f.select :user_role, Profile::ADVANCED_USER_ROLES %>
+              </div>
+            <% end %>
 
             <div class="actions">
               <%= f.submit class: 'btn btn-flat btn-primary' %>
-
-              <%= link_to edit_user_registration_path, class: 'btn btn-flat btn-primary' do %>
-                <i class="fa fa-lock" aria-hidden="true"></i>
-                Change your password
+              
+              <% if @profile.user == current_user %>
+                <%= link_to edit_user_registration_path, class: 'btn btn-flat btn-primary' do %>
+                  <i class="fa fa-lock" aria-hidden="true"></i>
+                  Change your password
+                <% end %>
               <% end %>
             </div>
 

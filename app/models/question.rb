@@ -1,6 +1,7 @@
 class Question < ActiveRecord::Base
   belongs_to :section
   has_many :answers
+  has_many :question_job_levels
 
   scope :question_belongs_to_job_level, -> (user_level) { where(job_type: user_level.to_i) }
   scope :question_belongs_to_next_job_level, -> (user_level) { where(job_type: user_level.to_i + 1) }

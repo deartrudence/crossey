@@ -13,7 +13,7 @@ class IndividualReview < ActiveRecord::Base
 
   accepts_nested_attributes_for :signatures, allow_destroy: :true
 
-  REVIEW_COLORS = [ 'navy', 'teal', 'purple', 'orange', 'maroon' ]
+  REVIEW_COLORS = [ 'navy', 'teal', 'purple', 'orange', 'maroon', 'navy', 'teal', 'purple', 'orange', 'maroon' ]
 
   def check_results
     hash = {

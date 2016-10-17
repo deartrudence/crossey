@@ -6,8 +6,7 @@
   </div>
 </section>
 
-<section class="content">
-	
+<section class="content">	
 	<div class="row">
 		<div class="col-md-6">
 			<div class="box box-primary">
@@ -22,8 +21,11 @@
 	</div>
 
 
+	<%= link_to profile_path(@individual_review.employee.profile), class: "btn btn-flat btn-primary" do %>
+		<i class="fa fa-user"></i>
+		Employee
+	<% end %>
 
-	
 	
 	<% @individual_review.review.sections.group_by(&:portion).each do |portion, sections| %>
 		<ul>
@@ -101,6 +103,9 @@
 	<% end%>
 
 	<%= render 'form' %>
+	
+	<br><br>
+	<%= link_to "View Results", individual_review_path(@individual_review), class: "btn btn-flat btn-primary" %>
 </section>
 
 <script>
