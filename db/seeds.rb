@@ -171,7 +171,7 @@ designer_sections = [
 
 questions = [
 	['Section I', 'Drawing', 'Creates drawings in accordance with CEL standards', 'check_box', [1, 2, 3]],
-	['Section I', 'Drawing', 'Drawing tagging is complete ', 'check_box', [1, 2, 3]],
+	['Section I', 'Drawing', 'Drawing tagging is complete', 'check_box', [1, 2, 3]],
 	['Section I', 'Drawing', 'Drawing presentation is neat and tidy', 'check_box', [1, 2, 3]],
 	['Section I', 'Drawing', 'Able to follow technical instructions for drawings', 'check_box', [1, 2, 3]],
 	['Section I', 'Drawing', 'Asks questions when appropriate', 'check_box', [1, 2, 3]],

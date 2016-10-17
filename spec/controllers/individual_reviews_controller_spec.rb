@@ -42,12 +42,25 @@ RSpec.describe IndividualReviewsController, type: :controller do
       get :index, params: {}, session: valid_session
       expect(assigns(:individual_reviews)).to eq([individual_review])
     end
-    it "assigns @users to all user for which current_user authored review" do
+    it "assigns ids of all employees reviewed by current user to user_array" do
       user1 = create(:user)
       user2 = create(:user)
       current_user = user1
-      ir = create(:individual_review, reviewer_id: user1.id)
+      ir = create(:individual_review, reviewer_id: user1.id, employee_id: user2.id)
+      user_array = current_user.authored_reviews.map(&:employee_id)
+      expect(user_array).to match_array([user2.id])
     end
+    it "assigns @users to all users including profiles where ids are found in the user array" do
+      user1 = create(:user)
+      user2 = create(:user)
+      user3 = create(:user)
+      current_user = user1
+      ir = create(:individual_review, reviewer_id: user1.id, employee_id: user2.id)
+      ir2 = create(:individual_review, reviewer_id: user1.id, employee_id: user3.id)
+      user_array = current_user.authored_reviews.map(&:employee_id)
+      @users = User.includes(:profile).where(id: user_array)
+      expect(@users).to match_array([user2, user3])
+    end  
   end
 
   describe "GET #show" do
