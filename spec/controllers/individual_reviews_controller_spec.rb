@@ -42,6 +42,12 @@ RSpec.describe IndividualReviewsController, type: :controller do
       get :index, params: {}, session: valid_session
       expect(assigns(:individual_reviews)).to eq([individual_review])
     end
+    it "assigns @users to all user for which current_user authored review" do
+      user1 = create(:user)
+      user2 = create(:user)
+      current_user = user1
+      ir = create(:individual_review, reviewer_id: user1.id)
+    end
   end
 
   describe "GET #show" do
