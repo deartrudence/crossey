@@ -285,7 +285,7 @@ questions = [
 	['Section III', 'Contract Administration', 'Employee Comments', 'text', [3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Communicates with client in a timely manner', 'check_box', [2, 3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Able to communciate effectively both oral and written', 'check_box', [2, 3, 4, 5, 6]],
-	['Section IV', 'Client Interface', 'Checks with client regarding levels of satisfaction', 'check_box', [2, 3, 4, 5, 6]],
+	['Section IV', 'Client Interface', 'Checks with client regarding levels of satisfaction', 'check_box', [5, 6]],
 	['Section IV', 'Client Interface', 'Promotes CEL in a professional manner at all times', 'check_box', [2, 3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Managing Principal Comments', 'text', [2, 3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Employee Comments', 'text', [2, 3, 4, 5, 6]],
