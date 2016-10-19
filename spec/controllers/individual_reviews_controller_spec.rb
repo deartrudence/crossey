@@ -102,24 +102,61 @@ RSpec.describe IndividualReviewsController, type: :controller do
       expect(assigns(:individual_review)).to eq(individual_review)
     end
 
-    it "assigns @total_check_questions to the totla number of questions with question_type: check_box" do
+    it "assigns @total_check_questions to the total number of questions with question_type: check_box that are part of the employees level" do
       user1 = create(:user)
       user2 = create(:user)
       current_user = user1
-      section = create(:section)
-      q1 = create(:question)
-      q2 = create(:question, question_type: 'text')
-      ir = create(:individual_review_with_questions, reviewer_id: user1.id, employee_id: user2.id)
-      @total_check_questions = Question.belongs_to_job_level(ir.employee_id).where(question_type: "check_box").uniq.count
-      expect(ir.questions).to eq(1)
+      review = create(:review)
+      section = create(:section, review: review)
+      q1 = create(:question, section: section)
+      q2 = create(:question, question_type: 'text', section: section)
+      qj1 = create(:question_job_level, job_level: 1, question: q1)
+      qj2 = create(:question_job_level, job_level: 2, question: q2)
+      ir = create(:individual_review, reviewer_id: user1.id, employee_id: user2.id, review: review, employee_job_level: 1)
+      @total_check_questions = Question.belongs_to_job_level(ir.employee_job_level).where(question_type: "check_box").uniq.count
+      expect(@total_check_questions).to eq(1)
     end 
+
+    it "assigns @check_results to a hash of the total for each possible result" do
+      user1 = create(:user)
+      user2 = create(:user)
+      current_user = user1
+      review = create(:review)
+      section = create(:section, review: review)
+      q1 = create(:question, section: section)
+      q2 = create(:question, question_type: 'text', section: section)
+      q3 = create(:question, question_type: 'check_box', section: section)
+      q4 = create(:question, question_type: 'check_box', section: section)
+      ir = create(:individual_review, reviewer_id: user1.id, employee_id: user2.id, review: review, employee_job_level: 1)
+      a1 = create(:answer, answer: 'Meets Expectations', question: q1, individual_review: ir)
+      a2 = create(:answer, answer: 'Exceeds Expectations', question: q2, individual_review: ir)
+      a3 = create(:answer, answer: 'Exceeds Expectations', question: q3, individual_review: ir)
+      a4 = create(:answer, answer: 'N/A', question: q4, individual_review: ir)
+      @check_results = ir.check_results
+      expect(@check_results).to eq({"Exceeds Expectations"=>1, "Meets Expectations"=>1, "Needs Improvement"=>0, "N/A"=>1})
+    end
+
+    it "assigns @text_results to all of the results for text questions" do
+      user1 = create(:user)
+      user2 = create(:user)
+      current_user = user1
+      review = create(:review)
+      section = create(:section, review: review)
+      q1 = create(:question, section: section)
+      q2 = create(:question, question_type: 'text', section: section)
+      ir = create(:individual_review, reviewer_id: user1.id, employee_id: user2.id, review: review, employee_job_level: 1)
+      a1 = create(:answer, answer: 'Meets Expectations', question: q1, individual_review: ir)
+      a2 = create(:answer, answer: 'text answer', question: q2, individual_review: ir)
+      @text_results = ir.text_results
+      expect(@text_results).to match_array([a2])
+    end
   end
 
   describe "GET #new" do
-    it "assigns a new individual_review as @individual_review" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:individual_review)).to be_a_new(IndividualReview)
-    end
+    # it "assigns a new individual_review as @individual_review" do
+    #   get :new, params: {}, session: valid_session
+    #   expect(assigns(:individual_review)).to be_a_new(IndividualReview)
+    # end
   end
 
   describe "GET #edit" do
@@ -142,6 +179,23 @@ RSpec.describe IndividualReviewsController, type: :controller do
         post :create, params: {individual_review: valid_attributes}, session: valid_session
         expect(assigns(:individual_review)).to be_a(IndividualReview)
         expect(assigns(:individual_review)).to be_persisted
+      end
+
+      it "assigns the reviewer_id to the current_user id" do 
+        user = create(:user)
+        current_user = user
+        ir = create(:individual_review)
+        ir.reviewer_id = current_user.id
+        expect(ir.reviewer_id).to eq(current_user.id)
+      end
+
+      it "assigns the employee_job_level as the employee's job level integer" do
+        user = create(:user)
+        employee = create(:profile, user: user)
+        ir = create(:individual_review, employee_id: user.id)
+        ir.employee_job_level = employee.job_level.to_i
+        expect(ir.employee_job_level).to be_a_kind_of(Fixnum)
+        expect(ir.employee_job_level).to eq(employee.job_level.to_i)
       end
 
       it "redirects to the created individual_review" do

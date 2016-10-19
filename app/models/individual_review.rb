@@ -23,12 +23,16 @@ class IndividualReview < ActiveRecord::Base
       'N/A' => 0
     }
     Answer::ANSWERS.each do |answer|
-      count = self.answers.where(answer: answer).count
+      # count = self.answers.where(answer: answer).count
+      count = self.check_box_answers.where(answer: answer).count
       hash[answer] = count
     end
     return hash
   end
 
+  def check_box_answers
+    self.answers.includes(:question).where(questions: {question_type: 'check_box'})
+  end
   def text_results
     self.answers.includes(:question).joins(:question).where(questions: {question_type: 'text'})
   end
