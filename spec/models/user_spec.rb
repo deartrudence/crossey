@@ -37,12 +37,4 @@ RSpec.describe User, type: :model do
   	expect(user.is_super_admin?).to eq(true)
   end
 
-  it "employee can only see own review" do
-    user = create(:user)
-    ability = Ability.new(user)
-    individual_review = create(:individual_review, employee: user)
-    # expect(ability).to be_able_to(:update, individual_review)
-    assert ability.can?(:edit, individual_review)
-  end
-
 end

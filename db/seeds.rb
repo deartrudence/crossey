@@ -5,9 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-user11 = User.create(email: 'user11@email.com', password: 'password')
+user11 = User.create(email: 'user1@email.com', password: 'password')
 user11.save
-user11.create_profile(first_name: 'user', last_name: '11', job_title:'EIT1', job_type:'Engineer' )
+user11.create_profile(first_name: 'user', last_name: '1', job_title:'EIT1', job_type:'Engineer' )
 user11.user_roles.create(name: 'Employee')
 
 user2 = User.create(email: 'user2@email.com', password: 'password')
@@ -30,7 +30,7 @@ user4.user_roles.create(name: 'Principal')
 
 user5 = User.create(email: 'user5@email.com', password: 'password')
 user5.save
-user5.create_profile(first_name: 'user', last_name: '5', job_title:'EIT Manager', job_type:'Engineer' )
+user5.create_profile(first_name: 'user', last_name: '5', job_title:'EITPROJECTENGINEER', job_type:'Engineer' )
 user5.user_roles.create(name: 'Employee')
 user5.user_roles.create(name: 'Reviewer')
 user5.user_roles.create(name: 'Principal')
@@ -61,7 +61,7 @@ user9.user_roles.create(name: 'Principal')
 
 user10 = User.create(email: 'user10@email.com', password: 'password')
 user10.save
-user10.create_profile(first_name: 'user', last_name: '10', job_title:'Design Manager', job_type:'Designer' )
+user10.create_profile(first_name: 'user', last_name: '10', job_title:'EITPROJECTMANAGER', job_type:'Designer' )
 user10.user_roles.create(name: 'Employee')
 user10.user_roles.create(name: 'Reviewer')
 user10.user_roles.create(name: 'Principal')
@@ -285,7 +285,7 @@ questions = [
 	['Section III', 'Contract Administration', 'Employee Comments', 'text', [3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Communicates with client in a timely manner', 'check_box', [2, 3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Able to communciate effectively both oral and written', 'check_box', [2, 3, 4, 5, 6]],
-	['Section IV', 'Client Interface', 'Checks with client regarding levels of satisfaction', 'check_box', [2, 3, 4, 5, 6]],
+	['Section IV', 'Client Interface', 'Checks with client regarding levels of satisfaction', 'check_box', [5, 6]],
 	['Section IV', 'Client Interface', 'Promotes CEL in a professional manner at all times', 'check_box', [2, 3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Managing Principal Comments', 'text', [2, 3, 4, 5, 6]],
 	['Section IV', 'Client Interface', 'Employee Comments', 'text', [2, 3, 4, 5, 6]],
