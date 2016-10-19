@@ -3,9 +3,6 @@ class Question < ActiveRecord::Base
   has_many :answers
   has_many :question_job_levels
 
-  scope :question_belongs_to_job_level, -> (user_level) { where(job_type: user_level.to_i) }
-  scope :question_belongs_to_next_job_level, -> (user_level) { where(job_type: user_level.to_i + 1) }
-
   def self.belongs_to_job_level(job_level)
   	user_job_level = job_level.to_i
     self.where(id: QuestionJobLevel.where(job_level: user_job_level).map(&:question_id))
