@@ -33,7 +33,8 @@ class IndividualReview < ActiveRecord::Base
   def check_box_answers
     self.answers.includes(:question).where(questions: {question_type: 'check_box'})
   end
-  def text_results
+
+  def text_answers
     self.answers.includes(:question).joins(:question).where(questions: {question_type: 'text'})
   end
 

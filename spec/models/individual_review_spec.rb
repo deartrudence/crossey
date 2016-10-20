@@ -16,7 +16,7 @@ RSpec.describe IndividualReview, type: :model do
   	answer1 = create(:answer, question: question1, individual_review: individual_review)
   	answer2 = create(:answer, question: question2, individual_review: individual_review)
   	answer3 = create(:answer, question: question3, individual_review: individual_review)
-  	expect(individual_review.text_results).to eq([answer2, answer3])
+  	expect(individual_review.text_answers).to eq([answer2, answer3])
   end
 
   it "returns correct tally for check_box answers for Individual Review" do

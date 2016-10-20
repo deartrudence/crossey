@@ -1,6 +1,6 @@
 <section class="content-header">
   <div class="text-center">
-    <h1 class="page-title">Review for <%= @individual_review.employee.profile.name %> on <%= @individual_review.date %></h1>
+    <h1 class="page-title">Review for <%= @individual_review.employee.profile.name %> on <%= @individual_review.date.strftime('%B %d, %Y') %></h1>
     
   </div>
 </section>	
@@ -12,12 +12,14 @@
 				<div class="box-body">
 					<p><strong>Date :</strong>
 					  <%= @individual_review.date %></p>
-					  <p><strong>Employee :</strong>
-					  <%= @individual_review.employee.profile.name %></p>
-					  <p><strong>Employee Job Title at Time of Review :</strong>
-					  <%= @individual_review.employee_job_title %></p>
-					  <p><strong>Reviewer :</strong>
-					  <%= @individual_review.reviewer.profile.name %></p>
+					<p><strong>Review Type :</strong>
+						<%= @individual_review.review.name %></p>
+				  <p><strong>Employee :</strong>
+				  <%= @individual_review.employee.profile.name %></p>
+				  <p><strong>Employee Job Title at Time of Review :</strong>
+				  <%= @individual_review.employee_job_title.titleize %></p>
+				  <p><strong>Reviewer :</strong>
+				  <%= @individual_review.reviewer.profile.name %></p>
 				</div>
 			</div>
 		</div>
@@ -99,40 +101,42 @@
 		</div>
 	</div>
 
-
-	<h2>Results</h2>
-	<% @results.select('answers.*, questions.section_id').group_by(&:section_id).each_with_index do |(section, answers), i| %>
-		<div class="box box-solid collapsed-box">
-			<div class="box-header bg-<%= IndividualReview::REVIEW_COLORS[i] %> with-border">
-				<h4 class='box-title'><%= Section.find(section).title %></h4>
-				<div class="box-tools pull-right">
-				  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Expand">
-				    <i class="fa fa-plus"></i></button>
+	<h2 class="text-center">Results</h2>
+	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
+	<h2><%= portion.capitalize %></h2>
+		<% sections.group_by(&:portion).each do |portion, sections| %>
+			<% sections.each_with_index do |section, i| %>
+			<div class="box box-solid collapsed-box">
+				<div class="box-header bg-<%= IndividualReview::REVIEW_COLORS[i] %>">
+						<h3 class="box-title"><%= section.title %></h3>
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Expand">
+						  <i class="fa fa-plus"></i></button>
+					</div>
+				</div>
+				<div class="box-body">
+					<% section.questions.group_by(&:subsection).each do |subsection, questions| %>
+						<h3><%= subsection %></h3>
+						<% array_questions = questions.map(&:id) %>
+						<% these_questions = Question.where(id: array_questions).belongs_to_job_level(@individual_review.employee_job_level) %>
+						<% these_questions.each do |question|%>
+							<p><strong><em><%= question.question_text %></em></strong></p>
+							<% answer = @individual_review.answers.where(question_id: question.id).first %>
+							<p class="answer"><%= answer.answer %></p>
+						<% end %>
+					<% end %>
+					<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @individual_review.id) %>
+					<h4>Employee Comment</h4>
+					<p><%= section_answer.employee_comment %></p>
+					<h4>Reviewer Comment</h4>
+					<p><%= section_answer.reviewer_comment %></p>
+					<hr>
 				</div>
 			</div>
-			<!-- this is to get Active Record relation of Answers instead of array -->
-			<% array = answers.map(&:id) %>
-			<% these_answers = Answer.where(id: array) %>
-			<!-- end -->
-			<div class="box-body">
-				
-				<% these_answers.joins(:question).select('answers.*, questions.subsection').group_by(&:subsection).each do |subsection, texts| %>
-						<h3><%= subsection %></h3>
-						<% texts.each do |text| %>
-							<p <% if text.answer.nil? %> class="off"<% end %>><strong><em><%= text.question.question_text %></em></strong></p>
-							<p class="answer"><%= text.answer %></p>
-						<% end %>
-						<hr>
-				<% end %>
-				<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @individual_review.id) %>
-				<h4>Employee Comment</h4>
-				<p><%= section_answer.employee_comment %></p>
-				<h4>Reviewer Comment</h4>
-				<p><%= section_answer.reviewer_comment %></p>
-				<hr>
-			</div>
-		</div>
+		<% end %>
 	<% end %>
+<% end %>
+	
 
 <script>
 
