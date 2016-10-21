@@ -9,7 +9,8 @@
   <meta name="turbolinks-cache-control" content="no-cache">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+	
+	<link rel="shortcut icon" type="image/x-icon" href="<%= asset_url 'global.ico'%>">
  <!--  <script   src="http://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 
  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.js"></script> -->
@@ -72,6 +73,7 @@
 				<% if current_user.present? && current_user.is_super_admin? %>
 					<li><%= link_to 'Users', profiles_path %></li>
 				<% end %>
+				<li class="logo"><%= image_tag 'logo_icon.png'%> <%= image_tag 'logo_text.png' %></li>
 			</ul>
 		</section>
 		<div class="slimScrollBar"></div>

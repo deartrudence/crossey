@@ -18,6 +18,18 @@
 ul {
 	padding: 0;
 }
+section.sidebar {
+	position: relative;
+}
+ul.sidebar-menu li.logo {
+	position: absolute;
+	bottom: 20px;
+	left: 10%;
+}
+ul.sidebar-menu li.logo img {
+	max-height: 50px;
+	margin-right: 10px;
+}
 li {
 	list-style-type: none;
 }
