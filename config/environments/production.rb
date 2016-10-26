@@ -81,6 +81,7 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   config.i18n.fallbacks = true
 
+  config.action_mailer.default_url_options = { :host => 'http://crossey.upatfive.xyz' }
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
