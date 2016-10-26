@@ -24,9 +24,9 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews/1.json
   def show
     # @total_check_questions = @individual_review.questions.where(question_type: "check_box").count
-    @total_check_questions = Question.belongs_to_job_level(@individual_review.employee_job_level).where(question_type: "check_box").uniq.count
+    @total_check_questions = Question.belongs_to_job_level(@individual_review.employee_job_level).belongs_to_review(@individual_review.review).where(question_type: "check_box").uniq.count
     @check_results = @individual_review.check_results
-    @text_results = @individual_review.text_results
+    @text_results = @individual_review.text_answers
     @results = @individual_review.answers.joins(:question)
   end
 
@@ -67,7 +67,7 @@ class IndividualReviewsController < ApplicationController
     respond_to do |format|
       if @individual_review.save
         #TODO - add all answers for review based on questions of review type
-        questions = Question.belongs_to_job_level(@individual_review.employee_job_level).uniq
+        questions = Question.belongs_to_job_level(@individual_review.employee_job_level).belongs_to_review(@individual_review.review).uniq
         questions.each do |question|
           Answer.create(question_id: question.id, individual_review_id: @individual_review.id)
         end

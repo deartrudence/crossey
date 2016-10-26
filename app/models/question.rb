@@ -12,4 +12,8 @@ class Question < ActiveRecord::Base
   	user_job_level = job_level.to_i  + 1
   	self.where(id: QuestionJobLevel.where(job_level: user_job_level).map(&:question_id))
   end
+
+  def self.belongs_to_review(review)
+    self.where(id: review.questions.map(&:id))
+  end
 end

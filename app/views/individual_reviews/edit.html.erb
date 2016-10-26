@@ -12,8 +12,10 @@
 			<div class="box box-primary">
 				<div class="box-body">
 					<p><strong>Date :</strong> <%= @individual_review.date %></p>
+					<p><strong>Review Type :</strong>
+						<%= @individual_review.review.name %></p>
 					<p><strong>Employee :</strong> <%= @individual_review.employee.profile.name %></p>
-					<p><strong>Employee Job Title at Time of Review :</strong> <%= @individual_review.employee_job_title %></p>
+					<p><strong>Employee Job Title at Time of Review :</strong> <%= @individual_review.employee_job_title.titleize %></p>
 					<p><strong>Reviewer :</strong> <%= @individual_review.reviewer.profile.name %></p>
 				</div>
 			</div>
@@ -27,7 +29,7 @@
 	<% end %>
 
 	
-	<% @individual_review.review.sections.group_by(&:portion).each do |portion, sections| %>
+	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
 		<ul>
 			<li><h2><%= portion.capitalize %></h2></li>
 				
@@ -78,8 +80,8 @@
 										</ul>
 									</div>
 								<% end %>
-								
 						<% end %>
+						<h3><%= section.title %> comments</h3>
 						<% section_answer = section.section_answers.where(individual_review_id: @individual_review.id).first %>
 						<%= form_for(section_answer, remote: true, :authenticity_token => true, :html => {:id => "section-#{section.id}", "data-id" => "#{section_answer.id}", :class => ''})  do |f| %>
 							<fieldset>

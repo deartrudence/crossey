@@ -147,7 +147,7 @@ RSpec.describe IndividualReviewsController, type: :controller do
       ir = create(:individual_review, reviewer_id: user1.id, employee_id: user2.id, review: review, employee_job_level: 1)
       a1 = create(:answer, answer: 'Meets Expectations', question: q1, individual_review: ir)
       a2 = create(:answer, answer: 'text answer', question: q2, individual_review: ir)
-      @text_results = ir.text_results
+      @text_results = ir.text_answers
       expect(@text_results).to match_array([a2])
     end
   end

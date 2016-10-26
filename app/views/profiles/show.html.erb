@@ -10,7 +10,7 @@
       <h2><%= @profile.name %></h2>
 
       <h4><strong>Job title:</strong>
-        <%= @profile.job_title %></h4>
+        <%= @profile.job_title.titleize %></h4>
 
       <h4><strong>Job type:</strong>
         <%= @profile.job_type %></h4>
@@ -21,7 +21,7 @@
           <hr>
           <div class="row">
             <div class="col-md-12">
-              <p class="col-md-2">Employee Title : <%= ir.employee_job_title %></p>
+              <p class="col-md-2">Employee Title : <%= ir.employee_job_title.titleize %></p>
               <p class="col-md-2"><%= ir.date %></p>
               <p class="col-md-2">
               <%= link_to  individual_reviews_download_path(review: ir), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
