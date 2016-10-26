@@ -1,6 +1,6 @@
 <section class="content-header">
   <div class="text-center">
-    <h1 class="page-title">Review for <%= @individual_review.employee.profile.name %> on <%= @individual_review.date.strftime('%B %d, %Y') %></h1>
+    <h1 class="page-title">Review for <%= @individual_review.employee.profile.name %> on <% if @individual_review.date.present? %><%= @individual_review.date.strftime('%B %d, %Y') %><% end %></h1>
     
   </div>
 </section>	
