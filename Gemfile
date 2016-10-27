@@ -14,6 +14,9 @@ gem 'coffee-rails', '~> 4.1.0'
 
 gem 'bootstrap-datepicker-rails'
 
+#downgrade b/c current version requires ruby 2.2.5
+gem 'ruby_dep', '~> 1.3.1'
+gem 'listen', '~> 3.0.8'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
