@@ -46,7 +46,7 @@ class IndividualReviewsController < ApplicationController
     @reviewer = @review.reviewer.profile
     @answers = @review.answers
     @check_results = @review.check_results
-    @total_check_questions = @review.questions.where(question_type: "check_box").count
+    @total_check_questions = Question.belongs_to_job_level(@review.employee_job_level).belongs_to_review(@review.review).where(question_type: "check_box").uniq.count
     @results = @review.answers.joins(:question)
     html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
     pdf = WickedPdf.new.pdf_from_string(html)
