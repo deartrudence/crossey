@@ -4,7 +4,7 @@ class PdfMailer < ApplicationMailer
 		@employee = employee
 		attachments["review-#{employee.name}.pdf"] = pdf
 		mail(
-			to: 'hello@upatfive.ca', 
+			to: 'adele.salvati@cel.ca', 
 			subject: 'New Review'
 		)
 	end
