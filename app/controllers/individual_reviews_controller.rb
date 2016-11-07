@@ -49,7 +49,8 @@ class IndividualReviewsController < ApplicationController
     @total_check_questions = Question.belongs_to_job_level(@review.employee_job_level).belongs_to_review(@review.review).where(question_type: "check_box").uniq.count
     @results = @review.answers.joins(:question)
     html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
-    pdf = WickedPdf.new.pdf_from_string(html)
+    footer = render_to_string('individual_reviews/pdf_footer.html.erb', layout: 'pdfs/layout_pdf')
+    pdf = WickedPdf.new.pdf_from_string(html, footer: {content: footer}, margin: {top: 10, bottom: 10})
     send_data(pdf,
       :filename => "individual_review.pdf",
       :type => "application/pdf",
@@ -78,7 +79,7 @@ class IndividualReviewsController < ApplicationController
         #TODO - signatures for Employee, Reviewer, and Principle
         @individual_review.signatures.create(signature_type: "Employee")
         @individual_review.signatures.create(signature_type: "Reviewer")
-        @individual_review.signatures.create(signature_type: "Principle")
+        @individual_review.signatures.create(signature_type: "Principal")
 
         format.html { redirect_to @individual_review, notice: 'Individual review was successfully created.' }
         format.json { render :show, status: :created, location: @individual_review }
