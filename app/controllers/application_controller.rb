@@ -13,8 +13,11 @@ class ApplicationController < ActionController::Base
   def authenticate_has_profile
     if !current_user.profile.present?
         redirect_to new_profile_path,
-        notice: 'Please fill out a profile before continuing' 
+        notice: 'Please fill out a profile before continuing'
+    else
+        redirect_to about_path     
     end
   end
+
   
 end
