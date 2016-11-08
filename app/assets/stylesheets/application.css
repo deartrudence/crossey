@@ -70,9 +70,13 @@ li {
 	.navbar a:hover {
 		color: #333 !important;
 	}
-
+	
 }
-
+@media (min-width: 768px) {
+	.sidebar-toggle {
+		display: none;
+	}
+}
 @media (max-width: 991px){
 	.main-header {
 		background-color: #222d32;
@@ -84,6 +88,10 @@ li {
 		color: #333 !important;
 	}
 
+}
+
+.bg-green {
+	background:#00a65a;
 }
 
 /*.btn-box-tool {

@@ -65,6 +65,10 @@
 			background: #ff851b;
 		}
 
+		.bg-green {
+			background:#00a65a;
+		}
+
 		h3 {
 			page-break-after:avoid;
 		}
@@ -86,7 +90,7 @@
 
 				<% unless @total_check_questions == 0%>
 					<% percentage = ((val.to_f / @total_check_questions.to_f) * 100).round(0) %>
-					<p><%= key %> - <%= val%> (%<%= percentage %>)</p>
+					<p><%= key %> - <%= val%> (<%= percentage %>%)</p>
 				<% end %>
 			<% end %>
 		</div>

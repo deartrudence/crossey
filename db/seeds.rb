@@ -78,7 +78,8 @@ sections = [
 	['Section III: Contract Administration', 'Reviewer'],
 	['Section IV: Project Management', 'Reviewer'],
 	['Section V: Organization and Health Safety', 'Reviewer'],
-	['Section VI: Overall Performance', 'Employee']
+	['Section VI: Overall Performance', 'Reviewer'],
+	['Employee Section', 'Employee']
 ]
 
 designer_sections = [
@@ -87,7 +88,8 @@ designer_sections = [
 	['Section III: Contract Administration', 'Reviewer'],
 	['Section IV: Project Management', 'Reviewer'],
 	['Section V: Organization and Health Safety', 'Reviewer'],
-	['Section VI: Overall Performance', 'Employee']
+	['Section VI: Overall Performance', 'Reviewer'],
+	['Employee Section', 'Employee']
 ]
 
 designer_questions = [
@@ -182,36 +184,36 @@ designer_questions = [
 	['Section IV: Project Management', 'Client Interface', 'Promotes CEL in a professional manner at all times', 'check_box', [2, 3, 4]],
 	['Section IV: Project Management', 'Client Interface', 'Managing Principal Comments', 'text', [2, 3, 4]],
 	['Section IV: Project Management', 'Client Interface', 'Employee Comments', 'text', [2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Arrives at meetings on time', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Arrives and leaves in accordance with their working schedule', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Attends internal meetings', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Participates in training', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Maintains an organized desk', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Files emails and design files on network', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Follows company project closeout procedures', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Timesheets are completed on time', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Expenses are submitted on time', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Complies with CEL policies and procedures', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Ability to work independently with minimal input from supervisor', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Participates in learning sessions', 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Managing Principal Comments', 'text', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Organizational', 'Employee Comments', 'text', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Health and Safety', "Complies with CEL's H&S program", 'check_box', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Health and Safety', 'Managing Principal Comments', 'text', [1, 2, 3, 4]],
-	['Section IV: Project Management', 'Health and Safety', 'Employee Comments', 'text', [1, 2, 3, 4]],
-	['Section V: Organization and Health Safety', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Strengths', 'text', [1, 2, 3, 4]],
-	['Section V: Organization and Health Safety', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Improvement Areas', 'text', [1, 2, 3, 4]],
-	['Section V: Organization and Health Safety', 'Performance Goals for the Upcoming Year', 'Goals', 'text', [1, 2, 3, 4]],
-	['Section V: Organization and Health Safety', 'Performance Goals for the Upcoming Year', 'Timeframe for completion', 'text', [1, 2, 3, 4]],
-	['Section V: Organization and Health Safety', 'Choose 1-2 development goals to focus on this year to enhance ', 'Goals', 'text', [1, 2, 3, 4]],
-	['Section V: Organization and Health Safety', 'Choose 1-2 development goals to focus on this year to enhance ', 'Timeframe for completion', 'text', [1, 2, 3, 4]],
-	['Section V: Organization and Health Safety', 'Identify 1-2 career development goals to help make progress for longer-tem ', 'Goals', 'text', [1, 2, 3, 4]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What makes you happy while working at CEL?', 'text', [1, 2, 3, 4]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What frustrates you while working at CEL?', 'text', [1, 2, 3, 4]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What are your career goals for the next 2 years and 5 years.', 'text', [1, 2, 3, 4]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What can your manager do to help you achieve your goals?', 'text', [1, 2, 3, 4]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What are the key items which enable you to do your best work (Work space free of distraction, training, timely input from my Manager, Revit/It Support…)?', 'text', [1, 2, 3, 4]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What items at CEL are preventing you from doing your best work?', 'text', [1, 2, 3, 4]]
+	['Section V: Organization and Health Safety', 'Organizational', 'Arrives at meetings on time', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Arrives and leaves in accordance with their working schedule', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Attends internal meetings', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Participates in training', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Maintains an organized desk', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Files emails and design files on network', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Follows company project closeout procedures', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Timesheets are completed on time', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Expenses are submitted on time', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Complies with CEL policies and procedures', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Ability to work independently with minimal input from supervisor', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Participates in learning sessions', 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Managing Principal Comments', 'text', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Employee Comments', 'text', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Health and Safety', "Complies with CEL's H&S program", 'check_box', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Health and Safety', 'Managing Principal Comments', 'text', [1, 2, 3, 4]],
+	['Section V: Organization and Health Safety', 'Health and Safety', 'Employee Comments', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Strengths', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Improvement Areas', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Goals', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Timeframe for completion', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Goals', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Timeframe for completion', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Identify 1-2 career development goals to help make progress for longer-tem ', 'Goals', 'text', [1, 2, 3, 4]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What makes you happy while working at CEL?', 'text', [1, 2, 3, 4]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What frustrates you while working at CEL?', 'text', [1, 2, 3, 4]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What are your career goals for the next 2 years and 5 years.', 'text', [1, 2, 3, 4]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What can your manager do to help you achieve your goals?', 'text', [1, 2, 3, 4]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What are the key items which enable you to do your best work (Work space free of distraction, training, timely input from my Manager, Revit/It Support…)?', 'text', [1, 2, 3, 4]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What items at CEL are preventing you from doing your best work?', 'text', [1, 2, 3, 4]]
 ]
 
 questions = [
@@ -371,36 +373,36 @@ questions = [
 	['Section IV: Project Management', 'Supervisory', 'Provides input for performance reviews', 'check_box', [6]],
 	['Section IV: Project Management', 'Supervisory', 'Managing Principal Comments', 'text', [6]],
 	['Section IV: Project Management', 'Supervisory', 'Employee Comments', 'text', [6]],
-	['Section IV: Project Management', 'Organizational', 'Arrives at meetings on time', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Arrives and leaves in accordance with their working schedule', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Attends internal meetings', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Participates in training', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Maintains an organized desk', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Files emails and design files on network', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Follows company project closeout procedures', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Timesheets are completed on time', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Expenses are submitted on time', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Complies with CEL policies and procedures', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Ability to work independently with minimal input from supervisor', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Participates in learning sessions', 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Managing Principal Comments', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Organizational', 'Employee Comments', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Health and Safety', "Complies with CEL's H&S program", 'check_box', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Health and Safety', 'Managing Principal Comments', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section IV: Project Management', 'Health and Safety', 'Employee Comments', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section V: Organization and Health Safety', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Strengths', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section V: Organization and Health Safety', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Improvement Areas', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section V: Organization and Health Safety', 'Performance Goals for the Upcoming Year', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section V: Organization and Health Safety', 'Performance Goals for the Upcoming Year', 'Timeframe for completion', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section V: Organization and Health Safety', 'Choose 1-2 development goals to focus on this year to enhance ', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section V: Organization and Health Safety', 'Choose 1-2 development goals to focus on this year to enhance ', 'Timeframe for completion', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section V: Organization and Health Safety', 'Identify 1-2 career development goals to help make progress for longer-tem ', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What makes you happy while working at CEL?', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What frustrates you while working at CEL?', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What are your career goals for the next 2 years and 5 years.', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What can your manager do to help you achieve your goals?', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What are the key items which enable you to do your best work (Work space free of distraction, training, timely input from my Manager, Revit/It Support…)?', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section VI: Overall Performance', 'Please answer each question prior to your meeting with your reviewer:', 'What items at CEL are preventing you from doing your best work?', 'text', [1, 2, 3, 4, 5, 6]]
+	['Section V: Organization and Health Safety', 'Organizational', 'Arrives at meetings on time', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Arrives and leaves in accordance with their working schedule', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Attends internal meetings', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Participates in training', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Maintains an organized desk', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Files emails and design files on network', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Follows company project closeout procedures', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Timesheets are completed on time', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Expenses are submitted on time', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Complies with CEL policies and procedures', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Ability to work independently with minimal input from supervisor', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Participates in learning sessions', 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Managing Principal Comments', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Organizational', 'Employee Comments', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Health and Safety', "Complies with CEL's H&S program", 'check_box', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Health and Safety', 'Managing Principal Comments', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section V: Organization and Health Safety', 'Health and Safety', 'Employee Comments', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Strengths', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Improvement Areas', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Timeframe for completion', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Timeframe for completion', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Identify 1-2 career development goals to help make progress for longer-tem ', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What makes you happy while working at CEL?', 'text', [1, 2, 3, 4, 5, 6]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What frustrates you while working at CEL?', 'text', [1, 2, 3, 4, 5, 6]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What are your career goals for the next 2 years and 5 years.', 'text', [1, 2, 3, 4, 5, 6]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What can your manager do to help you achieve your goals?', 'text', [1, 2, 3, 4, 5, 6]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What are the key items which enable you to do your best work (Work space free of distraction, training, timely input from my Manager, Revit/It Support…)?', 'text', [1, 2, 3, 4, 5, 6]],
+	['Employee Section', 'Please answer each question prior to your meeting with your reviewer:', 'What items at CEL are preventing you from doing your best work?', 'text', [1, 2, 3, 4, 5, 6]]
 ]
 
 
@@ -427,9 +429,11 @@ questions.each do |question|
 	elsif question[0] == 'Section IV: Project Management'
 		sec = Section.where(title: 'Section IV: Project Management').first
 	elsif question[0] == 'Section V: Organization and Health Safety'
-		sec = Section.where(title: 'Section V: Organization and Health Safety').first
+		sec = Section.where(title: 'Section V: Organization and Health Safety').first	
 	elsif question[0] == 'Section VI: Overall Performance'
 		sec = Section.where(title: 'Section VI: Overall Performance').first
+	elsif question[0] == 'Employee Section'
+		sec = Section.where(title: 'Employee Section').first
 	end
 	q = Question.create(section_id: sec.id, subsection: question[1], question_text: question[2], question_type: question[3])
 	question[4].each do |level|
@@ -447,9 +451,11 @@ designer_questions.each do |question|
 	elsif question[0] == 'Section IV: Project Management'
 		sec = Section.where(title: 'Section IV: Project Management').last
 	elsif question[0] == 'Section V: Organization and Health Safety'
-		sec = Section.where(title: 'Section V: Organization and Health Safety').last
+		sec = Section.where(title: 'Section V: Organization and Health Safety').last	
 	elsif question[0] == 'Section VI: Overall Performance'
 		sec = Section.where(title: 'Section VI: Overall Performance').last
+	elsif question[0] == 'Employee Section'
+		sec = Section.where(title: 'Employee Section').last
 	end
 	q = Question.create(section_id: sec.id, subsection: question[1], question_text: question[2], question_type: question[3])
 	question[4].each do |level|
