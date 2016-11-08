@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h3 class="box-title">For Employees</h3>
+			</div>
+			<div class="box-body">
+				<p>Click on "Start/Find Reviews" to access your review</p>
+				<%= link_to 'Start/Find Review', new_individual_review_path, class: 'btn btn-primary btn-flat' %>
+			</div>
+		</div>
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h3 class="box-title">For Reviewers</h3>
+			</div>
+			<div class="box-body">
+				<p>Click on "All Reviews" to access your employee's review</p>
+				<%= link_to 'All Reviews',individual_reviews_path, class: 'btn btn-primary btn-flat' %> 
+			</div>
+		</div>
+	</div>
+</div>
