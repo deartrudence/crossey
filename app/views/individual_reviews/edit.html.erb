@@ -60,7 +60,7 @@
 										<%= form_for(answer, remote: true, :authenticity_token => true, :html => {:id => "answer-#{question.id}", "data-id" => "#{answer.id}", :class => ''})  do |f| %>
 											<% if question.question_type == 'check_box' %>
 												<div class="form-group checkbox ">
-							          	<%= f.collection_radio_buttons :answer, Answer::ANSWERS, :to_s, :humanize, class: 'form-control' %>
+							          	<%= f.collection_radio_buttons :answer, Answer::ANSWERS, :to_s, :humanize, { item_wrapper_tag: false } do |b| b.radio_button(id: "answer-#{question.id}-#{b.label}") + b.label(for: "answer-#{question.id}-#{b.label}") end %>
 												</div>
 											<% else %>
 												<div class="form-group ">
