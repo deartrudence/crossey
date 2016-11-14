@@ -30,7 +30,7 @@ user4.user_roles.create(name: 'Principal')
 
 user5 = User.create(email: 'user5@email.com', password: 'password')
 user5.save
-user5.create_profile(first_name: 'Valerie', last_name: 'Summers', job_title:'EIT_PROJECT_ENGINEER', job_type:'Engineer' )
+user5.create_profile(first_name: 'Valerie', last_name: 'Summers', job_title:'PROJECT_ENGINEER', job_type:'Engineer' )
 user5.user_roles.create(name: 'Employee')
 user5.user_roles.create(name: 'Reviewer')
 user5.user_roles.create(name: 'Principal')
@@ -61,7 +61,7 @@ user9.user_roles.create(name: 'Principal')
 
 user10 = User.create(email: 'user10@email.com', password: 'password')
 user10.save
-user10.create_profile(first_name: 'Anna', last_name: 'Smith', job_title:'EIT_PROJECT_MANAGER', job_type:'Designer' )
+user10.create_profile(first_name: 'Anna', last_name: 'Smith', job_title:'PROJECT_MANAGER', job_type:'Designer' )
 user10.user_roles.create(name: 'Employee')
 user10.user_roles.create(name: 'Reviewer')
 user10.user_roles.create(name: 'Principal')
@@ -203,7 +203,7 @@ designer_questions = [
 	['Section V: Organization and Health Safety', 'Health and Safety', 'Employee Comments', 'text', [1, 2, 3, 4]],
 	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Strengths', 'text', [1, 2, 3, 4]],
 	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Improvement Areas', 'text', [1, 2, 3, 4]],
-	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Goals', 'text', [1, 2, 3, 4]],
+	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'List up to 5 impact goals to  be achieved in the upcoming year', 'text', [1, 2, 3, 4]],
 	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Timeframe for completion', 'text', [1, 2, 3, 4]],
 	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Goals', 'text', [1, 2, 3, 4]],
 	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Timeframe for completion', 'text', [1, 2, 3, 4]],
@@ -225,18 +225,18 @@ questions = [
 	['Section I: Drawing Production', 'Drawing', 'Reviews work to ensure it is complete and technically accurate', 'check_box', [1, 2, 3]],
 	['Section I: Drawing Production', 'Drawing', 'Follows CEL standards for filing design and archiving material as appropriate ', 'check_box', [1, 2, 3]],
 	['Section I: Drawing Production', 'Drawing', 'Understands project objectives and scope', 'check_box', [1, 2, 3]],
-	['Section I: Drawing Production', 'Drawing', 'Managing Principal Comments:', 'text', [1, 2, 3]],
-	['Section I: Drawing Production', 'Drawing', 'Employee Comments:', 'text', [1, 2, 3]],
+	['Section I: Drawing Production', 'Drawing', 'Managing Principal Comments', 'text', [1, 2, 3]],
+	['Section I: Drawing Production', 'Drawing', 'Employee Comments', 'text', [1, 2, 3]],
 	['Section I: Drawing Production', 'Production', 'Meets required deadlines for work assigned', 'check_box', [1, 2, 3]],
 	['Section I: Drawing Production', 'Production', 'Identifies that assigned work cannot be completed within alloted timeframe', 'check_box', [1, 2, 3]],
-	['Section I: Drawing Production', 'Production', 'Managing Principal Comments:', 'text', [1, 2, 3]],
-	['Section I: Drawing Production', 'Production', 'Employee Comments:', 'text', [1, 2, 3]],
+	['Section I: Drawing Production', 'Production', 'Managing Principal Comments', 'text', [1, 2, 3]],
+	['Section I: Drawing Production', 'Production', 'Employee Comments', 'text', [1, 2, 3]],
 	['Section I: Drawing Production', 'Layout', "Able to implement layouts in accordance to PM's direction", 'check_box', [1]],
 	['Section I: Drawing Production', 'Layout', "Makes layout decisions and coordinates with other services", 'check_box', [2, 3]],
 	['Section I: Drawing Production', 'Layout', "Provides designers with direction on implementing concept(s)", 'check_box', [4, 5, 6]],
 	['Section I: Drawing Production', 'Layout', "Provides direction for 3D coordination of services", 'check_box', [4, 5, 6]],
-	['Section I: Drawing Production', 'Layout', 'Managing Principal Comments:', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section I: Drawing Production', 'Layout', 'Employee Comments:', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section I: Drawing Production', 'Layout', 'Managing Principal Comments', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section I: Drawing Production', 'Layout', 'Employee Comments', 'text', [1, 2, 3, 4, 5, 6]],
 	['Section II: Design', 'Calculations', "Performs load calculations accurately", 'check_box', [2, 3, 4]],
 	['Section II: Design', 'Calculations', "Reviews load calculations and ensures accuracy", 'check_box', [5, 6]],
 	['Section II: Design', 'Calculations', "Performs lighting calculations", 'check_box', [2, 3, 4, 5, 6]],
@@ -255,21 +255,21 @@ questions = [
 	['Section II: Design', 'Calculations', "Performs plumbing load calculations ", 'check_box', [3, 4, 5, 6]],
 	['Section II: Design', 'Calculations', "Reviews plumbing load calculations", 'check_box', [3, 4, 5, 6]],
 	['Section II: Design', 'Calculations', "Knowledge of related codes, regulations and standards", 'check_box', [3, 4, 5, 6]],
-	['Section II: Design', 'Calculations', 'Managing Principal Comments:', 'text', [2, 3, 4, 5, 6]],
-	['Section II: Design', 'Calculations', 'Employee Comments:', 'text', [2, 3, 4, 5, 6]],
+	['Section II: Design', 'Calculations', 'Managing Principal Comments', 'text', [2, 3, 4, 5, 6]],
+	['Section II: Design', 'Calculations', 'Employee Comments', 'text', [2, 3, 4, 5, 6]],
 	['Section II: Design', 'System (choice of)', "Ability to create and document conceptual design in the respective discipline", 'check_box', [6]],
 	['Section II: Design', 'System (choice of)', "Leads and supervises the project team with design and drafting of mechanical/electrical systems", 'check_box', [6]],
 	['Section II: Design', 'System (choice of)', "Assists with choice of system ", 'check_box', [6]],
 	['Section II: Design', 'System (choice of)', "Type of System ", 'check_box', [6]],
 	['Section II: Design', 'System (choice of)', "Able to choose appropriate system for the application and create system", 'check_box', [6]],
-	['Section II: Design', 'System (choice of)', 'Managing Principal Comments:', 'text', [6]],
-	['Section II: Design', 'System (choice of)', 'Employee Comments:', 'text', [6]],
+	['Section II: Design', 'System (choice of)', 'Managing Principal Comments', 'text', [6]],
+	['Section II: Design', 'System (choice of)', 'Employee Comments', 'text', [6]],
 	['Section II: Design', 'Equipment Selection', 'Inputs equipment into drawings ', 'check_box', [1, 2]],
 	['Section II: Design', 'Equipment Selection', 'Requests equipment cut sheet from vendor ', 'check_box', [3, 4]],
 	['Section II: Design', 'Equipment Selection', 'Prepares equipment schedule ', 'check_box', [3, 4]],
 	['Section II: Design', 'Equipment Selection', 'Selects type of equipment ', 'check_box', [5, 6]],
-	['Section II: Design', 'Equipment Selection', 'Managing Principal Comments ', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section II: Design', 'Equipment Selection', 'Employee Comments ', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section II: Design', 'Equipment Selection', 'Managing Principal Comments', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section II: Design', 'Equipment Selection', 'Employee Comments', 'text', [1, 2, 3, 4, 5, 6]],
 	['Section II: Design', 'Design Reports and Studies', 'Formatting - grammatically correct and accurate spelling', 'check_box', [3, 4, 5, 6]],
 	['Section II: Design', 'Design Reports and Studies', 'Clear and concise', 'check_box', [3, 4, 5, 6]],
 	['Section II: Design', 'Design Reports and Studies', 'Written at level of client expectations ', 'check_box', [3, 4, 5, 6]],
@@ -392,7 +392,7 @@ questions = [
 	['Section V: Organization and Health Safety', 'Health and Safety', 'Employee Comments', 'text', [1, 2, 3, 4, 5, 6]],
 	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Strengths', 'text', [1, 2, 3, 4, 5, 6]],
 	['Section VI: Overall Performance', 'Feedback on Overall Performance Results: How Results Were Achieved', 'Improvement Areas', 'text', [1, 2, 3, 4, 5, 6]],
-	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
+	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'List up to 5 impact goals to  be achieved in the upcoming year', 'text', [1, 2, 3, 4, 5, 6]],
 	['Section VI: Overall Performance', 'Performance Goals for the Upcoming Year', 'Timeframe for completion', 'text', [1, 2, 3, 4, 5, 6]],
 	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Goals', 'text', [1, 2, 3, 4, 5, 6]],
 	['Section VI: Overall Performance', 'Choose 1-2 development goals to focus on this year to enhance ', 'Timeframe for completion', 'text', [1, 2, 3, 4, 5, 6]],

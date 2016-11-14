@@ -10,7 +10,9 @@ class Question < ActiveRecord::Base
 
   def self.belongs_to_next_job_level(job_level)
   	user_job_level = job_level.to_i  + 1
-  	self.where(id: QuestionJobLevel.where(job_level: user_job_level).map(&:question_id))
+  	# question = self.where(id: QuestionJobLevel.where(job_level: user_job_level).map(&:question_id))
+    question = self.where.not(question_text: ['Employee Comments', 'Managing Principal Comments']).where(id: QuestionJobLevel.where(job_level: user_job_level).map(&:question_id))
+
   end
 
   def self.belongs_to_review(review)
