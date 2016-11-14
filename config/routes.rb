@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'signature/destroy'
 
   get 'individual_reviews/download' => 'individual_reviews#download'
+  get 'about' => 'pages#about'
 
   resources :individual_reviews
   resources :reviews
