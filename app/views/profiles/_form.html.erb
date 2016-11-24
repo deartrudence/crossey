@@ -36,6 +36,10 @@
                 <%= f.collection_select :job_title, Profile::JOB_LEVELS, :first , :first %>
               </div>
               <div class="field form-group col-md-6">
+                <%= f.label :custom_job_title %><br>
+                <%= f.text_field :custom_job_title, class:"form-control" %>
+              </div>
+              <div class="field form-group col-md-6">
                 <%= f.label :job_type %><br>
                 <%= f.select :job_type, Profile::JOB_TYPES %>
               </div>

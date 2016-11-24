@@ -15,7 +15,7 @@
 					<p><strong>Review Type :</strong>
 						<%= @individual_review.review.name %></p>
 					<p><strong>Employee :</strong> <%= @individual_review.employee.profile.name %></p>
-					<p><strong>Employee Job Title at Time of Review :</strong> <%= @individual_review.employee_job_title.titleize %></p>
+					<p><strong>Employee Job Title at Time of Review :</strong> <%= @individual_review.employee_job_title.upcase %></p>
 					<p><strong>Reviewer :</strong> <%= @individual_review.reviewer.profile.name %></p>
 				</div>
 			</div>
