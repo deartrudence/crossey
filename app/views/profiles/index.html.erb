@@ -22,7 +22,13 @@
             <% @profiles.each do |profile| %>
               <tr>
                 <td><%= profile.name %></td>
-                <td><%= profile.job_title %></td>
+                <td>
+                  <% if profile.custom_job_title.present? %>
+                    <%= profile.custom_job_title%>
+                  <% else %>
+                    <%= profile.job_title.upcase %>
+                  <% end%>
+                </td>
                 <td><%= profile.job_type %></td>
                 <td><%= link_to 'Show', profile, class: "btn btn-flat btn-primary form-control" %></td>
                 <td><%= link_to 'Edit', edit_profile_path(profile), class: "btn btn-flat btn-info form-control" %></td>
