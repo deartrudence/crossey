@@ -5,67 +5,67 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-user1 = User.create(email: 'user1@email.com', password: 'password')
-user1.save
-user1.create_profile(first_name: 'Brenda', last_name: 'Devore', job_title:'EIT1', job_type:'Engineer' )
-user1.user_roles.create(name: 'Employee')
+# user1 = User.create(email: 'user1@email.com', password: 'password')
+# user1.save
+# user1.create_profile(first_name: 'Brenda', last_name: 'Devore', job_title:'EIT1', job_type:'Engineer' )
+# user1.user_roles.create(name: 'Employee')
 
-user2 = User.create(email: 'user2@email.com', password: 'password')
-user2.save
-user2.create_profile(first_name: 'Francisca', last_name: 'Stewart', job_title:'EIT2', job_type:'Engineer' )
-user2.user_roles.create(name: 'Employee')
+# user2 = User.create(email: 'user2@email.com', password: 'password')
+# user2.save
+# user2.create_profile(first_name: 'Francisca', last_name: 'Stewart', job_title:'EIT2', job_type:'Engineer' )
+# user2.user_roles.create(name: 'Employee')
 
-user3 = User.create(email: 'user3@email.com', password: 'password')
-user3.save
-user3.create_profile(first_name: 'Carol', last_name: 'Martin', job_title:'EIT3', job_type:'Engineer' )
-user3.user_roles.create(name: 'Employee')
-user3.user_roles.create(name: 'Reviewer')
+# user3 = User.create(email: 'user3@email.com', password: 'password')
+# user3.save
+# user3.create_profile(first_name: 'Carol', last_name: 'Martin', job_title:'EIT3', job_type:'Engineer' )
+# user3.user_roles.create(name: 'Employee')
+# user3.user_roles.create(name: 'Reviewer')
 
-user4 = User.create(email: 'user4@email.com', password: 'password')
-user4.save
-user4.create_profile(first_name: 'Loretta', last_name: 'Chatman', job_title:'EIT4', job_type:'Engineer' )
-user4.user_roles.create(name: 'Employee')
-user4.user_roles.create(name: 'Reviewer')
-user4.user_roles.create(name: 'Principal')
+# user4 = User.create(email: 'user4@email.com', password: 'password')
+# user4.save
+# user4.create_profile(first_name: 'Loretta', last_name: 'Chatman', job_title:'EIT4', job_type:'Engineer' )
+# user4.user_roles.create(name: 'Employee')
+# user4.user_roles.create(name: 'Reviewer')
+# user4.user_roles.create(name: 'Principal')
 
-user5 = User.create(email: 'user5@email.com', password: 'password')
-user5.save
-user5.create_profile(first_name: 'Valerie', last_name: 'Summers', job_title:'PROJECT_ENGINEER', job_type:'Engineer' )
-user5.user_roles.create(name: 'Employee')
-user5.user_roles.create(name: 'Reviewer')
-user5.user_roles.create(name: 'Principal')
-user5.user_roles.create(name: 'SuperAdmin')
+# user5 = User.create(email: 'user5@email.com', password: 'password')
+# user5.save
+# user5.create_profile(first_name: 'Valerie', last_name: 'Summers', job_title:'PROJECT_ENGINEER', job_type:'Engineer' )
+# user5.user_roles.create(name: 'Employee')
+# user5.user_roles.create(name: 'Reviewer')
+# user5.user_roles.create(name: 'Principal')
+# user5.user_roles.create(name: 'SuperAdmin')
 
-user6 = User.create(email: 'user6@email.com', password: 'password')
-user6.save
-user6.create_profile(first_name: 'Delilah', last_name: 'Rice', job_title:'D1', job_type:'Designer' )
-user6.user_roles.create(name: 'Employee')
+# user6 = User.create(email: 'user6@email.com', password: 'password')
+# user6.save
+# user6.create_profile(first_name: 'Delilah', last_name: 'Rice', job_title:'D1', job_type:'Designer' )
+# user6.user_roles.create(name: 'Employee')
 
-user7 = User.create(email: 'user7@email.com', password: 'password')
-user7.save
-user7.create_profile(first_name: 'Sean', last_name: 'Baughman', job_title:'D2', job_type:'Designer' )
-user7.user_roles.create(name: 'Employee')
+# user7 = User.create(email: 'user7@email.com', password: 'password')
+# user7.save
+# user7.create_profile(first_name: 'Sean', last_name: 'Baughman', job_title:'D2', job_type:'Designer' )
+# user7.user_roles.create(name: 'Employee')
 
-user8 = User.create(email: 'user8@email.com', password: 'password')
-user8.save
-user8.create_profile(first_name: 'William', last_name: 'Davis', job_title:'D3', job_type:'Designer' )
-user8.user_roles.create(name: 'Employee')
-user8.user_roles.create(name: 'Reviewer')
+# user8 = User.create(email: 'user8@email.com', password: 'password')
+# user8.save
+# user8.create_profile(first_name: 'William', last_name: 'Davis', job_title:'D3', job_type:'Designer' )
+# user8.user_roles.create(name: 'Employee')
+# user8.user_roles.create(name: 'Reviewer')
 
-user9 = User.create(email: 'user9@email.com', password: 'password')
-user9.save
-user9.create_profile(first_name: 'James', last_name: 'Mitchell', job_title:'D4', job_type:'Designer' )
-user9.user_roles.create(name: 'Employee')
-user9.user_roles.create(name: 'Reviewer')
-user9.user_roles.create(name: 'Principal')
+# user9 = User.create(email: 'user9@email.com', password: 'password')
+# user9.save
+# user9.create_profile(first_name: 'James', last_name: 'Mitchell', job_title:'D4', job_type:'Designer' )
+# user9.user_roles.create(name: 'Employee')
+# user9.user_roles.create(name: 'Reviewer')
+# user9.user_roles.create(name: 'Principal')
 
-user10 = User.create(email: 'user10@email.com', password: 'password')
-user10.save
-user10.create_profile(first_name: 'Anna', last_name: 'Smith', job_title:'PROJECT_MANAGER', job_type:'Designer' )
-user10.user_roles.create(name: 'Employee')
-user10.user_roles.create(name: 'Reviewer')
-user10.user_roles.create(name: 'Principal')
-user10.user_roles.create(name: 'SuperAdmin')
+# user10 = User.create(email: 'user10@email.com', password: 'password')
+# user10.save
+# user10.create_profile(first_name: 'Anna', last_name: 'Smith', job_title:'PROJECT_MANAGER', job_type:'Designer' )
+# user10.user_roles.create(name: 'Employee')
+# user10.user_roles.create(name: 'Reviewer')
+# user10.user_roles.create(name: 'Principal')
+# user10.user_roles.create(name: 'SuperAdmin')
 
 
 
