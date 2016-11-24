@@ -10,7 +10,12 @@
       <h2><%= @profile.name %></h2>
 
       <h4><strong>Job title:</strong>
-        <%= @profile.job_title.upcase %></h4>
+        <% if @profile.custom_job_title.present? %>
+          <%= @profile.custom_job_title%>
+        <% else %>
+          <%= @profile.job_title.upcase %>
+        <% end%>
+      </h4>
 
       <h4><strong>Job type:</strong>
         <%= @profile.job_type %></h4>
