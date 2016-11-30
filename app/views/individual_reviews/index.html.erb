@@ -57,13 +57,15 @@
     </div>
     <% if @underlings.present? %>
       <% @underlings.each do |user| %>
-        <div class="box-body">
-          <%= user.profile.name %>
-          <%= link_to user.profile, class: 'btn btn-flat btn-primary pull-right' do %>
-            <i class="fa fa-files-o" aria-hidden="true"></i>
-            Reviews
-          <% end %>
-        </div>
+        <% if user.profile.present? %>
+          <div class="box-body">
+            <%= user.profile.name %>
+            <%= link_to user.profile, class: 'btn btn-flat btn-primary pull-right' do %>
+              <i class="fa fa-files-o" aria-hidden="true"></i>
+              Reviews
+            <% end %>
+          </div>
+       <% end %> 
       <% end %>
     <% else %>
       <div class="box-body">
