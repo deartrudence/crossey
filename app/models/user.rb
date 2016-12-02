@@ -5,11 +5,17 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :authored_reviews, class_name: "IndividualReview", :foreign_key => 'reviewer_id'
   has_many :as_employee_reviews, class_name: "IndividualReview", :foreign_key => 'employee_id'
+
+  scope :not_archived, -> { joins(:profile).where(profiles: {archived: false}) }
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable, :registerable
+
+
+
 # :registerable,
   def is_employee?
     if self.profile.present?
