@@ -42,7 +42,8 @@
 									<%= f.label :employee %><br>
 									<%= f.collection_select :employee_id, User.not_archived, :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
 								</div>
-
+								<h1>Employee</h1>
+								<h2><%= f.object.employee %></h2>	
 								<div class="actions">
 									<a href="/profiles/1" class="btn btn-flat btn-primary" id="show-previous">
 										<i class="fa fa-files-o"></i>

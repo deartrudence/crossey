@@ -42,6 +42,14 @@ class IndividualReview < ActiveRecord::Base
     self.reviewer_id == user.id
   end
 
+  def total_percentage_result
+    (self.check_results["Exceeds Expectations"].to_f + self.check_results["Meets Expectations"].to_f)/ self.check_box_answers.count.to_f
+  end
+
+  def has_passed?
+    total_percentage_result > 0.50
+  end
+
   def job_level_to_title
     
   end
