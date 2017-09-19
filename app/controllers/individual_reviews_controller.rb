@@ -136,6 +136,30 @@ class IndividualReviewsController < ApplicationController
     end 
   end
 
+  def employee_completed
+    respond_to do |format|
+      if @individual_review.update(employee_completed: true)
+        format.html { redirect_to @individual_review, notice: 'Individual review has been completed by the employee' }
+        format.json { render :show, status: :ok, location: @individual_review }
+      else
+        format.html { render :edit }
+        format.json { render json: @individual_review.errors, status: :unprocessable_entity }
+      end
+    end 
+  end
+
+  def reviewer_completed
+    respond_to do |format|
+      if @individual_review.update(reviewer_completed: true)
+        format.html { redirect_to @individual_review, notice: 'Individual review has been completed by the reviewer' }
+        format.json { render :show, status: :ok, location: @individual_review }
+      else
+        format.html { render :edit }
+        format.json { render json: @individual_review.errors, status: :unprocessable_entity }
+      end
+    end 
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_individual_review

@@ -20,6 +20,13 @@
 				  <%= @individual_review.employee_job_title.upcase %></p>
 				  <p><strong>Reviewer :</strong>
 				  <%= @individual_review.reviewer.profile.name %></p>
+				  <% if @individual_review.totally_completed? %>
+				  	<% if @individual_review.has_passed? %>
+				  		<p class="label label-success">passed</p>
+				  	<% else %>
+				  		<p class="label label-warning">failed</p>
+				  	<% end %>
+				  <% end %>
 				</div>
 			</div>
 		</div>

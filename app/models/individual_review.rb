@@ -52,6 +52,10 @@ class IndividualReview < ActiveRecord::Base
     total_percentage_result > 0.50
   end
 
+  def totally_completed?
+    self.employee_completed && self.reviewer_completed
+  end
+
   def job_level_to_title
     
   end

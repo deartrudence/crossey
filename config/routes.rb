@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'splash' => 'pages#maintenance'
 
   get 'archive_review/:id' => 'individual_reviews#archive', as: 'archive_review'
+  get 'employee_completed/:id' => 'individual_reviews#employee_completed', as: 'employee_completed'
+  get 'reviewer_completed/:id' => 'individual_reviews#reviewer_completed', as: 'reviewer_completed'
 
   resources :individual_reviews
   resources :reviews
