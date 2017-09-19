@@ -17,8 +17,8 @@ class Ability
         end
     elsif user.is_reviewer? 
         can [:create], IndividualReview
-        can [:update, :edit, :show, :index, :download], IndividualReview, :reviewer_id => user.id
-        can [:update, :edit, :show, :index], IndividualReview, :employee_id => user.id
+        can [:update, :edit, :show, :index, :download, :reviewer_completed], IndividualReview, :reviewer_id => user.id
+        can [:update, :edit, :show, :index, :download, :employee_completed], IndividualReview, :employee_id => user.id
         can [:update, :edit, :show], Profile, :user_id => user.id
         user_array = user.authored_reviews.map(&:employee_id)
         users = User.where(id: user_array)
@@ -26,7 +26,8 @@ class Ability
             user_array.include?(profile.user_id)
         end
     elsif user.is_employee?
-        can [:update, :edit, :show, :index], IndividualReview, :employee_id => user.id
+        can [:show, :index,  :download, :employee_completed], IndividualReview, :employee_id => user.id
+        can [:edit, :update, :employee_completed], IndividualReview, :employee_completed => false
         can [:update, :edit, :show], Profile, :user_id => user.id
     else
         can [:update, :edit, :show, :create, :new], Profile, :user_id => user.id

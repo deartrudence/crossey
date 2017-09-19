@@ -48,12 +48,14 @@
 	  Employee
 	  <% end %>
 	</p> 
-	<p class="col-md-2">
-		<%= link_to edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" do %>
-			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-			Edit Review
-		<% end%>
-	</p>
+	<% if (current_user.id == @individual_review.employee_id && !@individual_review.employee_completed) || (current_user.id == @individual_review.reviewer_id || current_user.is_super_admin?)  %>
+		<p class="col-md-2">
+			<%= link_to edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" do %>
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				Edit Review
+			<% end%>
+		</p>
+	<% end %>
 	<br><br>
 
 	<% if @individual_review.reviewer_completed %>
