@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161202164114) do
+ActiveRecord::Schema.define(version: 20170919151201) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "question_id"
@@ -26,8 +26,8 @@ ActiveRecord::Schema.define(version: 20161202164114) do
 
   create_table "individual_reviews", force: :cascade do |t|
     t.integer  "user_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "review_id"
     t.date     "date"
     t.integer  "employee_id"
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20161202164114) do
     t.string   "employee_job_type"
     t.string   "employee_job_title"
     t.integer  "employee_job_level"
+    t.boolean  "archived",           default: false
   end
 
   add_index "individual_reviews", ["review_id"], name: "index_individual_reviews_on_review_id"

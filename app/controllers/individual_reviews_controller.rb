@@ -1,5 +1,5 @@
 class IndividualReviewsController < ApplicationController
-  before_action :set_individual_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_individual_review, only: [:show, :edit, :update, :destroy, :archive]
   before_action :authenticate_has_profile
   load_and_authorize_resource
   # GET /individual_reviews
@@ -122,6 +122,18 @@ class IndividualReviewsController < ApplicationController
       format.html { redirect_to individual_reviews_url, notice: 'Individual review was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def archive
+    respond_to do |format|
+      if @individual_review.update(archived: true)
+        format.html { redirect_to individual_reviews_path, notice: 'Individual review has been removed' }
+        format.json { render :show, status: :ok, location: @individual_review }
+      else
+        format.html { render :edit }
+        format.json { render json: @individual_review.errors, status: :unprocessable_entity }
+      end
+    end 
   end
 
   private

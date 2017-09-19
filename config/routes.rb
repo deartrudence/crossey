@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'about' => 'pages#about'
   get 'splash' => 'pages#maintenance'
 
+  get 'archive_review/:id' => 'individual_reviews#archive', as: 'archive_review'
+
   resources :individual_reviews
   resources :reviews
   devise_for :users

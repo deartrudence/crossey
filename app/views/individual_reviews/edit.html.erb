@@ -28,6 +28,10 @@
 		Employee
 	<% end %>
 
+	<% if current_user.is_super_admin? %>
+		<%= link_to 'Delete Review', archive_review_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-danger" %>
+	<% end %> 
+
 	
 	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
 		<ul>

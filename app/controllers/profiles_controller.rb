@@ -11,7 +11,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1.json
   def show
     @user_roles = @profile.user.user_roles.map(&:name)
-    @individual_reviews = IndividualReview.where(employee_id: @profile.user.id).order(:date).reverse
+    @individual_reviews = IndividualReview.not_archived.where(employee_id: @profile.user.id).order(:date).reverse
   end
 
   # GET /profiles/new

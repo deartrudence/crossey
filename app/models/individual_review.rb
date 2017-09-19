@@ -15,6 +15,8 @@ class IndividualReview < ActiveRecord::Base
 
   REVIEW_COLORS = [ 'navy', 'green', 'teal', 'purple', 'orange', 'maroon','navy', 'green', 'teal', 'purple', 'orange', 'maroon' ]
 
+  scope :not_archived, -> { where(archived: false) }
+
   def check_results
     hash = {
       'Exceeds Expectations' => 0, 
