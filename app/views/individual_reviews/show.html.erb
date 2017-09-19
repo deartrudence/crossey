@@ -32,12 +32,16 @@
 		</div>
 	</div>
 
-	<p class="col-md-2">
-	<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
-	  <i class="fa fa-file-pdf-o"></i>
-	  Download
-	  <% end %>
-	</p>
+	<% if @individual_review.reviewer_completed %>
+		<p class="col-md-2">
+		<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
+		  <i class="fa fa-file-pdf-o"></i>
+		  Download
+		  <% end %>
+		</p>
+	<% end %>
+
+
 	<p class="col-md-2">
 	<%= link_to profile_path(@individual_review.employee.profile), class: 'btn btn-flat btn-primary form-control' do %>
 	  <i class="fa fa-user"></i>
@@ -52,6 +56,7 @@
 	</p>
 	<br><br>
 
+	<% if @individual_review.reviewer_completed %>
 	<div class="row">
 		<div class="col-md-8">		
 			<div class="box box-primary">
@@ -107,9 +112,15 @@
 			</div>
 		</div>
 	</div>
-
+<% end %>
 	<h2 class="text-center">Results</h2>
 	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
+	<% if !@individual_review.reviewer_completed  && current_user.id == @individual_review.employee_id %>
+		<% portion_array = ["employee"]%>
+	<% else %>
+		<% portion_array = ["employee", "reviewer"] %>
+	<% end %>
+	<% if portion_array.include?(portion.downcase)  %>
 	<h2><%= portion.capitalize %></h2>
 		<% sections.group_by(&:portion).each do |portion, sections| %>
 			<% sections.each_with_index do |section, i| %>
@@ -141,6 +152,7 @@
 				</div>
 			</div>
 		<% end %>
+	<% end %>
 	<% end %>
 <% end %>
 	
