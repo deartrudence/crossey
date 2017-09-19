@@ -123,7 +123,7 @@
 		<% portion_array = ["employee", "reviewer"] %>
 	<% end %>
 	<% if portion_array.include?(portion.downcase)  %>
-	<h2><%= portion.capitalize %></h2>
+		<h2><%= portion.capitalize %></h2>
 		<% sections.group_by(&:portion).each do |portion, sections| %>
 			<% sections.each_with_index do |section, i| %>
 			<div class="box box-solid collapsed-box">
