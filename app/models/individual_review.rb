@@ -17,6 +17,9 @@ class IndividualReview < ActiveRecord::Base
 
   scope :not_archived, -> { where(archived: false) }
 
+  scope :completed, -> { where(employee_completed: true, reviewer_completed: true)}
+
+
   def check_results
     hash = {
       'Exceeds Expectations' => 0, 

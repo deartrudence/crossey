@@ -14,7 +14,20 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, 
          :recoverable, :rememberable, :trackable, :validatable, :registerable
 
+  def reviewed_users
+    user_array = self.authored_reviews.map(&:employee_id)
+    return User.includes(:profile).where(id: user_array)
+  end
 
+  def reviewer_completed_reviews
+    review_array = self.authored_reviews.map(&:id)
+    return IndividualReview.where(id: review_array).completed
+  end
+
+  def underlings
+    underling_array = Profile.by_job_type(self.profile.job_type).less_than_level(self.profile.job_level).map(&:user_id)
+    return User.includes(:profile).where(id: underling_array)
+  end
 
 # :registerable,
   def is_employee?

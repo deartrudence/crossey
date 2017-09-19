@@ -33,6 +33,8 @@
                   <% else %>
                     <span class="label label-warning">failed</span>
                   <% end %>
+                <% else %>
+                  <span class="label label-primary">incomplete</span>
                 <% end %>
               </p>
               <p class="col-md-2">Employee Title : <%= ir.employee_job_title.upcase %></p>

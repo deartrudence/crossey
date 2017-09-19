@@ -122,11 +122,11 @@
 	<%= link_to "View Results", individual_review_path(@individual_review), class: "btn btn-flat btn-primary" %>
 
 	<% if current_user.id == @individual_review.employee_id %>
-		<%= link_to 'Completed by Employee', employee_completed_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-warning" %>
+		<%= link_to 'Completed by Employee', employee_completed_path(@individual_review), data: { confirm: 'Are you sure? Once complete the review cannot be edited' }, class: "btn btn-flat btn-warning" %>
 	<% end %>
 
 	<% if current_user.id == @individual_review.reviewer_id %>
-		<%= link_to 'Completed by Reviewer', reviewer_completed_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-warning" %>
+		<%= link_to 'Completed by Reviewer', reviewer_completed_path(@individual_review), data: { confirm: 'Are you sure? Once complete the review cannot be edited' }, class: "btn btn-flat btn-warning" %>
 	<% end %>
 </section>
 
