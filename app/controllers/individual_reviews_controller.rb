@@ -5,26 +5,18 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews
   # GET /individual_reviews.json
   def index
-    # user_array = current_user.authored_reviews.map(&:employee_id)
-    # @users = User.includes(:profile).where(id: user_array)
-    @users = current_user.reviewed_users
+    @users = current_user.reviewed_users.joins(:profile).order('LOWER(profiles.first_name)')
     if current_user.is_super_admin?
-      @underlings = User.includes(:profile).all
-    elsif current_user.is_principal?
-      # other_user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
-      # @underlings = User.includes(:profile).where(id: other_user_array) 
+      @underlings = User.includes(:profile).all.joins(:profile).order('LOWER(profiles.first_name)').not_archived
+    elsif current_user.is_principal? 
       @underlings = current_user.underlings
     end
     @me = current_user
-      
-    # @individual_reviews_as_employee = IndividualReview.find_roles(:employee, current_user)
-    # @individual_reviews_as_reviewer = IndividualReview.find_roles(:reviewer, current_user)
   end
 
   # GET /individual_reviews/1
   # GET /individual_reviews/1.json
   def show
-    # @total_check_questions = @individual_review.questions.where(question_type: "check_box").count
     @total_check_questions = Question.belongs_to_job_level(@individual_review.employee_job_level).belongs_to_review(@individual_review.review).where(question_type: "check_box").uniq.count
     @check_results = @individual_review.check_results
     @text_results = @individual_review.text_answers

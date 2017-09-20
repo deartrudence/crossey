@@ -16,7 +16,8 @@ class User < ActiveRecord::Base
 
   def reviewed_users
     user_array = self.authored_reviews.not_archived.map(&:employee_id)
-    return User.includes(:profile).where(id: user_array)
+    return User.includes(:profile).where(id: user_array).not_archived
+    # ser.includes(:profile).all.joins(:profile)
   end
 
   def reviewer_completed_reviews
@@ -30,7 +31,7 @@ class User < ActiveRecord::Base
 
   def underlings
     underling_array = Profile.by_job_type(self.profile.job_type).less_than_level(self.profile.job_level).map(&:user_id)
-    return User.includes(:profile).where(id: underling_array)
+    return User.includes(:profile).where(id: underling_array).not_archived
   end
 
   def has_incomplete_reviews?
