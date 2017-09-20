@@ -33,6 +33,15 @@ class User < ActiveRecord::Base
     return User.includes(:profile).where(id: underling_array)
   end
 
+  def has_incomplete_reviews?
+    incomplete_number = IndividualReview.not_archived.incompleted.where(employee_id: self.id).count
+    if incomplete_number > 0
+      return true
+    else
+      return false
+    end
+  end
+
 # :registerable,
   def is_employee?
     if self.profile.present?

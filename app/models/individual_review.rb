@@ -19,6 +19,7 @@ class IndividualReview < ActiveRecord::Base
 
   scope :completed, -> { where(employee_completed: true, reviewer_completed: true)}
 
+  scope :incompleted, -> { where('employee_completed= ? OR reviewer_completed= ?', false, 'bar')}
 
   def check_results
     hash = {
