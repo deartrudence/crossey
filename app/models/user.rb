@@ -15,13 +15,17 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :registerable
 
   def reviewed_users
-    user_array = self.authored_reviews.map(&:employee_id)
+    user_array = self.authored_reviews.not_archived.map(&:employee_id)
     return User.includes(:profile).where(id: user_array)
   end
 
   def reviewer_completed_reviews
-    review_array = self.authored_reviews.map(&:id)
+    review_array = self.authored_reviews.not_archived.map(&:id)
     return IndividualReview.where(id: review_array).completed
+  end
+
+  def reviewer_completed_reviews_percentage
+    self.reviewer_completed_reviews.not_archived.count.to_f / self.authored_reviews.not_archived.count.to_f
   end
 
   def underlings
