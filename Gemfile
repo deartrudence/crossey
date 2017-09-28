@@ -18,6 +18,8 @@ gem 'bootstrap-datepicker-rails'
 # gem 'ruby_dep', '~> 1.3.1'
 # gem 'listen', '~> 3.0.8'
 
+gem 'fiscali'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 gem 'jquery-ui-rails'

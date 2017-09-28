@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
   end
 
   def reviewer_completed_reviews_percentage
-    self.reviewer_completed_reviews.not_archived.count.to_f / self.authored_reviews.not_archived.count.to_f
+    self.reviewer_completed_reviews.not_archived.in_current_fy.count.to_f / self.authored_reviews.not_archived.in_current_fy.count.to_f
   end
 
   def underlings
@@ -35,7 +35,7 @@ class User < ActiveRecord::Base
   end
 
   def has_incomplete_reviews?
-    incomplete_number = IndividualReview.not_archived.incompleted.where(employee_id: self.id).count
+    incomplete_number = IndividualReview.not_archived.in_current_fy.incompleted.where(employee_id: self.id).count
     if incomplete_number > 0
       return true
     else

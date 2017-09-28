@@ -21,6 +21,9 @@ class IndividualReview < ActiveRecord::Base
 
   scope :incompleted, -> { where('employee_completed= ? OR reviewer_completed= ?', false, 'bar')}
 
+  scope :in_current_fy, -> { where(date: Date.today.beginning_of_financial_year..Date.today.end_of_financial_year) }
+# IndividualReview.where(date: Date.today.beginning_of_financial_year..Date.today.end_of_financial_year).count
+  
   def check_results
     hash = {
       'Exceeds Expectations' => 0, 
@@ -44,12 +47,22 @@ class IndividualReview < ActiveRecord::Base
     self.answers.includes(:question).joins(:question).where(questions: {question_type: 'text'})
   end
 
+  def not_na_check_box_answers
+    total = 0
+    self.check_results.each do |key, value|
+      unless key == 'N/A'
+        total = total + value
+      end
+    end
+    return total
+  end
+
   def is_current_reviewer(user)
     self.reviewer_id == user.id
   end
 
   def total_percentage_result
-    (self.check_results["Exceeds Expectations"].to_f + self.check_results["Meets Expectations"].to_f)/ self.check_box_answers.count.to_f
+    (self.check_results["Exceeds Expectations"].to_f + self.check_results["Meets Expectations"].to_f)/ self.not_na_check_box_answers.to_f
   end
 
   def has_passed?
