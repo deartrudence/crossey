@@ -1,0 +1,4 @@
+<%= form_tag(individual_review_path(@individual_review), remote: true) do %>
+    <%= collection_select :reviewer_id, :id, User.users_by_role('Reviewer'), :id, :email %> 
+    <%= submit_tag 'Save', class: 'btn btn-flat btn-info' %>
+<% end %>

@@ -32,6 +32,7 @@
 		<%= link_to 'Delete Review', archive_review_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-danger" %>
 	<% end %> 
 
+	<%= render 'change_reviewer_form'%>
 	
 	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
 		<% if !@individual_review.reviewer_completed  && current_user.id == @individual_review.employee_id %>
@@ -116,7 +117,6 @@
 		</ul>
 	<% end%>
 
-	<%= render 'form' %>
 	
 	<br><br>
 	<%= link_to "View Results", individual_review_path(@individual_review), class: "btn btn-flat btn-primary" %>
@@ -128,6 +128,8 @@
 	<% if current_user.id == @individual_review.reviewer_id %>
 		<%= link_to 'Completed by Reviewer', reviewer_completed_path(@individual_review), data: { confirm: 'Are you sure? Once complete the review cannot be edited' }, class: "btn btn-flat btn-warning" %>
 	<% end %>
+	<br><br>
+	<%= render 'form' %>
 </section>
 
 <script>

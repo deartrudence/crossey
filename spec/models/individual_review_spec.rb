@@ -38,4 +38,102 @@ RSpec.describe IndividualReview, type: :model do
   	expect(individual_review.is_current_reviewer(reviewer)).to eq(true)
   end
 
+  it 'returns correct number of not N/A check answers' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review = create(:individual_review)
+		answer1 = create(:answer, question: question1, individual_review: individual_review)
+		answer2 = create(:answer, question: question2, individual_review: individual_review)
+		answer3 = create(:answer, question: question3, individual_review: individual_review)
+  	expect(individual_review.not_na_check_box_answers).to eq(3)
+	end
+
+  it 'returns correct total percentage result' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review = create(:individual_review)
+		answer1 = create(:answer, question: question1, individual_review: individual_review)
+		answer2 = create(:answer, question: question2, individual_review: individual_review)
+		answer3 = create(:answer, question: question3, individual_review: individual_review)
+  	expect(individual_review.total_percentage_result).to eq(1)
+	end
+	
+	it 'returns correctly identifies has passed' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review = create(:individual_review)
+		answer1 = create(:answer, question: question1, individual_review: individual_review)
+		answer2 = create(:answer, question: question2, individual_review: individual_review)
+		answer3 = create(:answer, question: question3, individual_review: individual_review)
+  	expect(individual_review.has_passed?).to eq(true)
+	end
+
+	it 'returns correctly identifies has passed' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review = create(:individual_review, employee_completed: true, reviewer_completed: true)
+		answer1 = create(:answer, question: question1, individual_review: individual_review)
+		answer2 = create(:answer, question: question2, individual_review: individual_review)
+		answer3 = create(:answer, question: question3, individual_review: individual_review)
+  	expect(individual_review.totally_completed?).to eq(true)
+	end
+	
+	it 'returns correctly returns all in current fiscal year' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review = create(:individual_review, date: Date.today)
+  	expect(IndividualReview.in_current_fy).to include(individual_review)
+	end
+	
+	
+	it 'returns correctly returns all completed' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review1 = create(:individual_review, employee_completed: true, reviewer_completed: true)
+		individual_review2 = create(:individual_review, employee_completed: true, reviewer_completed: false)
+  	expect(IndividualReview.completed).to include(individual_review1)
+	end
+	
+	it 'returns correctly returns all incompleted' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review1 = create(:individual_review, employee_completed: true, reviewer_completed: true)
+		individual_review2 = create(:individual_review, employee_completed: false, reviewer_completed: true)
+  	expect(IndividualReview.incompleted).to include(individual_review2)
+	end
+
+	it 'returns correctly returns all incompleted' do
+		review = create(:review)
+		section1 = create(:section, review: review)
+		question1 = create(:question, section: section1)
+		question2 = create(:question, section: section1)
+		question3 = create(:question, section: section1)
+		individual_review1 = create(:individual_review, archived: true)
+		individual_review2 = create(:individual_review, archived: false)
+  	expect(IndividualReview.not_archived).to include(individual_review2)
+	end
+
+	
+	
 end

@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :as_employee_reviews, class_name: "IndividualReview", :foreign_key => 'employee_id'
 
   scope :not_archived, -> { joins(:profile).where(profiles: {archived: false}) }
+  scope :users_by_role, -> (role) { joins(:user_roles).where(user_roles: {name: role}) }
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

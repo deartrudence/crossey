@@ -86,6 +86,7 @@ class IndividualReviewsController < ApplicationController
   # PATCH/PUT /individual_reviews/1
   # PATCH/PUT /individual_reviews/1.json
   def update
+    raise "update"
     @review = IndividualReview.find(params[:individual_review][:review])
     @employee = @review.employee.profile
     @reviewer = @review.reviewer.profile

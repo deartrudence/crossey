@@ -1,5 +1,4 @@
 class UserRolesController < ApplicationController
-class UserRolesController < ApplicationController
   before_action :set_user_role, only: [:show, :edit, :update, :destroy]
 
   # GET /user_roles

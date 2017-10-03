@@ -19,7 +19,7 @@ class IndividualReview < ActiveRecord::Base
 
   scope :completed, -> { where(employee_completed: true, reviewer_completed: true)}
 
-  scope :incompleted, -> { where('employee_completed= ? OR reviewer_completed= ?', false, 'bar')}
+  scope :incompleted, -> { where('employee_completed= ? OR reviewer_completed= ?', false, false)}
 
   scope :in_current_fy, -> { where(date: Date.today.beginning_of_financial_year..Date.today.end_of_financial_year) }
 # IndividualReview.where(date: Date.today.beginning_of_financial_year..Date.today.end_of_financial_year).count
@@ -66,7 +66,7 @@ class IndividualReview < ActiveRecord::Base
   end
 
   def has_passed?
-    total_percentage_result > 0.50
+    total_percentage_result > 0.65
   end
 
   def totally_completed?
