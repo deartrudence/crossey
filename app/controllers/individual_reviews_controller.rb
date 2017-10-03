@@ -86,25 +86,31 @@ class IndividualReviewsController < ApplicationController
   # PATCH/PUT /individual_reviews/1
   # PATCH/PUT /individual_reviews/1.json
   def update
-    raise "update"
-    @review = IndividualReview.find(params[:individual_review][:review])
-    @employee = @review.employee.profile
-    @reviewer = @review.reviewer.profile
-    @answers = @review.answers
-    @check_results = @review.check_results
-    @total_check_questions = Question.belongs_to_job_level(@review.employee_job_level).belongs_to_review(@review.review).where(question_type: "check_box").uniq.count
-    @results = @review.answers.joins(:question)
-    html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
-    @pdf = WickedPdf.new.pdf_from_string(html)
-    PdfMailer.pdf_email(@pdf, @employee).deliver
-    respond_to do |format|
-      if @individual_review.update(individual_review_params)
-        format.html { redirect_to @individual_review, notice: 'Individual review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @individual_review }
-      else
-        format.html { render :edit }
-        format.json { render json: @individual_review.errors, status: :unprocessable_entity }
-      end
+    # raise "update"
+    if params[:reviewer_id].present?
+      @individual_review.reviewer_id = params[:reviewer_id][:id]
+      @individual_review.save
+      redirect_to @individual_review, notice: 'Reviewer was successfully updated.'
+    else
+      @review = IndividualReview.find(params[:individual_review][:review])
+      @employee = @review.employee.profile
+      @reviewer = @review.reviewer.profile
+      @answers = @review.answers
+      @check_results = @review.check_results
+      @total_check_questions = Question.belongs_to_job_level(@review.employee_job_level).belongs_to_review(@review.review).where(question_type: "check_box").uniq.count
+      @results = @review.answers.joins(:question)
+      html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
+      @pdf = WickedPdf.new.pdf_from_string(html)
+      PdfMailer.pdf_email(@pdf, @employee).deliver
+        respond_to do |format|
+          if @individual_review.update(individual_review_params)
+            format.html { redirect_to @individual_review, notice: 'Individual review was successfully updated.' }
+            format.json { render :show, status: :ok, location: @individual_review }
+          else
+            format.html { render :edit }
+            format.json { render json: @individual_review.errors, status: :unprocessable_entity }
+          end
+        end
     end
   end
 

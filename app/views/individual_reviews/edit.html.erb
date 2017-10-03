@@ -28,11 +28,24 @@
 		Employee
 	<% end %>
 
+
 	<% if current_user.is_super_admin? %>
 		<%= link_to 'Delete Review', archive_review_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-danger" %>
 	<% end %> 
 
-	<%= render 'change_reviewer_form'%>
+	<br><br>
+	<% if current_user.is_super_admin? %>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="box box-primary">
+					<div class="box-body">
+						<h4>Change Reviewer</h4>
+						<%= render 'change_reviewer_form'%>
+					</div>
+				</div>
+			</div>
+		</div>
+	<% end %>
 	
 	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
 		<% if !@individual_review.reviewer_completed  && current_user.id == @individual_review.employee_id %>

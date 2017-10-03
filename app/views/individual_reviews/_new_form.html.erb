@@ -35,12 +35,12 @@
 
 								<div class="field form-group">
 								  <%= f.label :review_id %><br>
-								  <%= f.collection_select :review_id, Review.all, :id, :name, class: 'form-control select2 select2-hidden-accessible' %>
+								  <%= f.collection_select :review_id, Review.all.order('LOWER(name)'), :id, :name, class: 'form-control select2 select2-hidden-accessible' %>
 								</div>
 
 								<div class="field form-group">
 									<%= f.label :employee %><br>
-									<%= f.collection_select :employee_id, User.not_archived, :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
+									<%= f.collection_select :employee_id, User.not_archived.order('LOWER(email)'), :id, :email, class: 'form-control select2 select2-hidden-accessible' %>
 								</div>
 								<h1>Employee</h1>
 								<h2><%= f.object.employee %></h2>	

@@ -26,7 +26,9 @@
     <div class="box collapsed-box box-primary">
       <div class="box-header with-border">
         <h4 class="box-title">People I have Reviewed</h4>
-        <p><b>Percentage of reviews completed:</b> <%= number_to_percentage(current_user.reviewer_completed_reviews_percentage * 100, precision: 0) %></p>
+        <% if current_user.authored_reviews.not_archived.in_current_fy.present? %>
+          <p><b>Percentage of reviews completed:</b> <%= number_to_percentage(current_user.reviewer_completed_reviews_percentage * 100, precision: 0)  %></p>
+        <% end %>
         <div class="box-tools pull-right">
           <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Expand">
             <i class="fa fa-plus"></i></button>
