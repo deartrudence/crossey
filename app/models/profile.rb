@@ -3,6 +3,8 @@ class Profile < ActiveRecord::Base
 
   has_many :user_roles, through: :user
 
+  scope :not_archived, -> { where(archived: false) }
+
   USER_ROLES = ["Employee", "Reviewer"]
 
   ADVANCED_USER_ROLES = ["Principal", "SuperAdmin"]
