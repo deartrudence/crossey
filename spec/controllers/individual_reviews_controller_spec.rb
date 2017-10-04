@@ -189,6 +189,10 @@ RSpec.describe IndividualReviewsController, type: :controller do
         expect(ir.reviewer_id).to eq(current_user.id)
       end
 
+      it "assigns the employee profile according to the user selected as employee" do
+        # user = create(:user)
+        # employee = create(:profile)
+      end 
       it "assigns the employee_job_level as the employee's job level integer" do
         user = create(:user)
         employee = create(:profile, user: user)

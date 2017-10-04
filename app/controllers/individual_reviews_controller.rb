@@ -53,11 +53,12 @@ class IndividualReviewsController < ApplicationController
   # POST /individual_reviews
   # POST /individual_reviews.json
   def create
-    employee = Profile.where(id: individual_review_params[:employee_id]).first
+    employee = User.includes(:profile).where(id: individual_review_params[:employee_id]).first
     @individual_review = IndividualReview.new(individual_review_params)
     @individual_review.reviewer_id = current_user.id
-    @individual_review.employee_job_level = employee.job_level.to_i
-    @individual_review.employee_job_title = employee.job_title
+    @individual_review.employee_job_level = employee.profile.job_level.to_i
+    @individual_review.employee_job_title = employee.profile.job_title
+
     respond_to do |format|
       if @individual_review.save
         #TODO - add all answers for review based on questions of review type
