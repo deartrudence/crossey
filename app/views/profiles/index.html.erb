@@ -32,6 +32,7 @@
                 <td><%= profile.job_type %></td>
                 <td><%= link_to 'Show', profile, class: "btn btn-flat btn-primary form-control" %></td>
                 <td><%= link_to 'Edit', edit_profile_path(profile), class: "btn btn-flat btn-info form-control" %></td>
+                <td><%= link_to 'Delete User', archive_user_path(profile), data: { confirm: 'Are you sure? Once you delete a user, you cannot automaitically get them back' }, class: "btn btn-flat btn-danger form-control" %></td> 
               </tr>
             <% end %>
           </tbody>

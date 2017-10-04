@@ -22,41 +22,53 @@
 				  <%= @individual_review.reviewer.profile.name %></p>
 				  <% if @individual_review.totally_completed? %>
 				  	<% if @individual_review.has_passed? %>
-				  		<p class="label label-success">passed</p>
+				  		<p class="label label-success">passed - <%= number_to_percentage(@individual_review.total_percentage_result * 100 , precision: 0) %></p>
 				  	<% else %>
-				  		<p class="label label-warning">failed</p>
+				  		<p class="label label-warning">failed - <%= number_to_percentage(@individual_review.total_percentage_result * 100 , precision: 0) %></p>
 				  	<% end %>
+				  <% else %>
+				  	<p class="label label-primary">incomplete</p>
 				  <% end %>
 				</div>
 			</div>
 		</div>
 	</div>
 
-	<p class="col-md-2">
-	<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
-	  <i class="fa fa-file-pdf-o"></i>
-	  Download
-	  <% end %>
-	</p>
+	<% if @individual_review.reviewer_completed %>
+		<p class="col-md-2">
+		<%= link_to  individual_reviews_download_path(review: @individual_review), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
+		  <i class="fa fa-file-pdf-o"></i>
+		  Download
+		  <% end %>
+		</p>
+	<% end %>
+
+
 	<p class="col-md-2">
 	<%= link_to profile_path(@individual_review.employee.profile), class: 'btn btn-flat btn-primary form-control' do %>
 	  <i class="fa fa-user"></i>
 	  Employee
 	  <% end %>
 	</p> 
-	<p class="col-md-2">
-		<%= link_to edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" do %>
-			<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-			Edit Review
-		<% end%>
-	</p>
+	<% if (current_user.id == @individual_review.employee_id && !@individual_review.employee_completed) || (current_user.id == @individual_review.reviewer_id || current_user.is_super_admin?)  %>
+		<p class="col-md-2">
+			<%= link_to edit_individual_review_path(@individual_review), class:"btn btn-flat btn-info form-control" do %>
+				<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+				Edit Review
+			<% end%>
+		</p>
+	<% end %>
 	<br><br>
 
+	
 	<div class="row">
 		<div class="col-md-8">		
 			<div class="box box-primary">
 				<div class="box-header">
 					<h3>Results Overview</h3>
+					<% if @individual_review.totally_completed? %>
+						<p>Grade: <%= number_to_percentage(@individual_review.total_percentage_result * 100 , precision: 0) %></p>
+					<% end %>
 				</div>
 				<div class="box-body">
 					<table class="table table-bordered">
@@ -110,7 +122,13 @@
 
 	<h2 class="text-center">Results</h2>
 	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
-	<h2><%= portion.capitalize %></h2>
+	<% if !@individual_review.reviewer_completed  && current_user.id == @individual_review.employee_id %>
+		<% portion_array = ["employee"]%>
+	<% else %>
+		<% portion_array = ["employee", "reviewer"] %>
+	<% end %>
+	<% if portion_array.include?(portion.downcase)  %>
+		<h2><%= portion.capitalize %></h2>
 		<% sections.group_by(&:portion).each do |portion, sections| %>
 			<% sections.each_with_index do |section, i| %>
 			<div class="box box-solid collapsed-box">
@@ -141,6 +159,7 @@
 				</div>
 			</div>
 		<% end %>
+	<% end %>
 	<% end %>
 <% end %>
 	

@@ -1,10 +1,10 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
+  before_action :set_profile, only: [:show, :edit, :update, :archive_user ,:destroy]
   load_and_authorize_resource
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.where(archived: false)
+    @profiles = Profile.where(archived: false).order('LOWER(first_name)')
   end
 
   # GET /profiles/1
@@ -58,6 +58,18 @@ class ProfilesController < ApplicationController
       else
         format.html { render :edit }
         format.json { render json: @profile.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def archive_user
+    if @profile.update(archived: true)
+      @profile.user.as_employee_reviews.each do |review|
+        review.update(archived: true)
+      end
+      respond_to do |format|
+        format.html { redirect_to profiles_url, notice: 'Profile was successfully deleted.' }
+        format.json { head :no_content }
       end
     end
   end

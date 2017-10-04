@@ -26,24 +26,39 @@
           <hr>
           <div class="row">
             <div class="col-md-12">
+              <p class="col-md-1">
+                <% if ir.totally_completed? %>
+                  <% if ir.has_passed? %>
+                    <span class="label label-success">passed</span>
+                  <% else %>
+                    <span class="label label-warning">failed</span>
+                  <% end %>
+                <% else %>
+                  <span class="label label-primary">incomplete</span>
+                <% end %>
+              </p>
               <p class="col-md-2">Employee Title : <%= ir.employee_job_title.upcase %></p>
               <p class="col-md-2"><%= ir.date %></p>
-              <p class="col-md-2">
-              <%= link_to  individual_reviews_download_path(review: ir), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
-                <i class="fa fa-file-pdf-o"></i>
-                Download
-                <% end %>
-              </p> 
+              <% if ir.reviewer_completed %>
+                <p class="col-md-2">
+                <%= link_to  individual_reviews_download_path(review: ir), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>
+                  <i class="fa fa-file-pdf-o"></i>
+                  Download
+                  <% end %>
+                </p> 
+              <% end %>
               <p class="col-md-2"><%= link_to ir, class: "btn btn-flat btn-primary form-control" do %>
                 <i class="fa fa-file-text" aria-hidden="true"></i>
                 Review
                 <% end %>
               </p>
-              <p class="col-md-2"><%= link_to edit_individual_review_path(ir), class: "btn btn-flat btn-info form-control" do %>
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                Edit Review
-                <% end %>
-              </p>     
+              <% if (current_user.id == ir.employee_id && !ir.employee_completed) || (current_user.id == ir.reviewer_id || current_user.is_super_admin?)  %>
+                <p class="col-md-2"><%= link_to edit_individual_review_path(ir), class: "btn btn-flat btn-info form-control" do %>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  Edit Review
+                  <% end %>
+                </p>    
+              <% end %> 
             </div>
           </div>
         <% end %>

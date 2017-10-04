@@ -28,99 +28,121 @@
 		Employee
 	<% end %>
 
+
 	<% if current_user.is_super_admin? %>
 		<%= link_to 'Delete Review', archive_review_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-danger" %>
 	<% end %> 
 
-	
-	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
-		<ul>
-			<li><h2><%= portion.capitalize %></h2></li>
-				
-				<% sections.group_by(&:portion).each do |section, questions|%>
-					<% sections.each_with_index do |section, i| %>
-			<div class="box box-solid collapsed-box">
-				<div class="box-header bg-<%= IndividualReview::REVIEW_COLORS[i] %>">
-					<li><h3 class="box-title"><%= section.title %></h3>
-					<div class="box-tools pull-right">
-					  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Expand">
-					    <i class="fa fa-plus"></i></button>
+	<br><br>
+	<% if current_user.is_super_admin? %>
+		<div class="row">
+			<div class="col-md-4">
+				<div class="box box-primary">
+					<div class="box-body">
+						<h4>Change Reviewer</h4>
+						<%= render 'change_reviewer_form'%>
 					</div>
 				</div>
-				<div class="box-body">
-					
-						<% section.questions.group_by(&:subsection).each do |subsection,questions| %>
-							<h3><%= subsection %></h3> 
-							
-								<% array_questions = questions.map(&:id) %>
-								<% these_questions = Question.where(id: array_questions).belongs_to_job_level(@individual_review.employee_job_level).uniq.order('created_at') %>
-								<% next_questions = Question.where(id: array_questions).belongs_to_next_job_level(@individual_review.employee_job_level).uniq.order('created_at') %>
-								
-								<% these_questions.each do |question|%>	
-									<li><%= question.question_text %></li>
-									<li>
-										<% answer = question.answers.where(individual_review_id: @individual_review.id).first %>
-											
-										<%= form_for(answer, remote: true, :authenticity_token => true, :html => {:id => "answer-#{question.id}", "data-id" => "#{answer.id}", :class => ''})  do |f| %>
-											<% if question.question_type == 'check_box' %>
-												<div class="form-group checkbox ">
-							          	<%= f.collection_radio_buttons :answer, Answer::ANSWERS, :to_s, :humanize, { item_wrapper_tag: false } do |b| b.radio_button(id: "answer-#{question.id}-#{b.label}") + b.label(for: "answer-#{question.id}-#{b.label}") end %>
-												</div>
-											<% else %>
-												<div class="form-group ">
-							          	<%= f.text_area :answer, rows: '5', class: 'form-control text-answer-js' %>
-												</div>
-											<% end %>
-							      		<% end %>
-							      		<hr>
-									</li>
-								<% end %>
-								<% if next_questions.length >= 1%>
-									<div class="callout bg-gray">
-										<h4>Next Level Questions</h4>
-										<ul>
-											<% next_questions.each do |question| %>	
-												<li><%= question.question_text %></li>
-											<% end %>
-										</ul>
-									</div>
-								<% end %>
-						<% end %>
-						<h3><%= section.title %> comments</h3>
-						<% section_answer = section.section_answers.where(individual_review_id: @individual_review.id).first %>
-						<%= form_for(section_answer, remote: true, :authenticity_token => true, :html => {:id => "section-#{section.id}", "data-id" => "#{section_answer.id}", :class => ''})  do |f| %>
-							<fieldset>
-								<div class="form-group ">
-									<%= f.label :employee_comment %><br>
-			          	<%= f.text_area :employee_comment, rows: '5', class: 'form-control comment-js' %>
-								</div>
-								<div class="form-group ">
-									<%= f.label :reviewer_comment %><br>
-			          	<%= f.text_area :reviewer_comment, rows: '5', class: 'form-control comment-js' %>
-								</div>
-							</fieldset>
-			      <% end %>
-				</div>
-					</li>
 			</div>
-					<% end%>
+		</div>
+	<% end %>
+	
+	<% @individual_review.review.sections.includes(:questions).group_by(&:portion).each do |portion, sections| %>
+		<% if !@individual_review.reviewer_completed  && current_user.id == @individual_review.employee_id %>
+			<% portion_array = ["employee"]%>
+		<% else %>
+			<% portion_array = ["employee", "reviewer"] %>
+		<% end %>
+		<ul>
+			<% if portion_array.include?(portion.downcase) %>
+				<li><h2><%= portion.capitalize %></h2></li>
+					
+					<% sections.group_by(&:portion).each do |section, questions|%>
+						<% sections.each_with_index do |section, i| %>
+				<div class="box box-solid collapsed-box">
+					<div class="box-header bg-<%= IndividualReview::REVIEW_COLORS[i] %>">
+						<li><h3 class="box-title"><%= section.title %></h3>
+						<div class="box-tools pull-right">
+						  <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Expand">
+						    <i class="fa fa-plus"></i></button>
+						</div>
+					</div>
+					<div class="box-body">
+						
+							<% section.questions.group_by(&:subsection).each do |subsection,questions| %>
+								<h3><%= subsection %></h3> 
+								
+									<% array_questions = questions.map(&:id) %>
+									<% these_questions = Question.where(id: array_questions).belongs_to_job_level(@individual_review.employee_job_level).uniq.order('created_at') %>
+									<% next_questions = Question.where(id: array_questions).belongs_to_next_job_level(@individual_review.employee_job_level).uniq.order('created_at') %>
+									
+									<% these_questions.each do |question|%>	
+										<li><%= question.question_text %></li>
+										<li>
+											<% answer = question.answers.where(individual_review_id: @individual_review.id).first %>
+												
+											<%= form_for(answer, remote: true, :authenticity_token => true, :html => {:id => "answer-#{question.id}", "data-id" => "#{answer.id}", :class => ''})  do |f| %>
+												<% if question.question_type == 'check_box' %>
+													<div class="form-group checkbox ">
+								          	<%= f.collection_radio_buttons :answer, Answer::ANSWERS, :to_s, :humanize, { item_wrapper_tag: false } do |b| b.radio_button(id: "answer-#{question.id}-#{b.label}") + b.label(for: "answer-#{question.id}-#{b.label}") end %>
+													</div>
+												<% else %>
+													<div class="form-group ">
+								          	<%= f.text_area :answer, rows: '5', class: 'form-control text-answer-js' %>
+													</div>
+												<% end %>
+								      		<% end %>
+								      		<hr>
+										</li>
+									<% end %>
+									<% if next_questions.length >= 1%>
+										<div class="callout bg-gray">
+											<h4>Next Level Questions</h4>
+											<ul>
+												<% next_questions.each do |question| %>	
+													<li><%= question.question_text %></li>
+												<% end %>
+											</ul>
+										</div>
+									<% end %>
+							<% end %>
+							<h3><%= section.title %> comments</h3>
+							<% section_answer = section.section_answers.where(individual_review_id: @individual_review.id).first %>
+							<%= form_for(section_answer, remote: true, :authenticity_token => true, :html => {:id => "section-#{section.id}", "data-id" => "#{section_answer.id}", :class => ''})  do |f| %>
+								<fieldset>
+									<div class="form-group ">
+										<%= f.label :employee_comment %><br>
+				          	<%= f.text_area :employee_comment, rows: '5', class: 'form-control comment-js' %>
+									</div>
+									<div class="form-group ">
+										<%= f.label :reviewer_comment %><br>
+				          	<%= f.text_area :reviewer_comment, rows: '5', class: 'form-control comment-js' %>
+									</div>
+								</fieldset>
+				      <% end %>
+					</div>
+						</li>
+				</div>
+						<% end%>
+					<% end %>
+					</li>
 				<% end %>
-				</li>
 		</ul>
 	<% end%>
 
-	<%= render 'form' %>
 	
 	<br><br>
 	<%= link_to "View Results", individual_review_path(@individual_review), class: "btn btn-flat btn-primary" %>
 
 	<% if current_user.id == @individual_review.employee_id %>
-		<%= link_to 'Completed by Employee', employee_completed_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-warning" %>
+		<%= link_to 'Completed by Employee', employee_completed_path(@individual_review), data: { confirm: 'Are you sure? Once complete the review cannot be edited' }, class: "btn btn-flat btn-warning" %>
 	<% end %>
 
 	<% if current_user.id == @individual_review.reviewer_id %>
-		<%= link_to 'Completed by Reviewer', reviewer_completed_path(@individual_review), data: { confirm: 'Are you sure?' }, class: "btn btn-flat btn-warning" %>
+		<%= link_to 'Completed by Reviewer', reviewer_completed_path(@individual_review), data: { confirm: 'Are you sure? Once complete the review cannot be edited' }, class: "btn btn-flat btn-warning" %>
 	<% end %>
+	<br><br>
+	<%= render 'form' %>
 </section>
 
 <script>

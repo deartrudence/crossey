@@ -18,7 +18,7 @@
   <div class="actions">
     <% if @individual_review.is_current_reviewer(current_user) %>
       <%= f.hidden_field :review, value: @individual_review.id%>
-      <%= f.submit 'Complete and Submit Review', class: 'btn btn-flat btn-info' %>
+      <%= f.submit 'Submit Review', class: 'btn btn-flat btn-info' %>
     <% end %>
   </div>
 <% end %>

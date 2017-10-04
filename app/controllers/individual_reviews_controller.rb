@@ -5,25 +5,18 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews
   # GET /individual_reviews.json
   def index
-    # @individual_reviews = IndividualReview.all
-    user_array = current_user.authored_reviews.map(&:employee_id)
-    @users = User.includes(:profile).where(id: user_array)
+    @users = current_user.reviewed_users.joins(:profile).order('LOWER(profiles.first_name)')
     if current_user.is_super_admin?
-      @underlings = User.includes(:profile).all
-    elsif current_user.is_principal?
-      other_user_array = Profile.by_job_type(current_user.profile.job_type).less_than_level(current_user.profile.job_level).map(&:user_id)
-      @underlings = User.includes(:profile).where(id: other_user_array) 
+      @underlings = User.includes(:profile).all.joins(:profile).order('LOWER(profiles.first_name)').not_archived
+    elsif current_user.is_principal? 
+      @underlings = current_user.underlings
     end
     @me = current_user
-      
-    # @individual_reviews_as_employee = IndividualReview.find_roles(:employee, current_user)
-    # @individual_reviews_as_reviewer = IndividualReview.find_roles(:reviewer, current_user)
   end
 
   # GET /individual_reviews/1
   # GET /individual_reviews/1.json
   def show
-    # @total_check_questions = @individual_review.questions.where(question_type: "check_box").count
     @total_check_questions = Question.belongs_to_job_level(@individual_review.employee_job_level).belongs_to_review(@individual_review.review).where(question_type: "check_box").uniq.count
     @check_results = @individual_review.check_results
     @text_results = @individual_review.text_answers
@@ -94,24 +87,31 @@ class IndividualReviewsController < ApplicationController
   # PATCH/PUT /individual_reviews/1
   # PATCH/PUT /individual_reviews/1.json
   def update
-    @review = IndividualReview.find(params[:individual_review][:review])
-    @employee = @review.employee.profile
-    @reviewer = @review.reviewer.profile
-    @answers = @review.answers
-    @check_results = @review.check_results
-    @total_check_questions = Question.belongs_to_job_level(@review.employee_job_level).belongs_to_review(@review.review).where(question_type: "check_box").uniq.count
-    @results = @review.answers.joins(:question)
-    html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
-    @pdf = WickedPdf.new.pdf_from_string(html)
-    PdfMailer.pdf_email(@pdf, @employee).deliver
-    respond_to do |format|
-      if @individual_review.update(individual_review_params)
-        format.html { redirect_to @individual_review, notice: 'Individual review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @individual_review }
-      else
-        format.html { render :edit }
-        format.json { render json: @individual_review.errors, status: :unprocessable_entity }
-      end
+    # raise "update"
+    if params[:reviewer_id].present?
+      @individual_review.reviewer_id = params[:reviewer_id][:id]
+      @individual_review.save
+      redirect_to @individual_review, notice: 'Reviewer was successfully updated.'
+    else
+      @review = IndividualReview.find(params[:individual_review][:review])
+      @employee = @review.employee.profile
+      @reviewer = @review.reviewer.profile
+      @answers = @review.answers
+      @check_results = @review.check_results
+      @total_check_questions = Question.belongs_to_job_level(@review.employee_job_level).belongs_to_review(@review.review).where(question_type: "check_box").uniq.count
+      @results = @review.answers.joins(:question)
+      html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
+      @pdf = WickedPdf.new.pdf_from_string(html)
+      PdfMailer.pdf_email(@pdf, @employee).deliver
+        respond_to do |format|
+          if @individual_review.update(individual_review_params)
+            format.html { redirect_to @individual_review, notice: 'Individual review was successfully updated.' }
+            format.json { render :show, status: :ok, location: @individual_review }
+          else
+            format.html { render :edit }
+            format.json { render json: @individual_review.errors, status: :unprocessable_entity }
+          end
+        end
     end
   end
 

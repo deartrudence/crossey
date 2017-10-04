@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get 'archive_review/:id' => 'individual_reviews#archive', as: 'archive_review'
   get 'employee_completed/:id' => 'individual_reviews#employee_completed', as: 'employee_completed'
   get 'reviewer_completed/:id' => 'individual_reviews#reviewer_completed', as: 'reviewer_completed'
+  get 'archive_user/:id' => 'profiles#archive_user', as: 'archive_user'
 
   resources :individual_reviews
   resources :reviews
