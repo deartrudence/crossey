@@ -9,6 +9,7 @@ class IndividualReview < ActiveRecord::Base
   belongs_to :employee, :class_name => "User", :foreign_key => "employee_id"
   belongs_to :reviewer, :class_name => "User", :foreign_key => "reviewer_id"
 
+  validates :date, presence: true
   accepts_nested_attributes_for :answers, allow_destroy: :true
 
   accepts_nested_attributes_for :signatures, allow_destroy: :true
