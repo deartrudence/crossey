@@ -25,20 +25,21 @@
         <% @individual_reviews.each do |ir| %>
           <hr>
           <div class="row">
-            <div class="col-md-12">
-              <p class="col-md-1">
-                <% if ir.totally_completed? %>
-                  <% if ir.has_passed? %>
-                    <span class="label label-success">passed</span>
-                  <% else %>
-                    <span class="label label-warning">failed</span>
-                  <% end %>
+            <p class="col-md-1">
+              <% if ir.totally_completed? %>
+                <% if ir.has_passed? %>
+                  <span class="label label-success">passed</span>
                 <% else %>
-                  <span class="label label-primary">incomplete</span>
+                  <span class="label label-warning">failed</span>
                 <% end %>
-              </p>
-              <p class="col-md-2">Employee Title : <%= ir.employee_job_title.upcase %></p>
-              <p class="col-md-2"><%= ir.date %></p>
+              <% else %>
+                <span class="label label-primary">incomplete</span>
+              <% end %>
+            </p>
+            <div class="col-md-12">
+              <p class="col-md-2"><b>Employee Title :</b> <%= ir.employee_job_title.upcase %></p>
+              <p class="col-md-2"><b>Last Updated :</b> <%= ir.answers.map(&:updated_at).max.strftime('%Y-%m-%d') %></p>
+              <p class="col-md-2"><b>Review Date :</b> <%= ir.date %></p>
               <% if ir.reviewer_completed %>
                 <p class="col-md-2">
                 <%= link_to  individual_reviews_download_path(review: ir), target: '_blank', class: 'btn btn-flat btn-success form-control' do %>

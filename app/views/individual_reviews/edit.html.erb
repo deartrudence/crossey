@@ -133,12 +133,14 @@
 	
 	<br><br>
 	<%= link_to "View Results", individual_review_path(@individual_review), class: "btn btn-flat btn-primary" %>
-
+	<br><br>
 	<% if current_user.id == @individual_review.employee_id %>
+		<p>Once you've fully completed the review submit here.  (note that you will not be able to edit the review once it has been submitted)</p>
 		<%= link_to 'Completed by Employee', employee_completed_path(@individual_review), data: { confirm: 'Are you sure? Once complete the review cannot be edited. Please also make sure you have filled in the Signature section.' }, class: "btn btn-flat btn-warning" %>
 	<% end %>
 
 	<% if current_user.id == @individual_review.reviewer_id %>
+		<p>Once you've fully completed the review submit here to allow the employee to see results</p>
 		<%= link_to 'Completed by Reviewer', reviewer_completed_path(@individual_review), data: { confirm: 'Are you sure? Once complete the review cannot be edited' }, class: "btn btn-flat btn-warning" %>
 	<% end %>
 	<br><br>

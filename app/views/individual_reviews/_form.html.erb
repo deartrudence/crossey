@@ -17,6 +17,7 @@
 
   <div class="actions">
     <% if @individual_review.is_current_reviewer(current_user) %>
+    <p>Once signatures have been completed submit here to send the review to HR</p>
       <%= f.hidden_field :review, value: @individual_review.id%>
       <%= f.submit 'Submit Review', class: 'btn btn-flat btn-info' %>
     <% end %>

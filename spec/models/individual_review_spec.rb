@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe IndividualReview, type: :model do
   
   it "has a valid factory" do
-    expect(build(:individual_review)).to be_valid
+    expect(build(:individual_review, date: Date.today)).to be_valid
   end
 
   it "returns text answers for Individual Review" do
@@ -12,7 +12,7 @@ RSpec.describe IndividualReview, type: :model do
   	question1 = create(:question, section: section1)
   	question2 = create(:question, question_type: 'text', section: section1)
   	question3 = create(:question, question_type: 'text', section: section1)
-  	individual_review = create(:individual_review, review: review)
+  	individual_review = create(:individual_review, review: review, date: Date.today)
   	answer1 = create(:answer, question: question1, individual_review: individual_review)
   	answer2 = create(:answer, question: question2, individual_review: individual_review)
   	answer3 = create(:answer, question: question3, individual_review: individual_review)
@@ -25,7 +25,7 @@ RSpec.describe IndividualReview, type: :model do
   	question1 = create(:question, section: section1)
   	question2 = create(:question, section: section1)
   	question3 = create(:question, section: section1)
-  	individual_review = create(:individual_review)
+  	individual_review = create(:individual_review, date: Date.today)
   	answer1 = create(:answer, question: question1, individual_review: individual_review)
   	answer2 = create(:answer, question: question2, individual_review: individual_review)
   	answer3 = create(:answer, question: question3, individual_review: individual_review)
@@ -34,7 +34,7 @@ RSpec.describe IndividualReview, type: :model do
 
   it "returns correctly if a user is the reviewer" do 
   	reviewer = create(:user)
-  	individual_review = create(:individual_review, reviewer: reviewer)
+  	individual_review = create(:individual_review, reviewer: reviewer, date: Date.today)
   	expect(individual_review.is_current_reviewer(reviewer)).to eq(true)
   end
 
@@ -44,7 +44,7 @@ RSpec.describe IndividualReview, type: :model do
 		question1 = create(:question, section: section1)
 		question2 = create(:question, section: section1)
 		question3 = create(:question, section: section1)
-		individual_review = create(:individual_review)
+		individual_review = create(:individual_review, date: Date.today)
 		answer1 = create(:answer, question: question1, individual_review: individual_review)
 		answer2 = create(:answer, question: question2, individual_review: individual_review)
 		answer3 = create(:answer, question: question3, individual_review: individual_review)
@@ -57,7 +57,7 @@ RSpec.describe IndividualReview, type: :model do
 		question1 = create(:question, section: section1)
 		question2 = create(:question, section: section1)
 		question3 = create(:question, section: section1)
-		individual_review = create(:individual_review)
+		individual_review = create(:individual_review, date: Date.today)
 		answer1 = create(:answer, question: question1, individual_review: individual_review)
 		answer2 = create(:answer, question: question2, individual_review: individual_review)
 		answer3 = create(:answer, question: question3, individual_review: individual_review)
@@ -70,7 +70,7 @@ RSpec.describe IndividualReview, type: :model do
 		question1 = create(:question, section: section1)
 		question2 = create(:question, section: section1)
 		question3 = create(:question, section: section1)
-		individual_review = create(:individual_review)
+		individual_review = create(:individual_review, date: Date.today)
 		answer1 = create(:answer, question: question1, individual_review: individual_review)
 		answer2 = create(:answer, question: question2, individual_review: individual_review)
 		answer3 = create(:answer, question: question3, individual_review: individual_review)
@@ -83,7 +83,7 @@ RSpec.describe IndividualReview, type: :model do
 		question1 = create(:question, section: section1)
 		question2 = create(:question, section: section1)
 		question3 = create(:question, section: section1)
-		individual_review = create(:individual_review, employee_completed: true, reviewer_completed: true)
+		individual_review = create(:individual_review, employee_completed: true, reviewer_completed: true, date: Date.today)
 		answer1 = create(:answer, question: question1, individual_review: individual_review)
 		answer2 = create(:answer, question: question2, individual_review: individual_review)
 		answer3 = create(:answer, question: question3, individual_review: individual_review)
@@ -107,8 +107,8 @@ RSpec.describe IndividualReview, type: :model do
 		question1 = create(:question, section: section1)
 		question2 = create(:question, section: section1)
 		question3 = create(:question, section: section1)
-		individual_review1 = create(:individual_review, employee_completed: true, reviewer_completed: true)
-		individual_review2 = create(:individual_review, employee_completed: true, reviewer_completed: false)
+		individual_review1 = create(:individual_review, employee_completed: true, reviewer_completed: true, date: Date.today)
+		individual_review2 = create(:individual_review, employee_completed: true, reviewer_completed: false, date: Date.today)
   	expect(IndividualReview.completed).to include(individual_review1)
 	end
 	
@@ -118,8 +118,8 @@ RSpec.describe IndividualReview, type: :model do
 		question1 = create(:question, section: section1)
 		question2 = create(:question, section: section1)
 		question3 = create(:question, section: section1)
-		individual_review1 = create(:individual_review, employee_completed: true, reviewer_completed: true)
-		individual_review2 = create(:individual_review, employee_completed: false, reviewer_completed: true)
+		individual_review1 = create(:individual_review, employee_completed: true, reviewer_completed: true, date: Date.today)
+		individual_review2 = create(:individual_review, employee_completed: false, reviewer_completed: true, date: Date.today)
   	expect(IndividualReview.incompleted).to include(individual_review2)
 	end
 
@@ -129,8 +129,8 @@ RSpec.describe IndividualReview, type: :model do
 		question1 = create(:question, section: section1)
 		question2 = create(:question, section: section1)
 		question3 = create(:question, section: section1)
-		individual_review1 = create(:individual_review, archived: true)
-		individual_review2 = create(:individual_review, archived: false)
+		individual_review1 = create(:individual_review, archived: true, date: Date.today)
+		individual_review2 = create(:individual_review, archived: false, date: Date.today)
   	expect(IndividualReview.not_archived).to include(individual_review2)
 	end
 
