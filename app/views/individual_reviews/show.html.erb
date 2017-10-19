@@ -147,7 +147,9 @@
 						<% these_questions.each do |question|%>
 							<p><strong><em><%= question.question_text %></em></strong></p>
 							<% answer = @individual_review.answers.where(question_id: question.id).first %>
-							<p class="answer"><%= answer.answer %></p>
+							<% if answer.present? %>
+								<p class="answer"><%= answer.answer %></p>
+							<% end %>
 						<% end %>
 					<% end %>
 					<% section_answer = SectionAnswer.find_by(section_id: section, individual_review_id: @individual_review.id) %>
