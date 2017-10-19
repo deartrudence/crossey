@@ -154,7 +154,7 @@
 							<% if answer.present? %>
 								<p class="answer"><%= answer.answer %></p>
 							<% else%>
-								<p>THIS IS THE PROBLEM</p>
+								<p>THIS IS THE PROBLEM <%= question.id %></p>
 								<p><%= question.question_text %></p>
 							<% end %>
 						<% end %>
