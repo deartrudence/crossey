@@ -80,7 +80,7 @@
 										<li><%= question.question_text %></li>
 										<li>
 											<% answer = question.answers.where(individual_review_id: @individual_review.id).first %>
-												
+											<% if question.present? %>
 											<%= form_for(answer, remote: true, :authenticity_token => true, :html => {:id => "answer-#{question.id}", "data-id" => "#{answer.id}", :class => ''})  do |f| %>
 												<% if question.question_type == 'check_box' %>
 													<div class="form-group checkbox ">
@@ -91,7 +91,8 @@
 								          	<%= f.text_area :answer, rows: '5', class: 'form-control text-answer-js' %>
 													</div>
 												<% end %>
-								      		<% end %>
+											<% end %>
+											<% end %>
 								      		<hr>
 										</li>
 									<% end %>

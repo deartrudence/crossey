@@ -149,6 +149,8 @@
 							<% answer = @individual_review.answers.where(question_id: question.id).first %>
 							<% if answer.present? %>
 								<p class="answer"><%= answer.answer %></p>
+							<% else%>
+								<p>THIS IS THE PROBLEM</p>
 							<% end %>
 						<% end %>
 					<% end %>
