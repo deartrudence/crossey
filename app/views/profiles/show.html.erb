@@ -38,7 +38,7 @@
             </p>
             <div class="col-md-12">
               <p class="col-md-2"><b>Employee Title :</b> <%= ir.employee_job_title.upcase %></p>
-              <p class="col-md-2"><b>Last Updated :</b> <%= ir.answers.map(&:updated_at).max.strftime('%Y-%m-%d') %></p>
+              <p class="col-md-2"><b>Last Updated :</b> <%= ir.answers.map(&:updated_at).max.strftime('%Y-%m-%d') || ir.updated_at %></p>
               <p class="col-md-2"><b>Review Date :</b> <%= ir.date %></p>
               <% if ir.reviewer_completed %>
                 <p class="col-md-2">
