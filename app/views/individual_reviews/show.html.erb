@@ -143,10 +143,10 @@
 					<% section.questions.group_by(&:subsection).each do |subsection, questions| %>
 						<h3><%= subsection %></h3>
 						<% array_questions = questions.map(&:id) %>
-						<% puts >>>>>>>>>>>>>>>>>>>>>> %>
+						<% puts '>>>>>>>>>>>>>>>>>>>>>>' %>
 						<% puts array_questions %>
 						<% puts these_questions %>
-						<% puts >>>>>>>>>>>>>>>>>>>>>> %>
+						<% puts '>>>>>>>>>>>>>>>>>>>>>>' %>
 						<% these_questions = Question.where(id: array_questions).belongs_to_job_level(@individual_review.employee_job_level).order('created_at') %>
 						<% these_questions.each do |question|%>
 							<p><strong><em><%= question.question_text %></em></strong></p>
