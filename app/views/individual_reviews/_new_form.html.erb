@@ -40,7 +40,7 @@
 
 								<div class="field form-group">
 									<%= f.label :employee %><br>
-									<%= f.select :employee_id, options_for_select(User.includes(:profile).not_archived.order('LOWER(profiles.first_name)').map{ |u| [u.profile.name,u.profile.id, 'data-profile' => u.profile.id] }), prompt: 'Choose employee...', class: 'form-control select2 select2-hidden-accessible' %>
+									<%= f.select :employee_id, options_for_select(User.includes(:profile).not_archived.order('LOWER(profiles.first_name)').map{ |u| [u.profile.name,u.id, 'data-profile' => u.profile.id] }), prompt: 'Choose employee...', class: 'form-control select2 select2-hidden-accessible' %>
 								</div>
 								<h1>Employee</h1>	
 								<div class="actions">
