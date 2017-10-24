@@ -52,7 +52,7 @@
             <% if current_user.is_super_admin? %>
               <div class="field form-group">
                 <%= f.label :advanced_role %><br>
-                <%= f.select :user_role, Profile::ADVANCED_USER_ROLES %>
+                <%= f.select :user_role, Profile::ADVANCED_USER_ROLES, prompt: 'Add advanced role...' %>
               </div>
             <% end %>
 
