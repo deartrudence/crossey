@@ -33,6 +33,10 @@ class ProfilesController < ApplicationController
       user_role = @profile.user.user_roles.where(name: params[:profile][:user_role]).first_or_initialize
       user_role.save
     end
+    if params[:advanced_role].present?
+      user_role = @profile.user.user_roles.where(name: params[:advanced_role]).first_or_initialize
+      user_role.save
+    end
     respond_to do |format|
       if @profile.save
         format.html { redirect_to about_path, notice: 'Profile was successfully created.' }
@@ -49,6 +53,10 @@ class ProfilesController < ApplicationController
   def update
     if params[:profile][:user_role].present?
       user_role = @profile.user.user_roles.where(name: params[:profile][:user_role]).first_or_initialize
+      user_role.save
+    end
+    if params[:advanced_role].present?
+      user_role = @profile.user.user_roles.where(name: params[:advanced_role]).first_or_initialize
       user_role.save
     end
     respond_to do |format|
