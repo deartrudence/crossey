@@ -55,6 +55,8 @@
                 <%= f.label :advanced_role %><br>
                 <%= select_tag(:advanced_role, options_for_select(Profile::ADVANCED_USER_ROLES), {:include_blank => 'Add advanced role...'}) %>
               </div>
+            <% else %>  
+               <input type="hidden" name="profile[job_title]" value="EIT1">
             <% end %>
 
             <div class="actions">
