@@ -30,6 +30,7 @@
                 <%= f.text_field :last_name, class:"form-control" %>
               </div>
             </div>
+          <% if current_user.is_super_admin? %>    
             <div class="row">
               <div class="field form-group col-md-6">
                 <%= f.label :job_title %><br>
@@ -49,7 +50,7 @@
               <%= f.select :user_role, Profile::USER_ROLES %>
             </div>
             
-            <% if current_user.is_super_admin? %>
+            
               <div class="field form-group">
                 <%= f.label :advanced_role %><br>
                 <%= select_tag(:advanced_role, options_for_select(Profile::ADVANCED_USER_ROLES), {:include_blank => 'Add advanced role...'}) %>
