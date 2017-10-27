@@ -217,7 +217,7 @@
 			});
 
 		// AJAX to create or update each section comment
-			$('.comment-js').on('change', function(){
+			$('.comment-js').on('keyup change', function(){
 				var comment_value = $(this).val()
 				var section_answer_id = $(this).parent().parent().parent().data('id')
 				console.log(section_answer_id)
