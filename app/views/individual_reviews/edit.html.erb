@@ -186,7 +186,7 @@
 		});
 
 		// AJAX to create or update each answer - text answer
-			$('.text-answer-js').on('change', function(){
+			$('.text-answer-js').on('keyup change', function(){
 				var answer_value = $(this).val()
 				var answer_id = $(this).parent().parent().data('id')
 				var question = $(this).parent().parent().attr('id').split('-').pop()
