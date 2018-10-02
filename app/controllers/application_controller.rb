@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_has_profile, unless: :devise_controller?
   
   rescue_from CanCan::AccessDenied do |exception|
+    #TODO - if a user has no roles infite redirect (fix this / validate role on user)?
     redirect_to root_path, :alert => exception.message
   end
   

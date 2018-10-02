@@ -3,8 +3,12 @@ class PdfMailer < ApplicationMailer
 	def pdf_email(pdf, employee)
 		@employee = employee
 		attachments["review-#{employee.name}.pdf"] = pdf
+		# mail(
+		# 	to: 'adele.salvati@cel.ca', 
+		# 	subject: 'New Review'
+		# )
 		mail(
-			to: 'adele.salvati@cel.ca', 
+			to: 'hello@upatfive.ca', 
 			subject: 'New Review'
 		)
 	end

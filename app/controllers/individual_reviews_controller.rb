@@ -138,6 +138,19 @@ class IndividualReviewsController < ApplicationController
   end
 
   def employee_completed
+    puts 'EMPLOYEE COMPLETED ACTION ✨✨✨✨✨✨✨✨✨✨✨'
+    @review = IndividualReview.find(params[:id])
+    @employee = @review.employee.profile
+    @reviewer = @review.reviewer.profile
+    @answers = @review.answers
+    @check_results = @review.check_results
+    @total_check_questions = Question.belongs_to_job_level(@review.employee_job_level).belongs_to_review(@review.review).where(question_type: "check_box").uniq.count
+    @results = @review.answers.joins(:question)
+    html = render_to_string('individual_reviews/individual_review.html.erb', layout: 'pdfs/layout_pdf')
+    @pdf = WickedPdf.new.pdf_from_string(html)
+    PdfMailer.pdf_email(@pdf, @employee).deliver
+    ReviewCompleteMailer.review_complete_email(@employee).deliver
+
     respond_to do |format|
       if @individual_review.update(employee_completed: true)
         format.html { redirect_to @individual_review, notice: 'Individual review has been completed by the employee' }

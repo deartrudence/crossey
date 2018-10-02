@@ -4,6 +4,7 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
+    
     @profiles = Profile.where(archived: false).order('LOWER(first_name)')
   end
 
