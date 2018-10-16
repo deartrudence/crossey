@@ -1,4 +1,5 @@
 class IndividualReview < ActiveRecord::Base
+  require 'csv'
   belongs_to :user
   belongs_to :review
   has_many :sections, through: :review
@@ -76,6 +77,20 @@ class IndividualReview < ActiveRecord::Base
 
   def job_level_to_title
     
+  end
+
+  def self.to_csv
+    attributes = %w{surname first_name date complete}
+    CSV.generate(headers: true) do |csv|
+      csv << attributes
+      User.all.alphabetical.each do |user|
+        # get all of the reviews where the user is the employee that are not archived
+        reviews = user.as_employee_reviews.not_archived
+        reviews.each do |review|
+          csv << [user.profile.last_name, user.profile.first_name,review.date, review.totally_completed?]
+        end 
+      end
+    end
   end
   
 end
