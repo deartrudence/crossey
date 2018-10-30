@@ -18,6 +18,7 @@ class Profile < ActiveRecord::Base
   	EIT4: 4,
     PROJECT_ENGINEER: 5,
     PROJECT_MANAGER: 6, 
+    SENIOR_PROJECT_MANAGER: 7,
   	D1: 1,
   	D2: 2,
   	D3: 3,
