@@ -1,5 +1,5 @@
 source 'http://rubygems.org'
-ruby "2.2.5"
+ruby "2.3.7"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -72,7 +72,7 @@ group :development do
   gem 'sqlite3'
 end
 group :production do
-  gem 'pg'
+  gem 'pg', '~> 0.15'
   gem 'puma'
   gem 'rails_12factor'
 end

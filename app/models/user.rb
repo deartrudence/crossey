@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
 
   scope :not_archived, -> { joins(:profile).where(profiles: {archived: false}) }
   scope :users_by_role, -> (role) { joins(:user_roles).where(user_roles: {name: role}) }
+  scope :alphabetical, -> { includes(:profile).order('profiles.last_name') }
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

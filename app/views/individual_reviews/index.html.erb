@@ -5,6 +5,17 @@
 </section>
 
 <div >
+  <% if current_user.is_super_admin? %>
+    <section class="col-md-8 col-md-offset-2">
+      <%= link_to individual_reviews_path(format: "csv"), class:"btn btn-flat btn-primary" do %>
+        <i class="fa fa-files-o" aria-hidden="true"></i>
+        Download Review Summary
+      <% end %>
+    </section>
+    <br>
+    <br>
+    <br>
+  <% end %>
   <section class="col-md-8 col-md-offset-2">
     <div class="box box-primary collapsed-box ">
       <div class="box-header with-border">

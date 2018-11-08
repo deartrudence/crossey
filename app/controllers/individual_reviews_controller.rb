@@ -5,6 +5,7 @@ class IndividualReviewsController < ApplicationController
   # GET /individual_reviews
   # GET /individual_reviews.json
   def index
+    @reviews = IndividualReview.all.not_archived
     @users = current_user.reviewed_users.joins(:profile).order('LOWER(profiles.first_name)')
     if current_user.is_super_admin?
       @underlings = User.includes(:profile).all.joins(:profile).order('LOWER(profiles.first_name)').not_archived
@@ -12,6 +13,10 @@ class IndividualReviewsController < ApplicationController
       @underlings = current_user.underlings
     end
     @me = current_user
+    respond_to do |format|
+      format.html
+      format.csv { send_data @reviews.to_csv, filename: "users-#{Date.today}.csv" }
+    end
   end
 
   # GET /individual_reviews/1
@@ -49,6 +54,8 @@ class IndividualReviewsController < ApplicationController
       :type => "application/pdf",
       :diposition => 'attachment')
   end
+
+  
 
   # POST /individual_reviews
   # POST /individual_reviews.json
