@@ -36,7 +36,7 @@ Rails.application.configure do
   config.assets.digest = true
 
   config.action_dispatch.default_headers = {
-      'X-Frame-Options' => 'ALLOW-FROM http://crossey.upatfive.xyz'
+      'X-Frame-Options' => 'ALLOW-FROM http://crossey.herokuapp.com'
   }
 
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
@@ -81,7 +81,7 @@ Rails.application.configure do
   ActionMailer::Base.delivery_method = :smtp
   config.i18n.fallbacks = true
 
-  config.action_mailer.default_url_options = { :host => 'http://crossey.upatfive.xyz' }
+  config.action_mailer.default_url_options = { :host => 'http://crossey.herokuapp.com' }
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
