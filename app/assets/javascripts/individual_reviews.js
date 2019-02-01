@@ -18,8 +18,8 @@ Paloma.controller('IndividualReviews', {
 
 Review.updateViewPrevious = function(employee_id){
 	var base_url = window.location.origin
-	var employee_id = $(employee_id).find(':selected').data('profile')	
-	console.log(employee_id, ' employee_id')
+	var profile_id = $(employee_id).find(':selected').data('profile')	
+	console.log(profile_id, ' profile_id')
 	var $show_button = $('#show-previous')	
-	$show_button.attr('href', base_url + '/profiles/' + employee_id)
+	$show_button.attr('href', base_url + '/profiles/' + profile_id)
 }
