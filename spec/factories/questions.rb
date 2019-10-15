@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :question do
     subsection "Subsection 1"
     job_type "Engineering"

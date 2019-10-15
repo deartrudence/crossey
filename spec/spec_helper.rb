@@ -15,7 +15,7 @@
 # The `.rspec` file also contains a few flags that are not defaults but that
 # users commonly want.
 require "capybara/rspec"
-require 'factory_girl_rails'
+require 'factory_bot_rails'
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

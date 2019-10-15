@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :section_answer do
     association :section, factory: :section
     association :individual_review, factory: :individual_review

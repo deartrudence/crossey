@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :section do
     association :review, factory: :review
     title "Section II"

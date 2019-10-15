@@ -82,7 +82,7 @@ group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
   gem 'rspec-rails'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'faker'
 end
 

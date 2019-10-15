@@ -1,4 +1,4 @@
-FactoryGirl.define do
+FactoryBot.define do
   factory :signature do
     name "Signatures name"
     date "2016-10-09"
