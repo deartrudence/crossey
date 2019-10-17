@@ -1,4 +1,4 @@
-review3 = Review.create(name: 'EIT 2019')
+review3 = Review.create(name: 'Review 2019')
 
 sections = [
 	['Section I: Drawing Production', 'Reviewer'], 
