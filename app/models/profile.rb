@@ -42,4 +42,12 @@ class Profile < ActiveRecord::Base
   	job_level = Profile::JOB_LEVELS[self.job_title.to_sym]
   	self.job_level = job_level
   end
+
+  def actual_job_title
+    if self.custom_job_title.present?
+      return self.custom_job_title
+    else 
+      return self.job_title
+    end
+  end
 end

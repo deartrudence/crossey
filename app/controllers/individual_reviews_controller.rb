@@ -64,7 +64,7 @@ class IndividualReviewsController < ApplicationController
     @individual_review = IndividualReview.new(individual_review_params)
     @individual_review.reviewer_id = current_user.id
     @individual_review.employee_job_level = employee.profile.job_level.to_i
-    @individual_review.employee_job_title = employee.profile.job_title
+    @individual_review.employee_job_title = employee.profile.actual_job_title
 
     respond_to do |format|
       if @individual_review.save

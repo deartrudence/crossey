@@ -1,7 +1,7 @@
 FactoryBot.define do
 
   factory :review do
-    name "Review Name"
+    name {"Review Name"}
   end
 
   factory :review_with_questions do

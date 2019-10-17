@@ -3,7 +3,7 @@ FactoryBot.define do
   factory :individual_review do
     association :user, factory: :user
     association :review, factory: :review
-    date Date.today
+    date {Date.today}
 
     factory :individual_review_with_questions do 
       # transient do
